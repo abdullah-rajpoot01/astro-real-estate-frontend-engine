@@ -1,0 +1,97 @@
+---
+
+// 2. React UI Presenter Import
+import Layout from "@/layouts/main.astro"
+import ProductPage from "@/components/listing-overview/shell.astro"
+import type { Listing } from "@/types/listing"
+import ListingCard1 from "@/components/listings/listings-card"
+
+// 3. Define the path map using Astro's dynamic parameters engine
+export async function getStaticPaths() {
+
+  return [{
+      params: {
+        id: String("1"),
+      }
+    }]
+}
+const listing: Listing = {
+    id: "listing-001",
+    title: "Modern 5 Marla House for Sale in DHA Lahore",
+    slug: "modern-5-marla-house-for-sale-dha-lahore",
+    type: "sale",
+    propertyType: "house",
+    saleLable:"Save $5000",
+    status: "available",
+    price: 28500000,
+    comparePrice: 30000000,
+    images: [
+        "https://islamabad-images-1.pages.dev/images/299444896-800x1200.webp"
+    ],
+    description:
+        "Beautifully designed modern 5 Marla house located in a prime area of DHA Lahore. The property features spacious living areas, modern finishes, parking, and a well-designed layout suitable for a family.",
+    location: {
+        address: "Street 12, DHA Phase 6",
+        city: "Lahore",
+        state: "Punjab",
+        country: "Pakistan",
+        postalCode: "54000",
+        latitude: 31.4697,
+        longitude: 74.4084
+    },
+    features: [
+        "Double Storey",
+        "Car Parking",
+        "Modern Kitchen",
+        "Separate Drawing Room",
+        "Electricity Backup",
+        "Near Commercial Area"
+    ],
+    specifications: [
+        {
+            key: "Bedrooms",
+            value: "5"
+        },
+        {
+            key: "Bathrooms",
+            value: "5"
+        },
+        {
+            key: "Area",
+            value: "5 Marla"
+        },
+        {
+            key: "Floor",
+            value: "2"
+        },
+        {
+            key: "Furnished",
+            value: "Semi Furnished"
+        },
+        {
+            key: "Year Built",
+            value: "2024"
+        }
+    ],
+    agentId: "agent-001",
+    featured: true
+}
+
+---
+
+<Layout>
+  <!-- Pass the clean product object down into your React interface layer -->
+  <ProductPage  client:load />
+  
+  <div class='mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8'>
+    <div class='py-12 text-center'>
+      <!-- Added oswald styling here if you want it applied to headings -->
+      <h2 class='text-3xl font-bold tracking-tight text-balance font-oswald'>
+        Properties you might also want
+      </h2>
+    </div>
+    
+    <!-- Render array containing targeted matching metrics -->
+    <ListingCard1 listings={[listing]} maxItems={6} />
+  </div>
+</Layout>

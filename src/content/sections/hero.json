@@ -1,0 +1,30 @@
+{
+  "heading": "Blue Rock Investments",
+  "subHeading": "More Than Real Estate.",
+  "tagLine": "Find Your Dream Home.",
+  "description": "Discover quality products at great prices. Shop our collection, find your favorites, and enjoy a simple and convenient shopping experience.",
+  "carouselImages": [
+    {
+      "image": "https://islamabad-images-1.pages.dev/images/300055617-800x1200.webp",
+      "link": ""
+    },
+    {
+      "image": "https://islamabad-images-1.pages.dev/images/300348706-800x1200.webp",
+      "link": ""
+    }
+  ],
+  "buttons": [
+    {
+      "type": "default",
+      "text": "Shop",
+      "link": "/products",
+      "icon": "shoppingBag"
+    },
+    {
+      "type": "secondary",
+      "text": "Explore Categories",
+      "link": "/categories",
+      "icon": "tags"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "title": "Elite Store",
+  "subtitle": "Online Store",
+  "image": "https://islamabad-images-1.pages.dev/logos/201948.jpg",
+  "quickLinks": [
+    {
+      "label": "Home",
+      "url": "/",
+      "icon": "home"
+    },
+    {
+      "label": "Properties",
+      "url": "/properties",
+      "icon": "shoppingBag"
+    },
+    {
+      "label": "Categories",
+      "url": "/categories",
+      "icon": "tags"
+    },
+    {
+      "label": "About Us",
+      "url": "/about-us",
+      "icon": "user"
+    },
+    {
+      "label": "Testimonials",
+      "url": "/testimonials",
+      "icon": "users"
+    }
+  ],
+  "button": {
+    "enabled": true,
+    "text": "Contact Us",
+    "link": "/contact-us"
+  }
+}
