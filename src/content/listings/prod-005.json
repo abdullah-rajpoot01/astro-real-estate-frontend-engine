@@ -1,0 +1,49 @@
+{
+    "id": "lst_003",
+    "title": "Spacious 4-Bedroom Suburban Family Home",
+    "slug": "spacious-4-bedroom-suburban-family-home",
+    "type": "sale",
+    "propertyType": "House",
+    "status": "pending",
+    "saleLable": "Under Offer",
+    "price": 620000,
+    "images": [
+      "https://islamabad-images-1.pages.dev/images/300812176-800x1200.webp"
+    ],
+    "description": "Beautiful multi-story family home with a large landscaped backyard, modern kitchen, and an attached two-car garage.",
+    "location": {
+      "address": "456 Oak Lane",
+      "city": "Austin",
+      "state": "TX",
+      "country": "USA",
+      "postalCode": "78701",
+      "latitude": 30.2672,
+      "longitude": -97.7431
+    },
+    "features": [
+      "Backyard",
+      "Garage",
+      "Fireplace",
+      "Walk-in Closet"
+    ],
+    "specifications": [
+      {
+        "key": "Bedrooms",
+        "value": "4"
+      },
+      {
+        "key": "Bathrooms",
+        "value": "3.5"
+      },
+      {
+        "key": "Square Footage",
+        "value": "2,800 sq ft"
+      },
+      {
+        "key": "Year Built",
+        "value": "2018"
+      }
+    ],
+    "agentId": "agt_101",
+    "featured": true
+  }

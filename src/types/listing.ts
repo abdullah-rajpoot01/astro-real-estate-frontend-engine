@@ -40,11 +40,13 @@ export interface Agent {
   id: string
   name: string
   slug: string
+  title?:string
   image?: string
   phone?: string
   email?: string
   whatsapp?: string
   bio?: string
+  count?: number
   featured: boolean
 }
 
@@ -54,5 +56,6 @@ export interface PropertyType {
   slug: string
   description?: string
   image?: string
+  count?: number
   featured: boolean
 }

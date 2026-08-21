@@ -11,8 +11,8 @@
       "icon": "home"
     },
     {
-      "label": "Products",
-      "url": "/products",
+      "label": "Properties",
+      "url": "/properties",
       "icon": "shoppingBag"
     },
     {
@@ -28,6 +28,11 @@
     {
       "label": "About Us",
       "url": "/about-us",
+      "icon": "user"
+    },
+    {
+      "label": "Contact Us",
+      "url": "/contact-us",
       "icon": "user"
     }
   ],

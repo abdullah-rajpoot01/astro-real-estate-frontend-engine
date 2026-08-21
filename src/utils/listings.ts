@@ -1,11 +1,11 @@
 import fs from "fs";
 import path from "path";
 
-import type { Product } from "@/types/product";
+import type { Listing } from "@/types/listing";
 
-export function getAllProducts(): Product[] {
+export function getAllListings(): Listing[] {
   try {
-    const productsDir = path.join(process.cwd(), "src/content/products");
+    const productsDir = path.join(process.cwd(), "src/content/listings");
 
     if (!fs.existsSync(productsDir)) {
       console.error(`Products directory not found: ${productsDir}`);
@@ -21,7 +21,7 @@ export function getAllProducts(): Product[] {
         const filePath = path.join(productsDir, file);
         const fileContent = fs.readFileSync(filePath, "utf-8");
 
-        return [JSON.parse(fileContent) as Product];
+        return [JSON.parse(fileContent) as Listing];
       } catch (error) {
         console.error(`Failed to read product file: ${file}`, error);
         return [];

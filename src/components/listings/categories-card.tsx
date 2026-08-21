@@ -1,6 +1,6 @@
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import {  buttonVariants } from '@/components/ui/button'
+import { buttonVariants } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import type { PropertyType } from '@/types/listing'
@@ -36,7 +36,7 @@ function CategoriesCard1({ categories = [], maxCategories }: CategoriesCard1Prop
                             <h3 className='mb-1 text-xl font-bold'>{category.name}</h3>
                             <p className='mb-3 text-sm text-white/90'>{category.description}</p>
                             <div className='flex items-center justify-between'>
-                                <span className='text-sm'>12 items</span>
+                                <span className='text-sm'>{category?.count || 0} items</span>
                                 <a href={`/categories/${category.id}/1`}>
                                     <div
 

@@ -1,0 +1,43 @@
+{
+    "id": "lst_002",
+    "title": "Cozy Downtown Studio Apartment",
+    "slug": "cozy-downtown-studio-apartment",
+    "type": "rent",
+    "propertyType": "Studio",
+    "status": "available",
+    "price": 1800,
+    "images": [
+      "https://islamabad-images-1.pages.dev/images/304740573-800x1200.webp"
+    ],
+    "description": "Charming studio apartment located right in the heart of downtown. Steps away from transit, cafes, and nightlife.",
+    "location": {
+      "address": "123 Main Street, Apt 4B",
+      "city": "Boston",
+      "state": "MA",
+      "country": "USA",
+      "postalCode": "02110",
+      "latitude": 42.3601,
+      "longitude": -71.0589
+    },
+    "features": [
+      "Hardwood Floors",
+      "High Ceilings",
+      "Pet Friendly"
+    ],
+    "specifications": [
+      {
+        "key": "Bedrooms",
+        "value": "Studio"
+      },
+      {
+        "key": "Bathrooms",
+        "value": "1"
+      },
+      {
+        "key": "Square Footage",
+        "value": "550 sq ft"
+      }
+    ],
+    "agentId": "agt_102",
+    "featured": false
+  }
