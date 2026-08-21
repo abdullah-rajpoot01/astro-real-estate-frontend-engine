@@ -3,7 +3,7 @@
     "title": "Chic Minimalist Loft",
     "slug": "chic-minimalist-loft",
     "type": "rent",
-    "propertyType": "Loft",
+    "propertyType": "pt_003",
     "status": "available",
     "price": 3200,
     "images": [

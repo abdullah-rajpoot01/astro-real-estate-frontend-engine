@@ -1,0 +1,72 @@
+---
+// src/pages/property-types/[propertyType]/[page].astro
+import type { GetStaticPaths, Page } from "astro";
+import type { Listing } from "@/types/listing";
+import Layout from "@/layouts/main.astro";
+import { getAllListings } from "@/utils/listings";
+import PaginationWithPrimaryButton from "@/components/pagination-02";
+import PropertyTypeListingPage from "@/components/property-types/property-type-listing-page";
+import { getAllPropertyTypes } from "@/utils/property-type";
+
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+  const allPropertyTypes = getAllPropertyTypes();
+  const allListings = getAllListings();
+   
+  const activeListings = allListings.filter(
+    (item) => item.status //=== "available" || item.status === "pending"
+  );
+
+  // Use flatMap to generate routes for both IDs and Slugs
+  return allPropertyTypes.flatMap((type) => {
+    // Still matching listings securely by ID internally
+    const typedListings = activeListings.filter(
+      (listing) => listing.propertyType === type.id 
+    );
+
+    // Generate path A: Using the slug (e.g., /property-types/apartment)
+    const slugRoute = paginate(typedListings, {
+      params: { propertyType: String(type.slug) }, 
+      pageSize: 12,
+    });
+
+    // Generate path B: Using the raw ID (e.g., /property-types/pt_001)
+    const idRoute = paginate(typedListings, {
+      params: { propertyType: String(type.id) }, 
+      pageSize: 12,
+    });
+
+    return [...slugRoute, ...idRoute];
+  });
+};
+
+interface Props {
+  page: Page<Listing>;
+}
+
+const { page } = Astro.props;
+const { propertyType } = Astro.params;
+
+const listingsOnThisPage = page.data;
+// Keeps your navigation consistent with your folder naming configuration
+const baseUrl = `/property-types/${propertyType}`;
+
+const paginationInfo = {
+  currentPage: page.currentPage,
+  lastPage: page.lastPage,
+  hasNext: typeof page.url.next === "string",
+  hasPrev: typeof page.url.prev === "string",
+  nextUrl: page.url.next,
+  prevUrl: page.url.prev,
+};
+---
+
+<Layout title={`Property Type: ${propertyType}`}>
+  <PropertyTypeListingPage 
+    listing={listingsOnThisPage} 
+  />
+  
+  <PaginationWithPrimaryButton   
+    baseUrl={baseUrl} 
+    pagination={paginationInfo} 
+  />
+</Layout>

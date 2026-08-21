@@ -3,7 +3,7 @@
   "title": "Modern 3-Bedroom Luxury Apartment",
   "slug": "modern-3-bedroom-luxury-apartment",
   "type": "sale",
-  "propertyType": "Apartment",
+  "propertyType": "pt_001",
   "status": "available",
   "saleLable": "Price Reduced",
   "price": 450000,

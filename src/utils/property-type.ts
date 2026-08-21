@@ -38,7 +38,7 @@ export function getAllPropertyTypes(): PropertyType[] {
     // 3. Create a dictionary to count listings matching each property type name
     const countsByPropertyType: Record<string, number> = {};
     listings.forEach((listing) => {
-      const typeKey = listing.propertyType?.toLowerCase();
+      const typeKey = listing.propertyType;
       if (typeKey) {
         countsByPropertyType[typeKey] = (countsByPropertyType[typeKey] || 0) + 1;
       }
@@ -46,7 +46,7 @@ export function getAllPropertyTypes(): PropertyType[] {
 
     // 4. Return the categories array with the calculated count field injected
     return propertyTypes.map((type) => {
-      const typeKey = type.name.toLowerCase();
+      const typeKey = type.id;
       return {
         ...type,
         count: countsByPropertyType[typeKey] || 0, // Injected count property (defaults to 0)

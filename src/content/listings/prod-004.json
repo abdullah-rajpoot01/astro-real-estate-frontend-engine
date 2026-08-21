@@ -3,7 +3,7 @@
     "title": "Luxury Waterfront Villa",
     "slug": "luxury-waterfront-villa",
     "type": "sale",
-    "propertyType": "Villa",
+    "propertyType": "pt_004",
     "status": "sold",
     "price": 2450000,
     "comparePrice": 2600000,

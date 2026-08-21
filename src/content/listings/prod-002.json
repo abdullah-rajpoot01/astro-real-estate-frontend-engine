@@ -3,7 +3,7 @@
     "title": "Charming Countryside Cottage",
     "slug": "charming-countryside-cottage",
     "type": "rent",
-    "propertyType": "Cottage",
+    "propertyType": "pt_002",
     "status": "rented",
     "price": 2100,
     "images": [

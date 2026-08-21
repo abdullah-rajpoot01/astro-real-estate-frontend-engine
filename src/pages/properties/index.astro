@@ -1,8 +1,6 @@
 ---
-import ListingSection from "@/components/home/listings-section"
-import Layout from "@/layouts/main.astro"
+// src/pages/products/index.astro
+// Instantly redirects /products to /products/page/1 with a 301 status code
+return Astro.redirect('/properties/page/1', 301);
 ---
-
-<Layout>
-  <ListingSection />
-</Layout>
+    
