@@ -1,14 +1,21 @@
 import { ArrowRight, Clock, Mail, MapPin, Phone } from "lucide-react";
-import { getStoreConfig } from "@/utils/store-config";
-import footerData from "@/content/sections/footer.json"
-import { Facebook, Instagram, TikTok, YouTube } from "@/components/social-icons";
+import { Facebook, Instagram, LinkedIn, TikTok, WhatsApp, X, YouTube } from "@/components/social-icons";
 import IconComponent from "@/components/icon";
+import { getFooterSection } from "@/utils/footer";
+import { getAddress } from "@/utils/address";
+import { getContact } from "@/utils/contact";
+import { getSocials } from "@/utils/social";
+import { getBusinessHours } from "@/utils/business-hours";
+import { getSiteDetails } from "@/utils/site-detail";
 
 const Footer = () => {
-  const { title, subtitle, description, image, sections, quickLinks } = footerData;
+  const { title, subtitle, description, image, sections, quickLinks } = getFooterSection();
 
-  const { store, contact, address } = getStoreConfig();
-
+  const store  = getSiteDetails();
+  const address = getAddress();
+  const contact = getContact();
+  const { facebook, instagram, linkedin, tiktok, x, youtube } = getSocials();
+  const businessHours = getBusinessHours();
   return (
     <footer className="border-t border-black/10 bg-background mt-10">
       <div className="site-container py-14 px-8 text-sm text-foreground md:py-18">
@@ -23,7 +30,7 @@ const Footer = () => {
 
               <span className="min-w-0 leading-none">
                 <span className="block text-base font-black uppercase tracking-wide text-foreground">
-                  {title || store.name}
+                  {title || store.title}
                 </span>
                 <span className="block text-[10px] font-semibold uppercase tracking-[0.28em] text-primary">
                   {subtitle || "Online Store"}
@@ -39,54 +46,72 @@ const Footer = () => {
                 {sections.social.title || "Social Media"}
               </h3>
               <div className=" flex flex-wrap gap-3 mt-3">
-                <a
-                  href={`https://www.instagram.com/${store.name}`}
+                {instagram && <a
+                  href={instagram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Open Iron Heaven instagram"
                   className="grid size-10 place-items-center rounded-md border border-foreground/10 bg-background text-foreground transition hover:border-primary/40 hover:bg-primary/10 hover:text-foreground"
                   id="base-ui-_R_375qnnb_"
                   data-slot="tooltip-trigger"
                 >
                   <Instagram className="size-4" />
                   <span className="sr-only">instagram</span>
-                </a>
-                <a
-                  href={`https://www.facebook.com/`}
+                </a>}
+                {facebook && <a
+                  href={facebook}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Open Iron Heaven facebook"
                   className="grid size-10 place-items-center rounded-md border border-foreground/10 bg-background text-foreground transition hover:border-primary/40 hover:bg-primary/10 hover:text-foreground"
                   id="base-ui-_R_3b5qnnb_"
                   data-slot="tooltip-trigger"
                 >
                   <Facebook className="size-4" />
                   <span className="sr-only">facebook</span>
-                </a>
-                <a
-                  href={`https://www.youtube.com/`}
+                </a>}
+                {youtube && <a
+                  href={youtube}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Open Iron Heaven youtube"
                   className="grid size-10 place-items-center rounded-md border border-foreground/10 bg-background text-foreground transition hover:border-primary/40 hover:bg-primary/10 hover:text-foreground"
                   id="base-ui-_R_3f5qnnb_"
                   data-slot="tooltip-trigger"
                 >
                   <YouTube className="size-4" />
                   <span className="sr-only">youtube</span>
-                </a>
-                <a
-                  href={`"https://www.tiktok.com/`}
+                </a>}
+                {tiktok && <a
+                  href={tiktok}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Open Iron Heaven tiktok"
                   className="grid size-10 place-items-center rounded-md border border-foreground/10 bg-background text-foreground transition hover:border-primary/40 hover:bg-primary/10 hover:text-foreground"
                   id="base-ui-_R_3j5qnnb_"
                   data-slot="tooltip-trigger"
                 >
                   <TikTok className="size-4" />
                   <span className="sr-only">tiktok</span>
-                </a>
+                </a>}
+                {linkedin && <a
+                  href={linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="grid size-10 place-items-center rounded-md border border-foreground/10 bg-background text-foreground transition hover:border-primary/40 hover:bg-primary/10 hover:text-foreground"
+                  id="base-ui-_R_3j5qnnb_"
+                  data-slot="tooltip-trigger"
+                >
+                  <LinkedIn className="size-4" />
+                  <span className="sr-only">linkedin</span>
+                </a>}
+                {x && <a
+                  href={x}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="grid size-10 place-items-center rounded-md border border-foreground/10 bg-background text-foreground transition hover:border-primary/40 hover:bg-primary/10 hover:text-foreground"
+                  id="base-ui-_R_3j5qnnb_"
+                  data-slot="tooltip-trigger"
+                >
+                  <X className="size-4" />
+                  <span className="sr-only">x</span>
+                </a>}
               </div>
             </div>}
           </div>
@@ -111,17 +136,25 @@ const Footer = () => {
               <div
                 className="flex gap-4 leading-6 transition-colors hover:text-foreground group"
               >
-                <MapPin className='size-4 group-hover:text-primary' />
+                <MapPin className='size-6 group-hover:text-primary' />
                 <span className="group-hover:text-primary">
-                  {address.addressLine2}
+                  {address.addressLine1} , {address.addressLine2} , {address.city} , {address.province} , {address.country}
                 </span>
               </div>
               <a
-                href={`tel:${contact.phone?.[0]}`}
+                href={`tel:${contact.phone}`}
                 className="flex items-center gap-4 transition-colors hover:text-foreground group"
               >
                 <Phone className='size-4 group-hover:text-primary' />
-                <span className="group-hover:text-primary">{contact.phone?.[0].replace(/[^0-9]/g, "").replace(/^92/, "0")}</span>
+                <span className="group-hover:text-primary">{contact.phone.replace(/[^0-9]/g, "").replace(/^92/, "0")}</span>
+              </a>
+              <a
+                href={`https://wa.me/${contact.whatsapp}`}
+                target="_blank" rel="noreferrer noopener"
+                className="flex items-center gap-4 transition-colors hover:text-foreground group"
+              >
+                <WhatsApp className='size-4 group-hover:text-primary' />
+                <span className="group-hover:text-primary">{contact.whatsapp.replace(/[^0-9]/g, "").replace(/^92/, "0")}</span>
               </a>
               <a
                 href={`mailto:${contact.email}`}
@@ -140,22 +173,22 @@ const Footer = () => {
             <div className="mt-5 flex gap-4">
               <Clock className='size-4' />
               <div className="grid gap-3 leading-6">
-                <div>
-                  <div className="font-bold text-foreground"> Monday-Friday</div>
-                  <div>Morning: 9:30 AM to 12:30 AM</div>
-                  <div>Evening: 1:00 PM to 6:00 PM</div>
-                </div>
-                <div>
-                  <div className="font-bold text-foreground"> Saturday</div>
-                  <div>Morning: 10:00 AM to 5:30 PM</div>
-                </div>
+
+                {
+                  Object.keys(businessHours).map((businessHour) => <div>
+                    <div className="font-bold text-foreground">{businessHour}</div>
+                    <div>Open : {businessHours[businessHour].open}</div>
+                    <div>Close : {businessHours[businessHour].close}</div>
+                  </div>)
+                }
+
               </div>
             </div>
           </div>}
         </div>
         <div className="mt-14 grid gap-6 border-t border-foreground/10 pt-8 md:grid-cols-[1fr_auto] md:items-end">
           <div className="grid gap-2">
-            {sections.copyRight.enabled && <div>{sections.copyRight?.title ? sections.copyRight?.title : `© ${new Date().getFullYear()} ${store.name}. All rights reserved.`}</div>}
+            {sections.copyRight.enabled && <div>{sections.copyRight?.title ? sections.copyRight?.title : `© ${new Date().getFullYear()} ${store.title}. All rights reserved.`}</div>}
             <div className="flex items-center gap-1">
               <span>Made with</span>
               <svg

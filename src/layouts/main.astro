@@ -4,23 +4,28 @@ import Navbar from "@/components/navigation/navbar-main"
 import Footer from "@/components/navigation/footer"
 import WhatsAppButton from "@/components/whatsapp-button"
 import { ClientRouter } from "astro:transitions"
----    
-    
-<html lang="en">     
-  <head>  
+import { MobileNavDialog } from "@/components/navigation/mobile-nav"
+import { getNavbarSection } from "@/utils/navbar"
+
+const navbarData = getNavbarSection()
+---
+
+<html lang="en">
+  <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>Real Estate Frontend</title>
-        <ClientRouter />
+    <ClientRouter />
   </head>
-  <body>
-    <div class="relative">
-      <Navbar />
-      <main class="min-h-screen py-20 px-4 md:px-6">
-        <slot />
-      </main>
-      <Footer />
-      <WhatsAppButton whatsapp="923060779995"/>
-    </div>
+
+  <body> 
+    <Navbar>
+      <MobileNavDialog navbarData={navbarData} client:load />
+    </Navbar>
+    <main class="min-h-screen px-4 py-20 md:px-6">
+      <slot />
+    </main>
+    <Footer />
+    <WhatsAppButton whatsapp="923060779995" />
   </body>
 </html>

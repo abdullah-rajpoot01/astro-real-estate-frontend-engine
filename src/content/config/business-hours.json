@@ -1,10 +1,5 @@
 {
-  "monday": {
-    "open": "09:00",
-    "close": "18:00",
-    "closed": false
-  },
-  "tuesday": {
+  "monday-tuesday": {
     "open": "09:00",
     "close": "18:00",
     "closed": false
@@ -28,8 +23,5 @@
     "open": "10:00",
     "close": "16:00",
     "closed": false
-  },
-  "sunday": {
-    "closed": true
   }
 }

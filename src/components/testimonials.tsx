@@ -2,65 +2,12 @@ import type { ComponentProps } from "react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Marquee } from "@/components/ui/marquee";
+import { getTestimonials } from "@/utils/testimonials";
 
-const testimonials = [
-  {
-    id: 1,
-    name: "John Doe",
-    designation: "Software Engineer",
-    company: "TechCorp",
-    testimonial:
-      "This product has completely transformed the way we work. The efficiency and ease of use are unmatched!",
-    avatar: "https://randomuser.me/api/portraits/men/1.jpg",
-  },
-  {
-    id: 2,
-    name: "Sophia Lee",
-    designation: "Data Analyst",
-    company: "InsightTech",
-    testimonial:
-      "This tool has saved me hours of work! The analytics and reporting features are incredibly powerful.",
-    avatar: "https://randomuser.me/api/portraits/women/6.jpg",
-  },
-  {
-    id: 3,
-    name: "Michael Johnson",
-    designation: "UX Designer",
-    company: "DesignPro",
-    testimonial:
-      "An amazing tool that simplifies complex tasks. Highly recommended for professionals in the industry.",
-    avatar: "https://randomuser.me/api/portraits/men/3.jpg",
-  },
-  {
-    id: 4,
-    name: "Emily Davis",
-    designation: "Marketing Specialist",
-    company: "BrandBoost",
-    testimonial:
-      "I've seen a significant improvement in our team's productivity since we started using this service.",
-    avatar: "https://randomuser.me/api/portraits/women/4.jpg",
-  },
-  {
-    id: 5,
-    name: "Daniel Martinez",
-    designation: "Full-Stack Developer",
-    company: "CodeCrafters",
-    testimonial:
-      "The best investment we've made! The support team is also super responsive and helpful.",
-    avatar: "https://randomuser.me/api/portraits/men/5.jpg",
-  },
-  {
-    id: 6,
-    name: "Jane Smith",
-    designation: "Product Manager",
-    company: "InnovateX",
-    testimonial:
-      "The user experience is top-notch! The interface is clean, intuitive, and easy to navigate.",
-    avatar: "https://randomuser.me/api/portraits/women/2.jpg",
-  },
-];
 
-const Testimonials = () => (
+const Testimonials = () => {
+  
+  return(
   <div className="px-6 py-20">
     <h2 className="text-center font-medium text-4xl tracking-[-0.04em] md:text-[2.75rem]">
       Success Stories
@@ -77,10 +24,11 @@ const Testimonials = () => (
       </Marquee>
     </div>
   </div>
-);
+)};
 
-const TestimonialList = () =>
-  testimonials.map((testimonial) => (
+const TestimonialList = () =>{
+    const {testimonials} =getTestimonials()
+  return testimonials.map((testimonial) => (
     <div
       className="min-w-96 max-w-sm rounded-xl bg-accent p-6"
       key={testimonial.id}
@@ -95,7 +43,7 @@ const TestimonialList = () =>
           <div>
             <p className="font-medium">{testimonial.name}</p>
             <p className="text-muted-foreground text-sm">
-              {testimonial.designation}
+              {testimonial.role}
             </p>
           </div>
         </div>
@@ -105,9 +53,9 @@ const TestimonialList = () =>
           </div>
         </Button>
       </div>
-      <p className="mt-5 text-[17px]">{testimonial.testimonial}</p>
+      <p className="mt-5 text-[17px]">{testimonial.message}</p>
     </div>
-  ));
+  ))};
 
 const TwitterLogo = (props: ComponentProps<"svg">) => (
   <svg

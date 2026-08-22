@@ -11,7 +11,7 @@ const AboutCTA = () => {
           Join thousands of developers using our premium component library to
           ship beautiful UIs in minutes, not hours.
         </p>
-        <Button className="mt-8">View Properties</Button>
+        <Button  className="mt-8">View Properties</Button>
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 {
   "heading": "Blue Rock Investments",
-  "subHeading": "More Than Real Estate.",
-  "tagLine": "Find Your Dream Home.",
+  "subHeading1": "More Than Real Estate.",
+  "subHeading2": "Find Your Dream Home.",
   "description": "Discover quality products at great prices. Shop our collection, find your favorites, and enjoy a simple and convenient shopping experience.",
   "carouselImages": [
     {
@@ -16,14 +16,14 @@
   "buttons": [
     {
       "type": "default",
-      "text": "Shop",
-      "link": "/products",
+      "text": "View Properties",
+      "link": "/properties",
       "icon": "shoppingBag"
     },
     {
       "type": "secondary",
       "text": "Explore Categories",
-      "link": "/categories",
+      "link": "/property-types",
       "icon": "tags"
     }
   ]

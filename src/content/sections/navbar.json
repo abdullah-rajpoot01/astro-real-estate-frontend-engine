@@ -29,9 +29,18 @@
       "icon": "users"
     }
   ],
-  "button": {
-    "enabled": true,
-    "text": "Contact Us",
-    "link": "/contact-us"
-  }
+  "buttons": [
+    {
+      "type": "default",
+      "text": "Contact Us",
+      "link": "/contact-us",
+      "icon": "shoppingBag"
+    },
+    {
+      "type": "secondary",
+      "text": "Call Now",
+      "link": "/contact-us",
+      "icon": "user"
+    }
+  ]
 }

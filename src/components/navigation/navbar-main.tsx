@@ -1,13 +1,14 @@
 import { NavMenu } from "./nav-menu";
-import { MobileNavDialog } from "./mobile-nav";
-import { getStoreConfig } from "@/utils/store-config";
-import navbarData from "@/content/sections/navbar.json"
-import {  buttonVariants } from "../ui/button";
+import { buttonVariants } from "../ui/button";
+import IconComponent from "../icon";
+import { getNavbarSection } from "@/utils/navbar";
+import { getSiteDetails } from "@/utils/site-detail";
 
-const Navbar = () => {
-  const { title, subtitle, image, button,   } = navbarData;
+const Navbar = ({children}:{children: React.ReactNode;}) => {
 
-  const { store } = getStoreConfig();
+  const { title, subtitle, image, buttons } = getNavbarSection();
+
+  const  store  = getSiteDetails();
 
   return (
     <nav className="fixed top-0 z-50 left-1/2 -translate-x-1/2  w-full max-w-7xl  border-b border-border/85  bg-background shadow-xs/3">
@@ -21,10 +22,10 @@ const Navbar = () => {
 
           <span className="min-w-0 leading-none">
             <span className="block text-base font-black uppercase tracking-wide text-foreground">
-              {title || store.name}
+              {title || store.title}
             </span>
             <span className="block text-[10px] font-semibold uppercase tracking-[0.28em] text-primary">
-              {subtitle || "Online Store"}
+              {subtitle || store.subtitle}
             </span>
           </span>
 
@@ -34,15 +35,16 @@ const Navbar = () => {
         <NavMenu className="hidden md:block" />
 
         <div className="flex items-center gap-3">
-          {button.enabled && <div className="hidden lg:block"><a href={button.link} className={buttonVariants({ variant: "default", size: "default" })} >
+          {buttons.map((button) => <div className="hidden lg:block"><a href={button.link} className={buttonVariants({ variant: button.type, size: "default" })} >
+            {button.icon && <IconComponent name={button.icon} className="size-4" />}
             {button.text}
           </a>
           </div>
-          }
+          )}
 
           {/* Mobile Menu */}
           <div className="md:hidden">
-            <MobileNavDialog />
+            {children}
           </div>
         </div>
       </div>

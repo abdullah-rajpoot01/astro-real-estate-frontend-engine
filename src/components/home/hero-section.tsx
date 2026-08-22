@@ -1,16 +1,17 @@
 import { getStoreConfig } from "@/utils/store-config";
-import heroData from "@/content/sections/hero.json";
 import { buttonVariants } from "@/components/ui/button";
 import IconComponent from "@/components/icon";
 import { cn } from "@/lib/utils";
+import { getHeroSection } from "@/utils/hero-section";
 
 interface HeroSectionProps {
     children: React.ReactNode; // This holds our interactive carousel island
 }
 
 export default function HeroSection({ children }: HeroSectionProps) {
+    const heroData = getHeroSection();
 
-    const { heading, subHeading,  tagLine, description, buttons } = heroData;
+    const { heading, subHeading1, subHeading2, description, buttons } = heroData;
 
     const isButtonsGreaterThan1 = buttons.length > 1;
 
@@ -22,8 +23,8 @@ export default function HeroSection({ children }: HeroSectionProps) {
                 <div>
                     <span className="block text-primary text-balance font-heading  text-5xl md:text-6xl font-black uppercase leading-[0.94] ">{heading || store.name}</span>
                     <h2 className="mt-3 text-balance font-heading text-3xl sm:text-4xl font-black uppercase leading-[0.94] text-foreground ">
-                        {subHeading}
-                        <span className="block text-primary mt-3">{tagLine}</span>
+                        {subHeading1}
+                        <span className="block text-primary mt-3">{subHeading2}</span>
                     </h2>
                     <p className="mt-3 max-w-xl text-xl leading-7 text-foreground/90 sm:text-text-2xl line-clamp-4">
                         {description}
@@ -49,8 +50,8 @@ export default function HeroSection({ children }: HeroSectionProps) {
 
                 </div>
                 <div className="relative overflow-hidden max-w-md lg:aspect-square mx-auto border border-foreground/10 bg-black rounded-lg">
-                    
-                     {children}
+
+                    {children}
                 </div>
             </div>
         </section>

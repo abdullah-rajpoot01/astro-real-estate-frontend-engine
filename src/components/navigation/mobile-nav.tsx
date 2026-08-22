@@ -6,16 +6,14 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
-import {  Menu } from "lucide-react"
+import { Menu } from "lucide-react"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { useState } from "react"
-import { getStoreConfig } from "@/utils/store-config"
-import navbarData from "@/content/sections/navbar.json"
 import IconComponent from "@/components/icon"
+import type { NavbarData } from "@/utils/navbar"
 
-export function MobileNavDialog() {
-    const { store } = getStoreConfig();
-    const { title, subtitle, image, quickLinks, button } = navbarData;
+export function MobileNavDialog({ navbarData }: { navbarData: NavbarData }) {
+    const { title, subtitle, image, quickLinks, buttons } = navbarData;
 
     const [open, setOpen] = useState(false);
 
@@ -35,14 +33,14 @@ export function MobileNavDialog() {
 
                             <div className="relative w-12 h-12 flex justify-center items-center aspect-square  shadow-lg border rounded  border-foreground/80 overflow-hidden">
 
-                                <img src={image || store.logo} className="w-full h-full" /> 
+                                <img src={image || ""} className="w-full h-full" />
 
                             </div>
 
 
                             <span className="min-w-0 leading-none">
                                 <span className="block text-base font-black uppercase tracking-wide text-foreground">
-                                    {title || store.name}
+                                    {title}
                                 </span>
                                 <span className="block text-[10px] font-semibold uppercase tracking-[0.28em] text-primary">
                                     {subtitle || "Online Store"}
@@ -61,23 +59,23 @@ export function MobileNavDialog() {
                                     href={link.url}
                                     className="w-full flex items-center  gap-3 px-6 py-3 text-left bg-accent transition-colors"
                                 >
-                                    { link.icon && <IconComponent name={link.icon} className="size-4" />}  <span>{link.label}</span>
+                                    {link.icon && <IconComponent name={link.icon} className="size-4" />}  <span>{link.label}</span>
                                 </a>)
                             }
 
                         </nav>
                         {
-                            button.enabled && <div className="shrink-0 p-6 pt-0">
+                            buttons.map((button) => <div className="shrink-0 p-6 pt-0">
                                 <div className="flex flex-col gap-3">
                                     <a href={button.link} onClick={() => {
                                         closeDialog()
                                     }}
-                                        className={buttonVariants({ variant: "default", size: "default" })}
+                                        className={buttonVariants({ variant: button.type as "default", size: "default" })}
                                     >
                                         {button.text}
                                     </a>
                                 </div>
-                            </div>
+                            </div>)
                         }
                     </div>
                 </ScrollArea>

@@ -1,5 +1,4 @@
 {
-
   "title": "Elite Store",
   "subtitle": "Online Store",
   "image": "https://islamabad-images-1.pages.dev/logos/201948.jpg",
@@ -54,12 +53,10 @@
       "title": "Social"
     },
     "copyRight": {
-      "enabled": true,
-      "title": ""
+      "enabled": true
     },
     "siteMap": {
-      "enabled": true,
-      "title": ""
+      "enabled": true
     }
   }
 }

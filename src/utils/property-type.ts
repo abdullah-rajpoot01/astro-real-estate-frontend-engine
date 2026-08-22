@@ -1,10 +1,20 @@
 import fs from "fs";
 import path from "path";
 
-import type { PropertyType } from "@/types/listing";
 import { getAllListings } from "./listings";
+import { z } from "astro/zod";
 
+export const schema = z.object({
+  id: z.string(),
+  name: z.string(),
+  slug: z.string(),
+  description: z.string(),
+  image: z.string(),
+  count: z.number().optional(), // Changed to number to match your injected layout logic
+  featured: z.boolean()
+})
 
+export type PropertyType = z.infer<typeof schema>;
 
 // Single consolidated function to fetch property types and inject the listing counts
 export function getAllPropertyTypes(): PropertyType[] {
@@ -12,8 +22,8 @@ export function getAllPropertyTypes(): PropertyType[] {
     const typesDir = path.join(process.cwd(), "src/content/property-types");
 
     if (!fs.existsSync(typesDir)) {
-      console.error(`Property types directory not found: ${typesDir}`);
-      return [];
+      console.error(`❌ [CMS ERROR] Required directory missing: Property types directory not found: ${typesDir}`);
+      throw new Error(`Cloudflare build stopped: The directory "${typesDir}" is missing.`);
     }
 
     // 1. Read all property type files from the directory
@@ -25,10 +35,22 @@ export function getAllPropertyTypes(): PropertyType[] {
       try {
         const filePath = path.join(typesDir, file);
         const fileContent = fs.readFileSync(filePath, "utf-8");
-        return [JSON.parse(fileContent) as PropertyType];
+        const rawJson = JSON.parse(fileContent);
+
+        // Validate the individual configuration file structure
+        const validationResult = schema.safeParse(rawJson);
+
+        if (!validationResult.success) {
+          console.error(`❌ [CMS VALIDATION ERROR] Invalid property type in file [${file}]:`);
+          console.error(JSON.stringify(validationResult.error.format(), null, 2));
+          // Crash the Cloudflare build to block bad deployment
+          throw new Error(`Build failed: Malformed property type configuration found in ${file}.`);
+        }
+
+        return [validationResult.data];
       } catch (error) {
-        console.error(`Failed to read property type file: ${file}`, error);
-        return [];
+        console.error(`Failed to execute parser framework on file: ${file}`, error);
+        throw error; // Re-throw to halt deployment pipeline
       }
     });
 
@@ -54,7 +76,7 @@ export function getAllPropertyTypes(): PropertyType[] {
     });
 
   } catch (error) {
-    console.error("Failed to load property types:", error);
-    return [];
+    console.error("Critical error in property types validation workflow:", error);
+    throw error; // Propagate exception to halt Cloudflare compilation
   }
 }

@@ -6,11 +6,11 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import navbarData from "@/content/sections/navbar.json"
 import IconComponent from "@/components/icon";
+import { getNavbarSection } from "@/utils/navbar";
 
 export const NavMenu = (props: ComponentProps<typeof NavigationMenu>) => {
-  const { quickLinks } = navbarData
+  const { quickLinks } = getNavbarSection()
   return <NavigationMenu {...props}>
     <NavigationMenuList className="space-x-0 data-[orientation=vertical]:flex-col data-[orientation=vertical]:items-start data-[orientation=vertical]:justify-start">
       {

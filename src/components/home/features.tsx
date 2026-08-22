@@ -1,13 +1,11 @@
-import featuresData from "@/content/sections/features.json";
 import IconComponent from "@/components/icon";
-import homePageData from "@/content/pages/home.json";
+import { getFeaturesSection } from "@/utils/features";
 
 const Features = () => {
-    const { title, description, features, } = featuresData;
-    
-    const { setting } = homePageData;
+    const featuresData = getFeaturesSection();
 
-    if (!setting.featuresEnabled) return null;
+    const { title, description, features, } = featuresData;
+
 
     return (
         <div id="our-features" className="mx-auto flex max-w-7xl flex-col py-10 relative">
