@@ -1,8 +1,8 @@
-import { getStoreConfig } from "@/utils/store-config";
 import { buttonVariants } from "@/components/ui/button";
 import IconComponent from "@/components/icon";
 import { cn } from "@/lib/utils";
 import { getHeroSection } from "@/utils/hero-section";
+import { getSiteDetails } from "@/utils/site-detail";
 
 interface HeroSectionProps {
     children: React.ReactNode; // This holds our interactive carousel island
@@ -15,13 +15,13 @@ export default function HeroSection({ children }: HeroSectionProps) {
 
     const isButtonsGreaterThan1 = buttons.length > 1;
 
-    const { store } = getStoreConfig();
+    const  store  = getSiteDetails();
 
     return (
         <section id="hero" className="">
             <div className=" grid gap-5 lg:grid-cols-2 lg:items-center">
                 <div>
-                    <span className="block text-primary text-balance font-heading  text-5xl md:text-6xl font-black uppercase leading-[0.94] ">{heading || store.name}</span>
+                    <span className="block text-primary text-balance font-heading  text-5xl md:text-6xl font-black uppercase leading-[0.94] ">{heading || store.title}</span>
                     <h2 className="mt-3 text-balance font-heading text-3xl sm:text-4xl font-black uppercase leading-[0.94] text-foreground ">
                         {subHeading1}
                         <span className="block text-primary mt-3">{subHeading2}</span>

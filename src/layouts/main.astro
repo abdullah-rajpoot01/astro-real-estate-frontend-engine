@@ -6,8 +6,10 @@ import WhatsAppButton from "@/components/whatsapp-button"
 import { ClientRouter } from "astro:transitions"
 import { MobileNavDialog } from "@/components/navigation/mobile-nav"
 import { getNavbarSection } from "@/utils/navbar"
+import { getContact } from "@/utils/contact"
 
 const navbarData = getNavbarSection()
+const contact = getContact()
 ---
 
 <html lang="en">
@@ -18,7 +20,7 @@ const navbarData = getNavbarSection()
     <ClientRouter />
   </head>
 
-  <body> 
+  <body>
     <Navbar>
       <MobileNavDialog navbarData={navbarData} client:load />
     </Navbar>
@@ -26,6 +28,6 @@ const navbarData = getNavbarSection()
       <slot />
     </main>
     <Footer />
-    <WhatsAppButton whatsapp="923060779995" />
+    <WhatsAppButton whatsapp={contact.whatsapp} />
   </body>
 </html>
