@@ -3,22 +3,21 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Marquee } from "@/components/ui/marquee";
 import testimonialsData from "@/content/pages/testimonials.json"
-import homePageData from "@/content/pages/home.json";
+import { getHomePageConfig } from "@/utils/home-page";
 
 
 const Testimonials = () => {
-  const { title, description, enabled } = testimonialsData;
 
-  const { setting } = homePageData;
+  const { testimonialsSection} = getHomePageConfig();
 
-  if (!enabled || !setting.testimonialsEnabled) return null;
-  
+  if (!testimonialsSection.enabled  ) return null;
+
   return (<div className="py-10 ">
     <h2 className="text-center font-medium text-4xl tracking-[-0.04em] md:text-[2.75rem]">
-      {title}
+      {testimonialsSection.title}
     </h2>
     <p className="mt-3.5 text-center text-muted-foreground text-xl tracking-[-0.015em] md:text-2xl">
-      {description}
+      {testimonialsSection.description}
     </p>
     <div className="mask-x-from-80% mt-14">
       <Marquee className="[--duration:60s]" pauseOnHover>

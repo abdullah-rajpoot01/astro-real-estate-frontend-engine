@@ -1,41 +1,41 @@
 
-import {  buttonVariants } from '@/components/ui/button'
-import { ShoppingBag } from 'lucide-react'
-import homePageData from "@/content/pages/home.json";
+import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils';
 import CategoriesCard1 from '@/components/listings/categories-card';
 import { getAllPropertyTypes } from '@/utils/property-type';
+import { getHomePageConfig } from '@/utils/home-page';
+import IconComponent from '@/components/icon';
 
 function CategoriesSection() {
-  const { categoriesSection, setting } = homePageData;
+  const { categoriesSection } = getHomePageConfig();
 
-  if (!categoriesSection || !setting?.categoriesEnabled) return null;
+  if (!categoriesSection || !categoriesSection.enabled) return null;
 
-    // Fetch all property types with their dynamic listing counts pre-calculated
-    const allCategories = getAllPropertyTypes()
+  // Fetch all property types with their dynamic listing counts pre-calculated
+  const allCategories = getAllPropertyTypes()
 
-    /* 
-      ⚡ ALGORITHM: Filter and fill featured categories logic
-    */
-    // A. Extract all categories marked as featured
-    const featuredCategories = allCategories.filter((c) => c.featured === true)
+  /* 
+    ⚡ ALGORITHM: Filter and fill featured categories logic
+  */
+  // A. Extract all categories marked as featured
+  const featuredCategories = allCategories.filter((c) => c.featured === true)
 
-    // B. Gather regular categories to use as fallbacks
-    const fallbackCategories = allCategories.filter((c) => c.featured !== true)
+  // B. Gather regular categories to use as fallbacks
+  const fallbackCategories = allCategories.filter((c) => c.featured !== true)
 
-    // C. Merge lists ensuring featured items take absolute priority, limited safely to 6 slots
-    const recommendedCategories = [
-        ...featuredCategories,
-        ...fallbackCategories
-    ].slice(0, 6)
+  // C. Merge lists ensuring featured items take absolute priority, limited safely to 6 slots
+  const recommendedCategories = [
+    ...featuredCategories,
+    ...fallbackCategories
+  ].slice(0, 6)
 
   return (
     <section className='py-12'>
       <div className='mx-auto w-full max-w-7xl'>
         {/* Header */}
         <div className='mb-12 text-center'>
-          <h2 className='text-3xl font-bold tracking-tight text-balance'>{categoriesSection.heading}</h2>
-          {categoriesSection?.subHeading && <p className='text-muted-foreground mt-4 text-lg'>{categoriesSection.subHeading}</p>}
+          <h2 className='text-3xl font-bold tracking-tight text-balance'>{categoriesSection.title}</h2>
+          <p className='text-muted-foreground mt-4 text-lg'>{categoriesSection.description}</p>
         </div>
 
         {/* Categories Grid */}
@@ -46,8 +46,8 @@ function CategoriesSection() {
           <a href='/categories'>
             <div className={cn(buttonVariants({ size: "lg" }), "h-10 px-4 cursor-pointer gap-2")}
             >
-              <ShoppingBag className='size-5' />
-              {categoriesSection.btnTxt}
+              <IconComponent name={categoriesSection.buttonIcon} className='size-5' />
+              {categoriesSection.buttonText}
             </div>
           </a>
         </div>

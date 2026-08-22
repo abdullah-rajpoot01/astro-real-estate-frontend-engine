@@ -1,33 +1,35 @@
 {
   "categoriesSection": {
-    "heading": "Shop by Category",
-    "subHeading": "Discover products across our most popular categories",
+    "title": "Explore Properties by Category",
+    "description": "Browse our selection of residential, commercial, and investment properties .",
+    "buttonText": "View Categories",
+    "buttonIcon": "tags",
     "maxItems": 6,
-    "btnTxt": "View All Categories",
-    "design": "default"
+    "enabled": true
   },
-  "productsSection": {
-    "heading": "Today's Best Deals For You!",
-    "subHeading": "Everything You Need, All in One Place.",
-    "maxItems": 6,
-    "btnTxt": "View All Products",
-    "design": "default"
-  },
-  "setting": {
-    "heroEnabled": true,
-    "categoriesEnabled": true,
-    "productsEnabled": true,
-    "featuresEnabled": true,
-    "testimonialsEnabled": true
+  "listingsSection": {
+    "title": "Featured Property Listings",
+    "description": "Discover carefully selected properties with great locations, modern features, and strong investment potential.",
+    "buttonText": "View All Listings",
+    "buttonIcon": "shoppingBag",
+    "maxItems": 8,
+    "enabled": true
   },
   "featuresSection": {
-    "heading": "Why Choose Us",
-    "subHeading": "Discover trusted real estate services with Elite Store in Lahore.",
-    "design": "default"
+    "title": "Why Work With Us?",
+    "description": "Get expert guidance, local market knowledge, and personalized support throughout your real estate journey.",
+    "enabled": true
   },
-  "whySection": {
-    "heading": "Why Choose Us",
-    "subHeading": "Discover trusted real estate services with Elite Store in Lahore.",
-    "design": "default"
+  "testimonialsSection": {
+    "title": "What Our Clients Say",
+    "description": "Hear from homeowners, buyers, sellers, and investors who trusted us to make their real estate experience simple and successful.",
+    "enabled": true
+  },
+  "ctaSection": {
+    "title": "Find Your Next Property",
+    "description": "Whether you're buying your first home, selling a property, or looking for your next investment, we're here to help.",
+    "buttonText": "Get Started",
+    "buttonUrl": "/contact",
+    "enabled": true
   }
 }

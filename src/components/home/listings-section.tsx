@@ -1,14 +1,14 @@
 import { buttonVariants } from '@/components/ui/button'
-import { ShoppingBag } from 'lucide-react'
-import homePageData from "@/content/pages/home.json";
 import { cn } from '@/lib/utils';
 import ListingCard1 from '../listings/listings-card';
 import { getAllListings } from '@/utils/listings';
+import { getHomePageConfig } from '@/utils/home-page';
+import IconComponent from '../icon';
 
 
 export function ListingSection() {
-    const { productsSection, setting } = homePageData
-    if (!productsSection || !setting?.productsEnabled) return null;
+    const { listingsSection } = getHomePageConfig();
+    if (!listingsSection.enabled) return null;
 
     // Fetch all listings from the local inventory
     const allListings = getAllListings()
@@ -32,17 +32,17 @@ export function ListingSection() {
         <section className='py-12 '>
             <div className='mx-auto w-full max-w-7xl'>
                 <div className='mb-12 text-center'>
-                    <h2 className='text-3xl font-bold tracking-tight text-balance'>{productsSection.heading}</h2>
-                    {productsSection?.subHeading && <p className='text-muted-foreground mt-4 text-lg'>{productsSection.subHeading}</p>}
+                    <h2 className='text-3xl font-bold tracking-tight text-balance'>{listingsSection.title}</h2>
+                    <p className='text-muted-foreground mt-4 text-lg'>{listingsSection.description}</p>
                 </div>
-                <ListingCard1 listings={recommendedListings} maxItems={6} />
+                <ListingCard1 listings={recommendedListings} maxItems={listingsSection.maxItems} />
             </div>
             {/* Call to Action */}
             <div className='mt-12 text-center'>
                 <a href='/properties'>
                     <div className={cn(buttonVariants({ size: "lg" }), "h-10 px-4 cursor-pointer gap-2")}>
-                        <ShoppingBag className='size-5' />
-                        {productsSection.btnTxt}
+                        <IconComponent name={listingsSection.buttonIcon} className='size-5' />
+                        {listingsSection.buttonText}
                     </div>
                 </a>
             </div>
