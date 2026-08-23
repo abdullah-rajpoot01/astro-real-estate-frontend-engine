@@ -2,56 +2,63 @@ import fs from "fs";
 import path from "path";
 import { z } from "astro/zod";
 
-// Define the schema exactly as you provided
-export const featuresSchema = z.object({
+// Define the single feature validation rule matching your JSON block exactly
+export const featureItemSchema = z.object({
   title: z.string(),
   description: z.string(),
-  features: z.array(
-    z.object({ title: z.string(), description: z.string(), icon: z.string() })
-  )
+  icon: z.string()
 });
 
-// Infer the TypeScript type directly from your schema
-export type FeaturesData = z.infer<typeof featuresSchema>;
+// Infer the TypeScript type directly from your schema requirements
+export type FeatureItem = z.infer<typeof featureItemSchema>;
 
 /**
- * Fetches and parses the features section JSON configuration.
- * Throws a fatal error to halt the build if the file is missing OR if the data is invalid.
+ * Fetches and parses all individual feature files from src/content/features.
+ * Throws a fatal error to halt the build if the folder is missing OR if any file is invalid.
  */
-export function getFeaturesSection(): FeaturesData {
+export function getAllFeatures(): FeatureItem[] {
   try {
-    // Construct the absolute path pointing to /src/content/sections/features.json
-    const filePath = path.join(process.cwd(), "src/content/sections/features.json");
+    // Construct the absolute path pointing directly to your features directory
+    const featuresDir = path.join(process.cwd(), "src/content/features");
 
-    // Check if the file actually exists
-    if (!fs.existsSync(filePath)) {
-      console.error(`❌ [CMS ERROR] Required file missing: Features section file not found at: ${filePath}`);
-      throw new Error("Cloudflare build stopped: The required file 'features.json' is missing.");
+    // Check if the directory itself exists on the disk
+    if (!fs.existsSync(featuresDir)) {
+      console.error(`❌ [CMS ERROR] Required directory missing: Features directory not found at: ${featuresDir}`);
+      throw new Error(`Cloudflare build stopped: The directory "${featuresDir}" is missing.`);
     }
 
-    // Read the text contents of the file
-    const fileContent = fs.readFileSync(filePath, "utf-8");
-    
-    // Convert text to a plain JS object
-    const rawJson = JSON.parse(fileContent);
+    // 1. Read all files from the directory and filter for .json extensions
+    const files = fs
+      .readdirSync(featuresDir)
+      .filter((file) => file.endsWith(".json"));
 
-    // Validate the data layout using your schema
-    const validationResult = featuresSchema.safeParse(rawJson);
+    // 2. Loop through each file, validate its structure, and build the array stream
+    return files.flatMap((file) => {
+      try {
+        const filePath = path.join(featuresDir, file);
+        const fileContent = fs.readFileSync(filePath, "utf-8");
+        const rawJson = JSON.parse(fileContent);
 
-    if (!validationResult.success) {
-      console.error("❌ [CMS VALIDATION ERROR] Features section JSON formatting is invalid:");
-      console.error(JSON.stringify(validationResult.error.format(), null, 2));
-      
-      // Throw an error to intentionally crash the Cloudflare build
-      throw new Error("Cloudflare build stopped: Malformed configuration inside features.json.");
-    }
+        // Validate individual file layout structure properties
+        const validationResult = featureItemSchema.safeParse(rawJson);
 
-    // Return the strongly-typed data successfully
-    return validationResult.data;
+        if (!validationResult.success) {
+          console.error(`❌ [CMS VALIDATION ERROR] Invalid layout structure in feature file [${file}]:`);
+          console.error(JSON.stringify(validationResult.error.format(), null, 2));
+          // Crash the Cloudflare build to block bad deployment
+          throw new Error(`Build failed: Malformed feature configuration found in ${file}.`);
+        }
+
+        // Return the strictly-validated data array item
+        return [validationResult.data];
+      } catch (error) {
+        console.error(`Failed to execute parser framework on file: ${file}`, error);
+        throw error; // Re-throw to halt deployment pipeline execution
+      }
+    });
 
   } catch (error) {
-    console.error("Failed to load features section:", error);
-    // Re-throw the error so it bubbles up and stops the deployment build
-    throw error;
+    console.error("Critical error in features folder validation workflow:", error);
+    throw error; // Propagate exception to halt compilation
   }
 }

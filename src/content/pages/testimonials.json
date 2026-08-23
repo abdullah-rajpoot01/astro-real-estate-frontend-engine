@@ -1,19 +1,5 @@
 {
   "title": "Success Stories",
   "description": "Real stories from people who use and love our product every day",
-  "testimonials": [
-    {
-      "id": "test-001",
-      "name": "Ahmed Khan",
-      "role": "Customer",
-      "message": "Amazing quality products and very fast delivery. Highly recommended."
-    },
-    {
-      "id": "test-002",
-      "name": "Sara Ali",
-      "role": "Customer",
-      "message": "The shopping experience was smooth and the product exceeded my expectations."
-    }
-  ],
   "limit": 4
 }

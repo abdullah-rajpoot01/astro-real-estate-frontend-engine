@@ -8,19 +8,27 @@ import { MobileNavDialog } from "@/components/navigation/mobile-nav"
 import { getNavbarSection } from "@/utils/navbar"
 import { getContact } from "@/utils/contact"
 
+const themeConfig = { name: "amber-mono-light", file: "default.css" }
+
+// 3. Generate the class selector string dynamically matching your CSS block
+const themeClass = `theme-${themeConfig.name}`
+
 const navbarData = getNavbarSection()
+
 const contact = getContact()
 ---
 
-<html lang="en">
+<html lang="en" >
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>Real Estate Frontend</title>
     <ClientRouter />
+    <!-- 5. Linked stylesheet is placed AFTER globals.css to safely override variables -->
+    <link rel="stylesheet" href={`/themes/${themeConfig.file}`} />
   </head>
 
-  <body>
+  <body class={themeClass}>
     <Navbar>
       <MobileNavDialog navbarData={navbarData} client:load />
     </Navbar>

@@ -40,7 +40,7 @@ const paginationInfo = {
   prevUrl: page.url.prev,
 }
 // Check total listings count for conditional visibility
-const hasListings = listingsOnThisPage.length > 0
+const canShowPagination = listingsOnThisPage.length > 0 && paginationInfo.hasNext
 ---
 
 <Layout title={`All Properties - Page ${page.currentPage}`}>
@@ -49,7 +49,7 @@ const hasListings = listingsOnThisPage.length > 0
 
   <!-- Reusable pagination engine -->
   {
-    hasListings && (
+    canShowPagination && (
       <PaginationWithPrimaryButton
         baseUrl={baseUrl}
         pagination={paginationInfo}

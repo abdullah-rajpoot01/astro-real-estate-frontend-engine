@@ -1,15 +1,18 @@
 import type { ComponentProps } from "react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { getTestimonials } from "@/utils/testimonials";
-import  EmptyTestimonialsState from "./empty";
-
+import { getAllTestimonials } from "@/utils/testimonials";
+import EmptyTestimonialsState from "./empty";
+import testimonialsPageConfig from "@/content/pages/testimonials.json"
 
 
 const Testimonials = () => {
-  const { title, description, testimonials, limit } = getTestimonials()
+  const testimonials = getAllTestimonials
+    ()
   let testimonialsWithLimitApplied = testimonials;
 
+  const { title, description, limit } = testimonialsPageConfig
+  
   if (limit && limit > 0) {
     testimonialsWithLimitApplied = testimonials.slice(0, limit);
   }
@@ -22,7 +25,7 @@ const Testimonials = () => {
       <p className="mt-3.5 text-center text-muted-foreground text-xl tracking-[-0.015em] md:text-2xl">
         {description}
       </p>
-      {testimonials.length === 0 ? <EmptyTestimonialsState/> : <div className="mx-auto mt-14 max-w-(--breakpoint-xl) columns-1 gap-8 md:columns-2 lg:mt-16 lg:columns-3">
+      {testimonials.length === 0 ? <EmptyTestimonialsState /> : <div className="mx-auto mt-14 max-w-(--breakpoint-xl) columns-1 gap-8 md:columns-2 lg:mt-16 lg:columns-3">
         {testimonialsWithLimitApplied.map((testimonial) => (
           <div
             className="mb-8 break-inside-avoid rounded-xl p-6 dark:bg-muted/60"

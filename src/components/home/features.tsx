@@ -1,5 +1,5 @@
 import IconComponent from "@/components/icon";
-import { getFeaturesSection } from "@/utils/features";
+import { getAllFeatures } from "@/utils/features";
 import { getHomePageConfig } from "@/utils/home-page";
 
 const Features = () => {
@@ -7,9 +7,8 @@ const Features = () => {
 
     if (!featuresSection.enabled) return null;
 
-    const featuresData = getFeaturesSection();
+    const features = getAllFeatures();
 
-    const { features, } = featuresData;
     
     if (features.length === 0) return null;
 

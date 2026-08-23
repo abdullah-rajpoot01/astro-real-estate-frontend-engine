@@ -1,15 +1,13 @@
 import IconComponent from "@/components/icon";
-import { getFeaturesSection } from "@/utils/features";
 import AboutPageConfig from "@/content/pages/about.json"
+import { getAllFeatures } from "@/utils/features";
 
 const Features = () => {
     const { featuresSection } = AboutPageConfig;
-    
+
     if (!featuresSection.enabled) return null;
 
-    const featuresData = getFeaturesSection();
-
-    const { features, } = featuresData;
+    const features = getAllFeatures();
 
     if (features.length === 0) return null;
 

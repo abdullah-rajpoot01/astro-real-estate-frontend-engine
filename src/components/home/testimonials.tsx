@@ -1,9 +1,9 @@
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Marquee } from "@/components/ui/marquee";
-import testimonialsData from "@/content/pages/testimonials.json"
 import { getHomePageConfig } from "@/utils/home-page";
 import { X } from "../social-icons";
+import { getAllTestimonials } from "@/utils/testimonials";
 
 
 const Testimonials = () => {
@@ -12,7 +12,7 @@ const Testimonials = () => {
 
   if (!testimonialsSection.enabled) return null;
   
-  const { testimonials } = testimonialsData;
+  const testimonials  = getAllTestimonials();
 
   if (testimonials.length === 0) return null;
 
@@ -36,7 +36,7 @@ const Testimonials = () => {
 };
 
 const TestimonialList = () => {
-  const { testimonials } = testimonialsData;
+  const testimonials  = getAllTestimonials();
   return <>
     {testimonials.map((testimonial) => (
       <div

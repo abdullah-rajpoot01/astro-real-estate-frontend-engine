@@ -60,7 +60,7 @@ const paginationInfo = {
   nextUrl: page.url.next,
   prevUrl: page.url.prev,
 }
-const hasListings = listingsOnThisPage.length > 0
+const canShowPagination = listingsOnThisPage.length > 0 && paginationInfo.hasNext
 ---
 
 <Layout title={`Property Type: ${propertyType}`}>
@@ -70,7 +70,7 @@ const hasListings = listingsOnThisPage.length > 0
   />
 
   {
-    hasListings && (
+    canShowPagination && (
       <PaginationWithPrimaryButton
         baseUrl={baseUrl}
         pagination={paginationInfo}
