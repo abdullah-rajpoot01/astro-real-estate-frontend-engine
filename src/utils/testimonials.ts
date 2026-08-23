@@ -13,7 +13,8 @@ export const testimonialsSchema = z.object({
       role: z.string(),
       message: z.string()
     })
-  )
+  ),
+  limit: z.number().optional()
 });
 
 // Infer the TypeScript type directly from your schema
@@ -36,7 +37,7 @@ export function getTestimonials(): TestimonialsData {
 
     // Read the text contents of the file
     const fileContent = fs.readFileSync(filePath, "utf-8");
-    
+
     // Convert text to a plain JS object
     const rawJson = JSON.parse(fileContent);
 
@@ -46,7 +47,7 @@ export function getTestimonials(): TestimonialsData {
     if (!validationResult.success) {
       console.error("❌ [CMS VALIDATION ERROR] Testimonials JSON formatting is invalid:");
       console.error(JSON.stringify(validationResult.error.format(), null, 2));
-      
+
       // Throw an error to intentionally crash the Cloudflare build
       throw new Error("Cloudflare build stopped: Malformed configuration inside testimonials.json.");
     }

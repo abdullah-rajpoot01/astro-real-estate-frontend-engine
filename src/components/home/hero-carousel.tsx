@@ -30,7 +30,7 @@ export default function CarouselWithFooter() {
   }, [api]);
 
   return (
-    <div className="mx-auto max-w-full relative rounded-full">
+    <div className="mx-auto size-full relative rounded-full">
       <Carousel className="w-full max-w-full aspect-square p-0! border-0" setApi={setApi}>
         <CarouselContent>
           {images.map((img) => (

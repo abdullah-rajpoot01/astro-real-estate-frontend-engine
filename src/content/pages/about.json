@@ -1,0 +1,29 @@
+{
+    "heroSection": {
+        "title": "Know About Blue Rock Investments",
+        "description": "Discover quality products at great prices. Shop our collection, find your favorites, and enjoy a simple and convenient shopping experience.",
+        "image": "https://islamabad-images-1.pages.dev/logos/201948.jpg",
+        "buttonText": "View Properties",
+        "buttonIcon": "tags",
+        "buttonUrl": "/properties",
+        "enabled": true
+    },
+    "featuresSection": {
+        "title": "Why Work With Us?",
+        "description": "Get expert guidance, local market knowledge, and personalized support throughout your real estate journey.",
+        "enabled": true
+    },
+    "teamSection": {
+        "badge": "We're hiring!",
+        "title": "Team behind the product",
+        "description": "Our philosophy is simple — hire a team of diverse, passionate people and foster a culture that empowers you to do you best work.",
+        "enabled": true
+    },
+    "ctaSection": {
+        "title": "Find Your Next Property",
+        "description": "Whether you're buying your first home, selling a property, or looking for your next investment, we're here to help.",
+        "buttonText": "View Properties",
+        "buttonUrl": "/properties",
+        "enabled": true
+    }
+}

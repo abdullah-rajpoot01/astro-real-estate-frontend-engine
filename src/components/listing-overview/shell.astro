@@ -3,99 +3,44 @@
 import ProductInfoStatic from "./product-static-info"
 import ProductCarouselIsland from "./images"
 import ProductSpecsStatic from "./features-specification"
-import type { Listing, PropertyType } from "@/types/listing"
+import type { Listing } from "@/utils/listings"
+import ListingContactButtons from "./contact-buttons"
+import { getAllPropertyTypes } from "@/utils/property-type"
 
-// interface Props {
-//   listing: Listing
-//   category: PropertyType | null
-// }
-const categoryDummy:PropertyType = {
-  id: "property-type-001",
-  name: "House",
-  slug: "house",
-  description: "Residential houses and family homes.",
-  image: "https://islamabad-images-1.pages.dev/images/299444896-800x1200.webp",
-  featured: true,
+interface Props {
+  listing: Listing
 }
 
-const listingDummy: Listing = {
-  id: "listing-001",
-  title: "Modern 5 Marla House for Sale in DHA Lahore",
-  slug: "modern-5-marla-house-for-sale-dha-lahore",
-  type: "sale",
-  propertyType: "house",
-  status: "available",
-  price: 28500000,
-  comparePrice: 30000000,
-  images: [
-    "https://islamabad-images-1.pages.dev/images/299444896-800x1200.webp",
-  ],
-  description:
-    "Beautifully designed modern 5 Marla house located in a prime area of DHA Lahore. The property features spacious living areas, modern finishes, parking, and a well-designed layout suitable for a family.",
-  location: {
-    address: "Street 12, DHA Phase 6",
-    city: "Lahore",
-    state: "Punjab",
-    country: "Pakistan",
-    postalCode: "54000",
-    latitude: 31.4697,
-    longitude: 74.4084,
-  },
-  features: [
-    "Double Storey",
-    "Car Parking",
-    "Modern Kitchen",
-    "Separate Drawing Room",
-    "Electricity Backup",
-    "Near Commercial Area",
-  ],
-  specifications: [
-    {
-      key: "Bedrooms",
-      value: "5",
-    },
-    {
-      key: "Bathrooms",
-      value: "5",
-    },
-    {
-      key: "Area",
-      value: "5 Marla",
-    },
-    {
-      key: "Floor",
-      value: "2",
-    },
-    {
-      key: "Furnished",
-      value: "Semi Furnished",
-    },
-    {
-      key: "Year Built",
-      value: "2024",
-    },
-  ],
-  agentId: "agent-001",
-  featured: true,
-}
-// const { listing , category  } = Astro.props
+const { listing   } = Astro.props
+
+// 3. Fetch all property types using your consolidated function
+const propertyTypes = getAllPropertyTypes();
+
+// 4. Find the specific property type that matches the current listing
+const propertyType = propertyTypes.find(
+  (type) => type.id === listing.propertyType
+);
 ---
 
-<section class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+<section class="mx-auto w-full ">
   <div
     class="grid grid-cols-1 gap-6 py-4 lg:grid-cols-2 lg:gap-8 lg:py-6 xl:grid-cols-3 xl:gap-12 xl:py-12"
   >
     <!-- Column 1: Static Info Text -->
     <div>
-      <ProductInfoStatic listing={listingDummy} category={categoryDummy} />
+      <ProductInfoStatic listing={listing} propertyType={propertyType} />
+      <ListingContactButtons
+        listing={listing}
+        propertyType={propertyType}
+      />
     </div>
 
     <!-- Column 2: Client Image Slider -->
     <div class="row-span-2 row-start-1 lg:col-start-2">
-      <ProductCarouselIsland client:load listing={listingDummy} />
+      <ProductCarouselIsland client:load listing={listing} />
     </div>
   </div>
 
   <!-- Row 2: Full-Width Static Tech Details Panel -->
-  <ProductSpecsStatic listing={listingDummy} />
+  <ProductSpecsStatic listing={listing} />
 </section>

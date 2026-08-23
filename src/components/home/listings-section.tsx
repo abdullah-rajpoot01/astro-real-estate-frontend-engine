@@ -13,6 +13,8 @@ export function ListingSection() {
     // Fetch all listings from the local inventory
     const allListings = getAllListings()
 
+    if (allListings.length === 0) return null;
+    
     /* 
       ⚡ ALGORITHM: Filter and fill featured listings logic
     */
@@ -31,7 +33,7 @@ export function ListingSection() {
     return (
         <section className='py-12 '>
             <div className='mx-auto w-full max-w-7xl'>
-                <div className='mb-12 text-center'>
+                <div className='mb-12 max-w-3xl mx-auto  text-center'>
                     <h2 className='text-3xl font-bold tracking-tight text-balance'>{listingsSection.title}</h2>
                     <p className='text-muted-foreground mt-4 text-lg'>{listingsSection.description}</p>
                 </div>

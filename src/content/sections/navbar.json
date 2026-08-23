@@ -39,7 +39,7 @@
     {
       "type": "secondary",
       "text": "Call Now",
-      "link": "/contact-us",
+      "link": "tel:+92306779995",
       "icon": "user"
     }
   ]

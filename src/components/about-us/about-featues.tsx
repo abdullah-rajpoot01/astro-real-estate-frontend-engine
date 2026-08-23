@@ -1,16 +1,16 @@
 import IconComponent from "@/components/icon";
 import { getFeaturesSection } from "@/utils/features";
-import { getHomePageConfig } from "@/utils/home-page";
+import AboutPageConfig from "@/content/pages/about.json"
 
 const Features = () => {
-    const { featuresSection } = getHomePageConfig();
-
+    const { featuresSection } = AboutPageConfig;
+    
     if (!featuresSection.enabled) return null;
 
     const featuresData = getFeaturesSection();
 
     const { features, } = featuresData;
-    
+
     if (features.length === 0) return null;
 
     return (
@@ -24,7 +24,7 @@ const Features = () => {
                 <h2 className="max-w-3xl mx-auto text-foreground text-pretty text-center font-medium text-4xl tracking-[-0.04em] sm:text-[2.75rem]">
                     {featuresSection.title}
                 </h2>
-                <p className="max-w-3xl mx-auto  text-foreground/80 mt-3 text-pretty text-center  text-xl tracking-[-0.01em] sm:text-2xl">
+                <p className="max-w-3xl mx-auto text-foreground/80 mt-3 text-pretty text-center  text-xl tracking-[-0.01em] sm:text-2xl">
                     {featuresSection.description}
                 </p>
 

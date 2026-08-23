@@ -12,16 +12,17 @@ function CategoriesSection() {
   if (!categoriesSection || !categoriesSection.enabled) return null;
 
   // Fetch all property types with their dynamic listing counts pre-calculated
-  const allCategories = getAllPropertyTypes()
+  const allPropertyTypes = getAllPropertyTypes()
 
+  if (allPropertyTypes.length === 0) return null;
   /* 
     ⚡ ALGORITHM: Filter and fill featured categories logic
   */
   // A. Extract all categories marked as featured
-  const featuredCategories = allCategories.filter((c) => c.featured === true)
+  const featuredCategories = allPropertyTypes.filter((c) => c.featured === true)
 
   // B. Gather regular categories to use as fallbacks
-  const fallbackCategories = allCategories.filter((c) => c.featured !== true)
+  const fallbackCategories = allPropertyTypes.filter((c) => c.featured !== true)
 
   // C. Merge lists ensuring featured items take absolute priority, limited safely to 6 slots
   const recommendedCategories = [
@@ -33,7 +34,7 @@ function CategoriesSection() {
     <section className='py-12'>
       <div className='mx-auto w-full max-w-7xl'>
         {/* Header */}
-        <div className='mb-12 text-center'>
+        <div className='mb-12 max-w-3xl mx-auto  text-center'>
           <h2 className='text-3xl font-bold tracking-tight text-balance'>{categoriesSection.title}</h2>
           <p className='text-muted-foreground mt-4 text-lg'>{categoriesSection.description}</p>
         </div>
@@ -43,7 +44,7 @@ function CategoriesSection() {
 
         {/* Call to Action */}
         <div className='mt-12 text-center'>
-          <a href='/categories'>
+          <a href='/property-types'>
             <div className={cn(buttonVariants({ size: "lg" }), "h-10 px-4 cursor-pointer gap-2")}
             >
               <IconComponent name={categoriesSection.buttonIcon} className='size-5' />

@@ -1,20 +1,25 @@
-import { Button } from "@/components/ui/button";
+import AboutPageConfig from "@/content/pages/about.json"
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "../ui/button";
 
 const AboutCTA = () => {
-  return (
-    <div className="">
-      <div className="relative flex w-full flex-col items-center justify-center bg-accent py-8 rounded-2xl">
-        <h2 className="font-medium text-5xl tracking-tighter text-center">
-          Ready to Build Faster?
-        </h2>
-        <p className="mx-auto mt-6 max-w-xl text-center text-muted-foreground text-xl/normal">
-          Join thousands of developers using our premium component library to
-          ship beautiful UIs in minutes, not hours.
-        </p>
-        <Button  className="mt-8">View Properties</Button>
-      </div>
-    </div>
-  );
+    const { ctaSection } = AboutPageConfig;
+
+    if (!ctaSection.enabled) return null;
+
+    return (
+        <div className="">
+            <div className="relative flex w-full flex-col items-center justify-center bg-accent py-8 rounded-2xl">
+                <h2 className="font-medium text-5xl tracking-tighter text-center">
+                    {ctaSection.title}
+                </h2>
+                <p className="mx-auto mt-6 max-w-xl text-center text-muted-foreground text-xl/normal">
+                    {ctaSection.description}
+                </p>
+                <a href={ctaSection.buttonUrl} className={cn(buttonVariants(), "mt-8")}>{ctaSection.buttonText}</a>
+            </div>
+        </div>
+    );
 };
 
 export default AboutCTA;

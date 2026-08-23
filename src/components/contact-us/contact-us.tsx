@@ -3,6 +3,7 @@ import { getBusinessHours } from "@/utils/business-hours";
 import { getContact } from "@/utils/contact";
 import { getSiteDetails } from "@/utils/site-detail";
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
+import contactPageConfig from "@/content/pages/contact.json"
 
 const Contact = () => {
     const { title } = getSiteDetails();
@@ -11,15 +12,17 @@ const Contact = () => {
     const businessHours = getBusinessHours();
     return <div className="flex min-h-screen items-center justify-center overflow-hidden">
         <div className="w-full max-w-(--breakpoint-xl) px-2">
-            <div className="text-center">
+            <div className="text-center mx-auto max-w-3xl">
                 <b className="font-medium text-foreground text-center text-sm uppercase tracking-wide">
-                    Contact Us | <span className="text-primary">{title}</span>
+                    {
+                        contactPageConfig?.pageTitle ? contactPageConfig.pageTitle : <>Contact Us | <span className="text-primary">{title}</span></>
+                    }
                 </b>
                 <h2 className="mt-3 text-center text-foreground/80 font-medium text-4xl tracking-[-0.04em]">
-                    We&apos;d love to hear from you
+                    {contactPageConfig.title}
                 </h2>
                 <p className="text-center mt-3 text-foreground/80 text-lg md:text-xl">
-                    Our friendly team is always here to chat.
+                    {contactPageConfig.description}
                 </p>
             </div>
             <section className="py-16 md:py-20">

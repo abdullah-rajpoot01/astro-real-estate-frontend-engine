@@ -137,7 +137,7 @@ const Footer = () => {
                 className="flex gap-4 leading-6 transition-colors hover:text-foreground group"
               >
                 <MapPin className='size-6 group-hover:text-primary' />
-                <span className="group-hover:text-primary">
+                <span className="group-hover:text-primary max-w-[80%] ">
                   {address.addressLine1} , {address.addressLine2} , {address.city} , {address.province} , {address.country}
                 </span>
               </div>

@@ -49,7 +49,7 @@ export default function HeroSection({ children }: HeroSectionProps) {
                     </div>
 
                 </div>
-                <div className="relative overflow-hidden max-w-md lg:aspect-square mx-auto border border-foreground/10 bg-black rounded-lg">
+                <div className="relative overflow-hidden max-w-md lg:aspect-square mx-auto border border-foreground/10 bg-black rounded-lg w-full h-full">
 
                     {children}
                 </div>

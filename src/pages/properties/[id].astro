@@ -1,97 +1,74 @@
 ---
-
 // 2. React UI Presenter Import
 import Layout from "@/layouts/main.astro"
-import ProductPage from "@/components/listing-overview/shell.astro"
-import type { Listing } from "@/types/listing"
+import ListingOverview from "@/components/listing-overview/shell.astro"
 import ListingCard1 from "@/components/listings/listings-card"
 
 // 3. Define the path map using Astro's dynamic parameters engine
-export async function getStaticPaths() {
+import type { GetStaticPaths, InferGetStaticPropsType } from "astro"
+import { getAllListings } from "@/utils/listings"
 
-  return [{
-      params: {
-        id: String("1"),
-      }
-    }]
-}
-const listing: Listing = {
-    id: "listing-001",
-    title: "Modern 5 Marla House for Sale in DHA Lahore",
-    slug: "modern-5-marla-house-for-sale-dha-lahore",
-    type: "sale",
-    propertyType: "house",
-    saleLable:"Save $5000",
-    status: "available",
-    price: 28500000,
-    comparePrice: 30000000,
-    images: [
-        "https://islamabad-images-1.pages.dev/images/299444896-800x1200.webp"
-    ],
-    description:
-        "Beautifully designed modern 5 Marla house located in a prime area of DHA Lahore. The property features spacious living areas, modern finishes, parking, and a well-designed layout suitable for a family.",
-    location: {
-        address: "Street 12, DHA Phase 6",
-        city: "Lahore",
-        state: "Punjab",
-        country: "Pakistan",
-        postalCode: "54000",
-        latitude: 31.4697,
-        longitude: 74.4084
+export const getStaticPaths = (async () => {
+  // 1. Fetch all listings using your function
+  const listings = getAllListings()
+
+  // 2. Map them into the format Astro expects
+  return listings.map((listing) => ({
+    params: {
+      id: String(listing.id),
     },
-    features: [
-        "Double Storey",
-        "Car Parking",
-        "Modern Kitchen",
-        "Separate Drawing Room",
-        "Electricity Backup",
-        "Near Commercial Area"
-    ],
-    specifications: [
-        {
-            key: "Bedrooms",
-            value: "5"
-        },
-        {
-            key: "Bathrooms",
-            value: "5"
-        },
-        {
-            key: "Area",
-            value: "5 Marla"
-        },
-        {
-            key: "Floor",
-            value: "2"
-        },
-        {
-            key: "Furnished",
-            value: "Semi Furnished"
-        },
-        {
-            key: "Year Built",
-            value: "2024"
-        }
-    ],
-    agentId: "agent-001",
-    featured: true
-}
+    props: {
+      listing,
+    },
+  }))
+}) satisfies GetStaticPaths
 
+// 3. Type the props using Astro's built-in type inference helper
+type Props = InferGetStaticPropsType<typeof getStaticPaths>
+
+// 4. Access the fully-typed listing directly from Astro.props
+const { listing } = Astro.props
+
+// 1. Fetch all listings from the local inventory
+const allListings = getAllListings()
+
+/* 
+  ⚡ ALGORITHM: Find related listings (Same Category Priority, max 6 slots)
+*/
+
+// A. Exclude the current listing so it doesn't recommend itself
+const availableListings = allListings.filter((l) => l.id !== listing.id)
+
+// B. Extract listings matching the current property type
+const sameCategoryListings = availableListings.filter(
+  (l) => l.propertyType === listing.propertyType
+)
+
+// C. Gather listings from different categories to use as fallbacks
+const otherCategoryListings = availableListings.filter(
+  (l) => l.propertyType !== listing.propertyType
+)
+
+// D. Merge lists ensuring same category takes absolute priority, limited safely to 6 slots
+const recommendedListings = [
+  ...sameCategoryListings,
+  ...otherCategoryListings,
+].slice(0, 6)
 ---
 
 <Layout>
   <!-- Pass the clean product object down into your React interface layer -->
-  <ProductPage  client:load />
-  
-  <div class='mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8'>
-    <div class='py-12 text-center'>
+  <ListingOverview listing={listing} />
+
+  <div class="w-full">
+    <div class="py-12 text-center">
       <!-- Added oswald styling here if you want it applied to headings -->
-      <h2 class='text-3xl font-bold tracking-tight text-balance font-oswald'>
+      <h2 class="font-oswald text-3xl font-bold tracking-tight text-balance">
         Properties you might also want
       </h2>
     </div>
-    
+
     <!-- Render array containing targeted matching metrics -->
-    <ListingCard1 listings={[listing]} maxItems={6} />
+    <ListingCard1 listings={recommendedListings} maxItems={6} />
   </div>
 </Layout>

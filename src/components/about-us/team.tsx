@@ -2,23 +2,29 @@
 import { getAllAgents } from "@/utils/agents";
 import { WhatsApp } from "../social-icons";
 import { Mail, Phone } from "lucide-react";
-
+import AboutPageConfig from "@/content/pages/about.json"
 
 
 const Team = () => {
+  const { teamSection } = AboutPageConfig;
+
+  if (!teamSection.enabled) return null;
+
   const agents = getAllAgents();
+
+  if (agents.length === 0) return null;
+
   return (
     <div className="mx-auto flex max-w-(--breakpoint-xl) flex-col justify-center gap-16 py-10 ">
-      <div className="mx-auto max-w-2xl text-center">
+      <div className="mx-auto max-w-3xl text-center">
         <b className="text-center font-medium text-muted-foreground text-sm uppercase">
-          We&apos;re hiring!
+          {teamSection.badge}
         </b>
         <h2 className="mt-3 font-medium text-4xl tracking-[-0.04em] sm:text-[2.75rem]">
-          Team behind the product
+          {teamSection.title}
         </h2>
         <p className="mt-4 text-pretty text-base text-muted-foreground sm:text-xl">
-          Our philosophy is simple — hire a team of diverse, passionate people
-          and foster a culture that empowers you to do you best work.
+          {teamSection.description}
         </p>
 
       </div>

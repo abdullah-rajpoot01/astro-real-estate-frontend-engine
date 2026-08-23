@@ -1,4 +1,4 @@
-import Features from '../home/features'
+import Features from './about-featues'
 import AboutCTA from './about-cta'
 import AboutHero from './about-hero'
 import Team from './team'
