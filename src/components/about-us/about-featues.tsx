@@ -1,4 +1,4 @@
-import IconComponent from "@/components/icon";
+import IconComponent from "@/components/icons/icon";
 import AboutPageConfig from "@/content/pages/about.json"
 import { getAllFeatures } from "@/utils/features";
 

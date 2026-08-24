@@ -34,13 +34,13 @@
       "type": "default",
       "text": "Contact Us",
       "link": "/contact-us",
-      "icon": "shoppingBag"
+      "icon": "message"
     },
     {
-      "type": "secondary",
+      "type": "outline",
       "text": "Call Now",
       "link": "tel:+92306779995",
-      "icon": "user"
+      "icon": "phone"
     }
   ]
 }

@@ -1,5 +1,5 @@
 import { buttonVariants } from "@/components/ui/button";
-import IconComponent from "@/components/icon";
+import IconComponent from "@/components/icons/icon";
 import { cn } from "@/lib/utils";
 import { getHeroSection } from "@/utils/hero-section";
 import { getSiteDetails } from "@/utils/site-detail";

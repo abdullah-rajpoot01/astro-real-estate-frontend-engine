@@ -2,7 +2,7 @@ import { buttonVariants } from "@/components/ui/button";
 import AboutPageConfig from "@/content/pages/about.json"
 import { getSiteDetails } from "@/utils/site-detail";
 import { cn } from "@/lib/utils";
-import IconComponent from "../icon";
+import IconComponent from "../icons/icon";
 export default function Hero() {
     const { heroSection } = AboutPageConfig;
 

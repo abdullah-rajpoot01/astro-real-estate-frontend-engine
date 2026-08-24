@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils';
 import CategoriesCard1 from '@/components/listings/categories-card';
 import { getAllPropertyTypes } from '@/utils/property-type';
 import { getHomePageConfig } from '@/utils/home-page';
-import IconComponent from '@/components/icon';
+import IconComponent from '@/components/icons/icon';
 
 function CategoriesSection() {
   const { categoriesSection } = getHomePageConfig();

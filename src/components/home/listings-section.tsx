@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils';
 import ListingCard1 from '../listings/listings-card';
 import { getAllListings } from '@/utils/listings';
 import { getHomePageConfig } from '@/utils/home-page';
-import IconComponent from '../icon';
+import IconComponent from '../icons/icon';
 
 
 export function ListingSection() {

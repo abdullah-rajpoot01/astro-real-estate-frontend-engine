@@ -53,10 +53,12 @@
       "title": "Social"
     },
     "copyRight": {
-      "enabled": true
+      "enabled": true,
+      "title": ""
     },
     "siteMap": {
-      "enabled": true
+      "enabled": true,
+      "title": ""
     }
   }
 }

@@ -1,4 +1,4 @@
-import IconComponent from "@/components/icon";
+import IconComponent from "@/components/icons/icon";
 import { getAllFeatures } from "@/utils/features";
 import { getHomePageConfig } from "@/utils/home-page";
 

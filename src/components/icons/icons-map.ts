@@ -1,5 +1,4 @@
 // components/Icon.tsx
-
 import {
     Home,
     ShoppingBag,
@@ -100,7 +99,7 @@ import {
     type LucideIcon,
 } from "lucide-react";
 
-const iconMap: Record<string, LucideIcon> = {
+export const iconMap: Record<string, LucideIcon> = {
     home: Home,
     shoppingBag: ShoppingBag,
     shoppingCart: ShoppingCart,
@@ -199,120 +198,4 @@ const iconMap: Record<string, LucideIcon> = {
     warning: AlertTriangle,
 };
 
-interface IconProps {
-    name: string;
-    className?: string;
-}
-
-export default function IconComponent({
-    name,
-    className,
-}: IconProps) {
-    const IconComponent = iconMap[name] ?? CircleHelp;
-
-    return (
-        <IconComponent
-            className={className}
-        />
-    );
-}
-
-const iconsName = [
-    "home",
-    "shoppingBag",
-    "shoppingCart",
-    "store",
-    "user",
-    "users",
-    "userPlus",
-    "userCheck",
-    "settings",
-    "search",
-    "heart",
-    "star",
-    "mapPin",
-    "phone",
-    "mail",
-    "menu",
-    "circleHelp",
-    "info",
-    "bell",
-    "calendar",
-    "clock",
-    "check",
-    "x",
-    "plus",
-    "minus",
-    "chevronDown",
-    "chevronUp",
-    "chevronLeft",
-    "chevronRight",
-    "arrowRight",
-    "arrowLeft",
-    "arrowUp",
-    "arrowDown",
-    "externalLink",
-    "link",
-    "share",
-    "send",
-    "download",
-    "upload",
-    "eye",
-    "eyeOff",
-    "lock",
-    "unlock",
-    "login",
-    "logout",
-    "key",
-    "shield",
-    "shieldCheck",
-    "creditCard",
-    "wallet",
-    "banknote",
-    "receipt",
-    "tag",
-    "tags",
-    "package",
-    "truck",
-    "boxes",
-    "dollar",
-    "percent",
-    "discount",
-    "gift",
-    "camera",
-    "image",
-    "video",
-    "file",
-    "fileText",
-    "folder",
-    "folderOpen",
-    "edit",
-    "delete",
-    "copy",
-    "save",
-    "moreHorizontal",
-    "moreVertical",
-    "filter",
-    "sliders",
-    "list",
-    "grid",
-    "dashboard",
-    "barChart",
-    "pieChart",
-    "trendingUp",
-    "trendingDown",
-    "globe",
-    "building",
-    "briefcase",
-    "map",
-    "navigation",
-    "message",
-    "messages",
-    "headphones",
-    "help",
-    "success",
-    "error",
-    "alert",
-    "warning"
-]
-
+export const AvailableIcons = Object.keys(iconMap);

@@ -1,6 +1,6 @@
 import { ArrowRight, Clock, Mail, MapPin, Phone } from "lucide-react";
 import { Facebook, Instagram, LinkedIn, TikTok, WhatsApp, X, YouTube } from "@/components/social-icons";
-import IconComponent from "@/components/icon";
+import IconComponent from "@/components/icons/icon";
 import { getFooterSection } from "@/utils/footer";
 import { getAddress } from "@/utils/address";
 import { getContact } from "@/utils/contact";

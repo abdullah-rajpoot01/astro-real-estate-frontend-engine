@@ -6,7 +6,7 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import IconComponent from "@/components/icon";
+import IconComponent from "@/components/icons/icon";
 import { getNavbarSection } from "@/utils/navbar";
 
 export const NavMenu = (props: ComponentProps<typeof NavigationMenu>) => {
