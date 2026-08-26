@@ -1,14 +1,14 @@
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Marquee } from "@/components/ui/marquee";
-import { getHomePageConfig } from "@/utils/home-page";
+import { getHomeTestimonialsSection } from "@/utils/home-page";
 import { X } from "../social-icons";
 import { getAllTestimonials } from "@/utils/testimonials";
 
 
 const Testimonials = () => {
 
-  const { testimonialsSection } = getHomePageConfig();
+  const  testimonialsSection  = getHomeTestimonialsSection();
 
   if (!testimonialsSection.enabled) return null;
   

@@ -1,8 +1,8 @@
 import { NavMenu } from "./nav-menu";
 import { buttonVariants } from "../ui/button";
 import IconComponent from "../icons/icon";
-import { getNavbarSection } from "@/utils/navbar";
-import { getSiteDetails } from "@/utils/site-detail";
+import { getNavbarSection } from "@/utils/sections/navbar";
+import { getSiteDetails } from "@/utils/core-detail/site-detail";
 import { cn } from "@/lib/utils";
 
 const Navbar = ({children}:{children: React.ReactNode;}) => {

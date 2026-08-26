@@ -3,7 +3,7 @@
     "title": "Cozy Downtown Studio Apartment",
     "slug": "cozy-downtown-studio-apartment",
     "type": "rent",
-    "propertyType": "pt_006",
+    "category": "pt_006",
     "status": "available",
     "price": 1800,
     "images": [

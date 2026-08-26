@@ -5,7 +5,8 @@ import ProductCarouselIsland from "./images"
 import ProductSpecsStatic from "./features-specification"
 import type { Listing } from "@/utils/listings"
 import ListingContactButtons from "./contact-buttons"
-import { getAllPropertyTypes } from "@/utils/property-type"
+import { getAllCategories } from "@/utils/categories"
+import AddressAndLocation from "./address-location"
 
 interface Props {
   listing: Listing
@@ -14,11 +15,11 @@ interface Props {
 const { listing   } = Astro.props
 
 // 3. Fetch all property types using your consolidated function
-const propertyTypes = getAllPropertyTypes();
+const categories = getAllCategories();
 
 // 4. Find the specific property type that matches the current listing
-const propertyType = propertyTypes.find(
-  (type) => type.id === listing.propertyType
+const category = categories.find(
+  (type) => type.id === listing.category
 );
 ---
 
@@ -28,10 +29,9 @@ const propertyType = propertyTypes.find(
   >
     <!-- Column 1: Static Info Text -->
     <div>
-      <ProductInfoStatic listing={listing} propertyType={propertyType} />
+      <ProductInfoStatic listing={listing} category={category} />
       <ListingContactButtons
         listing={listing}
-        propertyType={propertyType}
       />
     </div>
 
@@ -43,4 +43,5 @@ const propertyType = propertyTypes.find(
 
   <!-- Row 2: Full-Width Static Tech Details Panel -->
   <ProductSpecsStatic listing={listing} />
+  <AddressAndLocation listing={listing}/>
 </section>

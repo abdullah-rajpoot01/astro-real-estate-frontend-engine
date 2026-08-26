@@ -12,7 +12,7 @@ export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
 
   // Filter for available listings (or 'pending' if you still want to show them)
   const activeListings = allListings.filter(
-    (item) => item.status //=== "available" || item.status === "pending"
+    (item) => item.status === "available" || item.status === "pending"
   )
 
   // Paginate all active properties safely with 12 slots per page layout

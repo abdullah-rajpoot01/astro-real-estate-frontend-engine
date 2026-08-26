@@ -4,7 +4,7 @@ import { testimonialsPageConfig } from "./page-config";
 
 
 export const testimonialsPageCollection: Collection = {
-    name: "testimonials",
+    name: "testimonialsPage",
     label: "Testimonials Page",
     // A file collection manages specific configuration files rather than a folder layout
     files: [

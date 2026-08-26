@@ -2,11 +2,11 @@
 import { getAllAgents } from "@/utils/agents";
 import { WhatsApp } from "../social-icons";
 import { Mail, Phone } from "lucide-react";
-import AboutPageConfig from "@/content/pages/about.json"
+import { getAboutTeamSection } from "@/utils/core-detail/about-page";
 
 
 const Team = () => {
-  const { teamSection } = AboutPageConfig;
+  const teamSection = getAboutTeamSection();
 
   if (!teamSection.enabled) return null;
 
@@ -29,7 +29,7 @@ const Team = () => {
 
       </div>
 
-      <div className="grid w-full grid-cols-1 gap-x-10 gap-y-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <div className="grid w-full grid-cols-1 gap-x-10 gap-y-12 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
         {agents.map((member) => (
           <div
             className="flex flex-col items-center rounded-lg bg-accent px-6 py-8 text-center"
@@ -46,13 +46,13 @@ const Team = () => {
             {member.title && <p className="text-muted-foreground text-sm">{member.title}</p>}
             {member.bio && <p className="mt-3 mb-6 text-pretty">{member.bio}</p>}
             <div className="mt-auto flex items-center gap-4">
-              <a href="#" target="_blank">
+              <a href={`https://wa.me/${member.whatsapp}`} target="_blank">
                 <WhatsApp className="h-5 w-5 stroke-muted-foreground" />
               </a>
-              <a href="#" target="_blank">
+              <a href={`mailto:${member.email}`} target="_blank">
                 <Mail className="h-5 w-5 stroke-muted-foreground" />
               </a>
-              <a href="#" target="_blank">
+              <a href={`tel:${member.phone}`} target="_blank">
                 <Phone className="h-5 w-5 stroke-muted-foreground" />
               </a>
             </div>

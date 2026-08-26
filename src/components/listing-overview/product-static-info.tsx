@@ -1,24 +1,22 @@
 // src/components/products/ProductInfoStatic.tsx
 
 import type { Listing } from "@/utils/listings"
-import ListingContactButtons from "./contact-buttons"
-import type { PropertyType } from "@/utils/property-type"
-import { Badge } from "../ui/badge"
+import type { Category } from "@/utils/categories"
 
 interface Props {
   listing: Listing
-  propertyType?: PropertyType
+  category?: Category
 }
 
-export default function ProductInfoStatic({ listing, propertyType }: Props) {
+export default function ProductInfoStatic({ listing, category }: Props) {
 
   return (
     <div className='flex flex-col gap-2 lg:gap-4'>
       <div className='flex items-center gap-2 flex-wrap'>
         
-        {propertyType?.name && (
+        {category?.name && (
           <span className='bg-primary/10 text-primary text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-full'>
-             {propertyType.name}
+             {category.name}
           </span>
         )}
         {listing.featured && (

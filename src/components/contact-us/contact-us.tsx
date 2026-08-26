@@ -1,7 +1,7 @@
 import { getAddress } from "@/utils/address";
 import { getBusinessHours } from "@/utils/business-hours";
-import { getContact } from "@/utils/contact";
-import { getSiteDetails } from "@/utils/site-detail";
+import { getContact } from "@/utils/core-detail/contact";
+import { getSiteDetails } from "@/utils/core-detail/site-detail";
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import contactPageConfig from "@/content/pages/contact.json"
 

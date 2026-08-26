@@ -7,12 +7,12 @@ import {
   CarouselItem,
 
 } from "@/components/ui/carousel";
-import heroData from "@/content/sections/hero.json";
 
-// We can read data in Astro frontmatter to pass to the island
 
-export default function CarouselWithFooter() {
-  const { carouselImages: images } = heroData;
+export default function CarouselWithFooter({images}:{images:{
+    image: string;
+    link?: string | undefined;
+}[]}) {
   const [api, setApi] = React.useState<CarouselApi>();
 
   React.useEffect(() => {

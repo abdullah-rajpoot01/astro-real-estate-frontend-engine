@@ -1,28 +1,28 @@
 
 import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils';
-import CategoriesCard1 from '@/components/listings/categories-card';
-import { getAllPropertyTypes } from '@/utils/property-type';
-import { getHomePageConfig } from '@/utils/home-page';
+import CategoriesCard1 from '@/components/categories/categories-card';
+import { getAllCategories } from '@/utils/categories';
+import { getHomeCategoriesSection } from '@/utils/home-page';
 import IconComponent from '@/components/icons/icon';
 
 function CategoriesSection() {
-  const { categoriesSection } = getHomePageConfig();
+  const  categoriesSection  = getHomeCategoriesSection();
 
   if (!categoriesSection || !categoriesSection.enabled) return null;
 
   // Fetch all property types with their dynamic listing counts pre-calculated
-  const allPropertyTypes = getAllPropertyTypes()
+  const allCategories = getAllCategories()
 
-  if (allPropertyTypes.length === 0) return null;
+  if (allCategories.length === 0) return null;
   /* 
     ⚡ ALGORITHM: Filter and fill featured categories logic
   */
   // A. Extract all categories marked as featured
-  const featuredCategories = allPropertyTypes.filter((c) => c.featured === true)
+  const featuredCategories = allCategories.filter((c) => c.featured === true)
 
   // B. Gather regular categories to use as fallbacks
-  const fallbackCategories = allPropertyTypes.filter((c) => c.featured !== true)
+  const fallbackCategories = allCategories.filter((c) => c.featured !== true)
 
   // C. Merge lists ensuring featured items take absolute priority, limited safely to 6 slots
   const recommendedCategories = [

@@ -1,8 +1,8 @@
 import { buttonVariants } from "@/components/ui/button";
 import IconComponent from "@/components/icons/icon";
 import { cn } from "@/lib/utils";
-import { getHeroSection } from "@/utils/hero-section";
-import { getSiteDetails } from "@/utils/site-detail";
+import { getSiteDetails } from "@/utils/core-detail/site-detail";
+import { getHeroSection } from "@/utils/home-page";
 
 interface HeroSectionProps {
     children: React.ReactNode; // This holds our interactive carousel island

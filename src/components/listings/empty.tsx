@@ -23,16 +23,7 @@ export default function EmptyListingsState() {
             There are currently no properties  listed on the market. Check back soon or set up an alert to find out when new properties arrive.
           </EmptyDescription>
         </EmptyHeader>
-        <EmptyContent>
-          <div className="flex flex-wrap gap-2 *:mx-auto">
-            <Button>
-              <Bell /> Get Alerts
-            </Button>
-            <Button variant="outline">
-              <Mail /> Contact Agent
-            </Button>
-          </div>
-        </EmptyContent>
+
       </Empty>
     </div>
   );

@@ -1,10 +1,10 @@
 import { buttonVariants } from "@/components/ui/button";
-import AboutPageConfig from "@/content/pages/about.json"
-import { getSiteDetails } from "@/utils/site-detail";
+import { getSiteDetails } from "@/utils/core-detail/site-detail";
 import { cn } from "@/lib/utils";
 import IconComponent from "../icons/icon";
+import { getAboutHeroSection } from "@/utils/core-detail/about-page";
 export default function Hero() {
-    const { heroSection } = AboutPageConfig;
+    const  heroSection  = getAboutHeroSection();
 
     if (!heroSection.enabled) return null;
 

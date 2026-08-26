@@ -13,7 +13,7 @@
     <!-- Sveltia CMS requires this empty div to mount its user interface -->
     <div id="nc-root"></div>
 
-    <script> 
+    <script>
       // Import the CMS object directly from the npm package
       import CMS from "@sveltia/cms"
       import { sectionsCollection } from "@/cms/sections/collection"
@@ -21,7 +21,13 @@
       import { aboutPageCollection } from "@/cms/about/collection"
       import { testimonialsPageCollection } from "@/cms/testimonials/collection"
       import { propertiesPageCollection } from "@/cms/properties/collection"
-      import { propertyTypesPageCollection } from "@/cms/property-types/collection"
+      import { categoriesPageCollection } from "@/cms/categories/collection"
+      import { categoriesCollection } from "@/cms/categories/main"
+      import { listingsCollection } from "@/cms/properties/main"
+      import { agentsCollection } from "@/cms/agents/main"
+      import { featuresCollection } from "@/cms/features/main"
+      import { testimonialsCollection } from "@/cms/testimonials/main"
+      import { coreDetailCollection } from "@/cms/core-detail/collection"
       // Initialize with your JavaScript configuration object
       CMS.init({
         config: {
@@ -32,6 +38,22 @@
             repo: "your-github-username/your-repo-name",
             branch: "main",
           },
+          output: {
+            omit_empty_optional_fields: true,
+          },
+          media_libraries: {
+            default: {
+              config: {
+                max_file_size: 254800,
+                transformations: {
+                  raster_image: {
+                    format: "webp",
+                    quality: 80,
+                  },
+                },
+              },
+            },
+          },
           // Where uploaded media assets will be saved
           media_folder: "public/images",
           public_folder: "/images",
@@ -40,10 +62,20 @@
             src: "https://islamabad-images-1.pages.dev/logos/201948.jpg",
             show_in_header: false,
           },
-
           // Define your Astro Content Collections here
-          collections: [sectionsCollection, homePageCollection,aboutPageCollection
-            ,testimonialsPageCollection,propertiesPageCollection,propertyTypesPageCollection
+          collections: [
+            categoriesCollection,
+            listingsCollection,
+            agentsCollection,
+            featuresCollection,
+            testimonialsCollection,
+            coreDetailCollection,
+            sectionsCollection,
+            homePageCollection,
+            aboutPageCollection,
+            testimonialsPageCollection,
+            propertiesPageCollection,
+            categoriesPageCollection,
           ],
         },
       })

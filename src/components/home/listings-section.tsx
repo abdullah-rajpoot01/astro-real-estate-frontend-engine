@@ -2,12 +2,12 @@ import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils';
 import ListingCard1 from '../listings/listings-card';
 import { getAllListings } from '@/utils/listings';
-import { getHomePageConfig } from '@/utils/home-page';
+import { getHomeListingsSection } from '@/utils/home-page';
 import IconComponent from '../icons/icon';
 
 
 export function ListingSection() {
-    const { listingsSection } = getHomePageConfig();
+    const  listingsSection  = getHomeListingsSection();
     if (!listingsSection.enabled) return null;
 
     // Fetch all listings from the local inventory

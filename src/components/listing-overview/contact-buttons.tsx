@@ -1,30 +1,54 @@
 import { cn } from "@/lib/utils";
-import { getContact } from "@/utils/contact"
+import { getContact } from "@/utils/core-detail/contact";
 import { buttonVariants } from "../ui/button";
 import { WhatsApp } from "../social-icons";
 import { Mail, PhoneCall } from "lucide-react";
 import type { Listing } from "@/utils/listings";
-import type { PropertyType } from "@/utils/property-type";
+import { getAllAgents } from "@/utils/agents";
 
 interface Props {
-    listing: Listing
-    propertyType?: PropertyType
-}
-const ListingContactButtons = ({ listing, propertyType }: Props) => {
-    const contact = getContact();
-    return (
-        <div className="flex gap-2 mt-4 ">
-            <a href={`https://wa.me/${contact.whatsapp}`} target="_blank" className={cn(buttonVariants(),)}>
-                <WhatsApp className="size-4" />  Whatsapp
-            </a>
-            <a href={`mailto:${contact.email}`} className={cn(buttonVariants())}>
-                <Mail className="size-4" />  Email
-            </a>
-            <a href={`tel:${contact.phone}`} className={cn(buttonVariants())}>
-                <PhoneCall className="size-4" />  Phone
-            </a>
-        </div>
-    )
+    listing: Listing;
 }
 
-export default ListingContactButtons
+// Assumes getAllAgents() reads local static array files synchronously.
+// If it returns a Promise, pass agents down as a prop from the parent component instead!
+const ListingContactButtons = ({ listing }: Props) => {
+    const contact = getContact();
+    const agents = getAllAgents();
+
+    // Finds matching agent profile context strings
+    const agent = agents.find((ag) => ag.id === listing.agentId);
+
+    // Clean structural fallback definitions matching your schema rules
+    const email = agent?.email || contact.email;
+    const phone = agent?.phone || contact.phone;
+    const whatsapp = agent?.whatsapp || contact.whatsapp;
+    
+    return (
+        <div className="flex gap-2 mt-4">
+            {/* Standardized template string injection */}
+            <a 
+                href={`https://wa.me/${whatsapp}`} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className={cn(buttonVariants())}
+            >
+                <WhatsApp className="size-4" /> Whatsapp
+            </a>
+            <a 
+                href={`mailto:${email}`} 
+                className={cn(buttonVariants())}
+            >
+                <Mail className="size-4" /> Email
+            </a>
+            <a 
+                href={`tel:${phone}`} 
+                className={cn(buttonVariants())}
+            >
+                <PhoneCall className="size-4" /> Phone
+            </a>
+        </div>
+    );
+};
+
+export default ListingContactButtons;

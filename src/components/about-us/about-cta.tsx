@@ -1,9 +1,9 @@
-import AboutPageConfig from "@/content/pages/about.json"
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "../ui/button";
+import { getAboutCtaSection } from "@/utils/core-detail/about-page";
 
 const AboutCTA = () => {
-    const { ctaSection } = AboutPageConfig;
+    const  ctaSection  = getAboutCtaSection();
 
     if (!ctaSection.enabled) return null;
 

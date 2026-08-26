@@ -16,7 +16,7 @@
     },
     {
       "label": "Categories",
-      "url": "/property-types",
+      "url": "/categories",
       "icon": "tags"
     },
     {
@@ -53,12 +53,10 @@
       "title": "Social"
     },
     "copyRight": {
-      "enabled": true,
-      "title": ""
+      "enabled": true
     },
     "siteMap": {
-      "enabled": true,
-      "title": ""
+      "enabled": true
     }
   }
 }

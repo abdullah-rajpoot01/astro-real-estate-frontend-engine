@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react'
 import { cn } from '@/lib/utils'
 import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '@/components/ui/carousel'
-import type { Listing } from '@/types/listing'
+import type { Listing } from '@/utils/listings'
 
 export default function ProductCarouselIsland({ listing }: { listing: Listing }) {
   const [selectedImage, setSelectedImage] = useState(0)

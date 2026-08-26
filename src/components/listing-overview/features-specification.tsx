@@ -1,6 +1,6 @@
 // src/components/products/ProductSpecsStatic.tsx
 import { cn } from '@/lib/utils'
-import type { Listing } from '@/types/listing'
+import type { Listing } from '@/utils/listings'
 
 export default function ProductSpecsStatic({ listing }: { listing: Listing }) {
   return (

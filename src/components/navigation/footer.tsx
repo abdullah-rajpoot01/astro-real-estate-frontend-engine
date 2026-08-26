@@ -1,12 +1,12 @@
 import { ArrowRight, Clock, Mail, MapPin, Phone } from "lucide-react";
 import { Facebook, Instagram, LinkedIn, TikTok, WhatsApp, X, YouTube } from "@/components/social-icons";
 import IconComponent from "@/components/icons/icon";
-import { getFooterSection } from "@/utils/footer";
-import { getAddress } from "@/utils/address";
-import { getContact } from "@/utils/contact";
-import { getSocials } from "@/utils/social";
-import { getBusinessHours } from "@/utils/business-hours";
-import { getSiteDetails } from "@/utils/site-detail";
+import { getFooterSection } from "@/utils/sections/footer";
+import { getAddress } from "@/utils/core-detail/address";
+import { getContact } from "@/utils/core-detail/contact";
+import { getSocials } from "@/utils/core-detail/social";
+import { getBusinessHours } from "@/utils/core-detail/business-hours";
+import { getSiteDetails } from "@/utils/core-detail/site-detail";
 
 const Footer = () => {
   const { title, subtitle, description, image, sections, quickLinks } = getFooterSection();

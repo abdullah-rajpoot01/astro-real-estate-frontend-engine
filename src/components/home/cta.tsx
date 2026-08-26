@@ -1,9 +1,9 @@
 import { cn } from "@/lib/utils";
-import { getHomePageConfig } from "@/utils/home-page";
+import { getHomeCtaSection } from "@/utils/home-page";
 import { buttonVariants } from "../ui/button";
 
 const HomeCTA = () => {
-    const { ctaSection } = getHomePageConfig();
+    const  ctaSection  = getHomeCtaSection();
 
     if (!ctaSection.enabled) return null;
 

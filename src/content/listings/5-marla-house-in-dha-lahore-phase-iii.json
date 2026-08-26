@@ -1,0 +1,23 @@
+{
+  "id": "682c1b68c275",
+  "title": "5 Marla House in DHA Lahore Phase III",
+  "type": "sale",
+  "category": "pt_003",
+  "status": "available",
+  "saleLable": "Luxury",
+  "price": 125000,
+  "images": [
+    "https://picsum.photos/id/49/1920/1280.webp"
+  ],
+  "description": "Peaceful cottage escape surrounded by nature. Features a rustic interior, wraparound porch, and a private garden orchard.",
+  "location": {
+    "address": "Hakeemabad , Street 2 , City Care Medical Center Street",
+    "city": "Khanewal",
+    "state": "Punjab",
+    "country": "Pakistan",
+    "postalCode": "58150",
+    "latitude": 199.3,
+    "longitude": 123.5
+  },
+  "featured": false
+}

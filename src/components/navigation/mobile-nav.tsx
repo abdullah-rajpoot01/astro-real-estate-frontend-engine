@@ -10,7 +10,7 @@ import { Menu } from "lucide-react"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { useState } from "react"
 import IconComponent from "@/components/icons/icon"
-import type { NavbarData } from "@/utils/navbar"
+import type { NavbarData } from "@/utils/sections/navbar"
 
 export function MobileNavDialog({ navbarData }: { navbarData: NavbarData }) {
     const { title, subtitle, image, quickLinks, buttons } = navbarData;
