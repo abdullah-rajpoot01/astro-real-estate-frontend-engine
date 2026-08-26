@@ -3,7 +3,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { getAllTestimonials } from "@/utils/testimonials";
 import EmptyTestimonialsState from "./empty";
-import testimonialsPageConfig from "@/content/pages/testimonials.json"
+import { getTestimonialsPageConfig } from "@/utils/testimonials-page";
 
 
 const Testimonials = () => {
@@ -11,8 +11,8 @@ const Testimonials = () => {
     ()
   let testimonialsWithLimitApplied = testimonials;
 
-  const { title, description, limit } = testimonialsPageConfig
-  
+  const { title, description, limit } = getTestimonialsPageConfig();
+
   if (limit && limit > 0) {
     testimonialsWithLimitApplied = testimonials.slice(0, limit);
   }

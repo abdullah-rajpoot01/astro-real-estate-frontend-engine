@@ -1,11 +1,11 @@
-import propertiesPageConfig from "@/content/pages/properties.json";
+import { getPropertiesPageConfig } from '@/utils/properties-page';
 import ListingCard1 from '../listings/listings-card';
-import type { Listing } from '@/types/listing';
 import EmptyListingsState from "./empty";
+import type { Listing } from "@/utils/listings";
 
 
 function PropertyListingPage({ listings }: { listings: Listing[] }) {
-
+    const propertiesPageConfig = getPropertiesPageConfig()
 
     return (
         <section className='pb-10'>

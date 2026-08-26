@@ -1,11 +1,11 @@
-import categoriesListingPageConfig from "@/content/pages/categories.json";
 import ListingCard1 from '../listings/listings-card';
 import EmptyListingsState from "../listings/empty";
 import type { Listing } from "@/utils/listings";
+import { getCategoriesPageConfig } from '@/utils/categories-page';
 
 
 function categoryListingPage({ listings, propertyType }: { listings: Listing[], propertyType: string }) {
-
+    const categoriesListingPageConfig = getCategoriesPageConfig();
     return (
         <section className='pb-10'>
             <div className='mx-auto w-full max-w-7xl'>

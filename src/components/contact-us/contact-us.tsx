@@ -1,15 +1,16 @@
-import { getAddress } from "@/utils/address";
-import { getBusinessHours } from "@/utils/business-hours";
+import { getContactPageConfig } from "@/utils/contact-us-page";
+import { getAddress } from "@/utils/core-detail/address";
+import { getBusinessHours } from "@/utils/core-detail/business-hours";
 import { getContact } from "@/utils/core-detail/contact";
 import { getSiteDetails } from "@/utils/core-detail/site-detail";
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
-import contactPageConfig from "@/content/pages/contact.json"
 
 const Contact = () => {
     const { title } = getSiteDetails();
     const address = getAddress();
     const contact = getContact();
     const businessHours = getBusinessHours();
+    const contactPageConfig = getContactPageConfig();
     return <div className="flex min-h-screen items-center justify-center overflow-hidden">
         <div className="w-full max-w-(--breakpoint-xl) px-2">
             <div className="text-center mx-auto max-w-3xl">
