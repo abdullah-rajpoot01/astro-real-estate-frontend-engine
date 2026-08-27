@@ -16,6 +16,6 @@ export type ContactData = z.infer<typeof contactSchema>;
  * Throws a fatal error to halt the build if the file is missing OR if the data layout is invalid.
  */
 export function getContact(): ContactData {
-    return loadAndValidateFile("src/content/config/contact.json", contactSchema);
+    return loadAndValidateFile("src/content/core-detail/contact.json", contactSchema);
 
 }

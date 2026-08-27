@@ -3,7 +3,7 @@ import type { CollectionFile } from "@sveltia/cms";
 export const contactConfig: CollectionFile = {
     name: "contact_settings",
     label: "Contact Information Settings",
-    file: "src/content/sections/contact.json",
+    file: "src/content/core-detail/contact.json",
     format: "json",
     fields: [
         { name: "whatsapp", label: "WhatsApp Number", widget: "string", required: true },

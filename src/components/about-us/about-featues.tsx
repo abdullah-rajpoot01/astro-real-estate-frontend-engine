@@ -1,5 +1,5 @@
 import IconComponent from "@/components/icons/icon";
-import { getAboutFeaturesSection } from "@/utils/core-detail/about-page";
+import { getAboutFeaturesSection } from "@/utils/about-page";
 import { getAllFeatures } from "@/utils/features";
 
 const Features = () => {

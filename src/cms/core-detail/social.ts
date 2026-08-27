@@ -3,7 +3,7 @@ import type { CollectionFile } from "@sveltia/cms";
 export const socialConfig: CollectionFile = {
     name: "social_media",
     label: "Social Media Settings",
-    file: "src/content/sections/social.json",
+    file: "src/content/core-detail/social.json",
     format: "json",
     fields: [
         { name: "facebook", label: "Facebook Page URL", widget: "string", required: false },

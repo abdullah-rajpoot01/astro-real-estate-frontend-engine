@@ -3,7 +3,7 @@ import type { CollectionFile } from "@sveltia/cms";
 export const brandingConfig: CollectionFile = {
     name: "branding_settings",
     label: "Branding & Theme Settings",
-    file: "src/content/sections/branding.json",
+    file: "src/content/core-detail/branding.json",
     format: "json",
     fields: [
         {

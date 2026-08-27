@@ -3,42 +3,45 @@ import type { CollectionFile } from "@sveltia/cms";
 export const businessHoursConfig: CollectionFile = {
     name: "business_hours_settings",
     label: "Business Hours Settings",
-    file: "src/content/sections/business-hours.json",
+    file: "src/content/core-detail/business-hours.json",
     format: "json",
     fields: [
         {
             name: "businessHours",
-            label: "Schedule Blocks",
+            label: "Business Hours",
             widget: "list",
-            // The 'key' property treats the list items as dynamic object keys instead of an array!
-            key: "dayName", 
+            summary: "{{fields.name}}: {{#if fields.closed}} Closed {{else}}{{fields.open}} - {{fields.close}}{{/if}}",
             fields: [
-                { 
-                    name: "dayName", 
-                    label: "Day / Block Name", 
-                    widget: "string", 
-                    required: true 
+                {
+                    name: "name",
+                    label: "Day / Period Name",
+                    widget: "string",
+                    required: true
                 },
-                { 
-                    name: "open", 
-                    label: "Opening Time", 
-                    widget: "string", 
-                    default: "09:00", 
-                    required: true 
+                {
+                    name: "closed",
+                    label: "Is Closed?",
+                    widget: "boolean",
+                    default: false,
+                    required: true
                 },
-                { 
-                    name: "close", 
-                    label: "Closing Time", 
-                    widget: "string", 
-                    default: "17:00", 
-                    required: true 
+                {
+                    name: "open",
+                    label: "Opening Time",
+                    widget: "datetime",
+                    format: "HH:mm",
+                    date_format: false,
+                    time_format: "HH:mm",
+                    required: false
                 },
-                { 
-                    name: "closed", 
-                    label: "Closed All Day", 
-                    widget: "boolean", 
-                    default: false, 
-                    required: true 
+                {
+                    name: "close",
+                    label: "Closing Time",
+                    widget: "datetime",
+                    format: "HH:mm",
+                    date_format: false,
+                    time_format: "HH:mm",
+                    required: false
                 }
             ]
         }

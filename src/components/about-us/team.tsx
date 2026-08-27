@@ -2,7 +2,7 @@
 import { getAllAgents } from "@/utils/agents";
 import { WhatsApp } from "../social-icons";
 import { Mail, Phone } from "lucide-react";
-import { getAboutTeamSection } from "@/utils/core-detail/about-page";
+import { getAboutTeamSection } from "@/utils/about-page";
 
 
 const Team = () => {

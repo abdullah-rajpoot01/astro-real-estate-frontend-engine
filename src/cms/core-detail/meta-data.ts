@@ -3,7 +3,7 @@ import type { CollectionFile } from "@sveltia/cms";
 export const siteMetadataConfig: CollectionFile = {
     name: "site_metadata",
     label: "Site Metadata Settings",
-    file: "src/content/sections/site-metadata.json",
+    file: "src/content/core-detail/site-metadata.json",
     format: "json",
     fields: [
         { name: "title", label: "SEO Title Tag", widget: "string", required: true },

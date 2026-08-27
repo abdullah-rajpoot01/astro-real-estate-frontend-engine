@@ -1,7 +1,6 @@
 {
   "id": "lst_001",
   "title": "Modern 3-Bedroom Luxury Apartment",
-  "slug": "modern-3-bedroom-luxury-apartment",
   "type": "sale",
   "category": "pt_001",
   "status": "available",
@@ -41,6 +40,7 @@
       "value": "1,650 sq ft"
     }
   ],
-  "agentId": "agt_101",
-  "featured": true
+  "agentId": "agt_102",
+  "featured": true,
+  "slug": "modern-3-bedroom-luxury-apartment"
 }

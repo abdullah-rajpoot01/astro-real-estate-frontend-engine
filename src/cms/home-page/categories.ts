@@ -1,10 +1,10 @@
 import type { CollectionFile } from "@sveltia/cms";
 import { AvailableIcons } from "@/components/icons/icons-map";
 
-export const listingsSectionConfig: CollectionFile = {
-    name: "listingsSection",
-    label: "Featured Listings Section",
-    file: "src/content/home/listings-section.json",
+export const categoriesSectionConfig: CollectionFile = {
+    name: "categories-section",
+    label: "Categories Section",
+    file: "src/content/home-page/categories.json",
     format: "json",
     fields: [
         { 
@@ -41,11 +41,11 @@ export const listingsSectionConfig: CollectionFile = {
         },
         {
             name: "maxItems",
-            label: "Maximum Listings to Show (Optional)",
+            label: "Maximum Items to Show (Optional)",
             widget: "number",
-            value_type: "int", // Enforces integers only
-            min: 1,            // Ensures at least 1 must be input if provided
-            required: false    // Keeps the field fully optional
+            value_type: "int", // Restricts input to integers only
+            min: 1,            // Enforces minimum value constraint
+            required: false    // Makes the field entirely optional
         }
     ]
 };

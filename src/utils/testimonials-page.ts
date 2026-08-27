@@ -17,7 +17,7 @@ export type TestimonialsPageData = z.infer<typeof testimonialsPageSchema>;
  */
 export function getTestimonialsPageConfig(): TestimonialsPageData {
   return loadAndValidateFile(
-    "src/content/pages/testimonails.json", 
+    "src/content/pages/testimonials.json", 
     testimonialsPageSchema
   );
 }

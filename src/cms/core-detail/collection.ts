@@ -1,5 +1,5 @@
 import type { Collection } from "@sveltia/cms";
-import { socialConfig } from "./socail";
+import { socialConfig } from "./social";
 import { addressConfig } from "./address";
 import { contactConfig } from "./contact";
 import { businessHoursConfig } from "./business-hours";

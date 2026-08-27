@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "../ui/button";
-import { getAboutCtaSection } from "@/utils/core-detail/about-page";
+import { getAboutCtaSection } from "@/utils/about-page";
 
 const AboutCTA = () => {
     const  ctaSection  = getAboutCtaSection();

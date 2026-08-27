@@ -12,5 +12,5 @@ export const brandingSchema = z.object({
 export type BrandingData = z.infer<typeof brandingSchema>;
 
 export function getStoreBranding(): BrandingData {
-    return loadAndValidateFile("src/content/config/branding.json", brandingSchema);
+    return loadAndValidateFile("src/content/core-detail/branding.json", brandingSchema);
 }

@@ -23,6 +23,6 @@ export type StoreDetailData = z.infer<typeof storeDetailSchema>;
  * Throws a fatal error to halt the build if the file is missing OR if the data layout is invalid.
  */
 export function getSiteDetails(): StoreDetailData {
-    return loadAndValidateFile("src/content/config/site-detail.json", storeDetailSchema);
+    return loadAndValidateFile("src/content/core-detail/site-detail.json", storeDetailSchema);
 
 }

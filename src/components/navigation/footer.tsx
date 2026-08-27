@@ -11,11 +11,11 @@ import { getSiteDetails } from "@/utils/core-detail/site-detail";
 const Footer = () => {
   const { title, subtitle, description, image, sections, quickLinks } = getFooterSection();
 
-  const store  = getSiteDetails();
+  const store = getSiteDetails();
   const address = getAddress();
   const contact = getContact();
   const { facebook, instagram, linkedin, tiktok, x, youtube } = getSocials();
-  const businessHours = getBusinessHours();
+  const { businessHours } = getBusinessHours();
   return (
     <footer className="border-t border-black/10 bg-background mt-10">
       <div className="site-container py-14 px-8 text-sm text-foreground md:py-18">
@@ -175,10 +175,10 @@ const Footer = () => {
               <div className="grid gap-3 leading-6">
 
                 {
-                  Object.keys(businessHours).map((businessHour) => <div>
-                    <div className="font-bold text-foreground">{businessHour}</div>
-                    <div>Open : {businessHours[businessHour].open}</div>
-                    <div>Close : {businessHours[businessHour].close}</div>
+                  businessHours.map((businessHour) => <div>
+                    <div className="font-bold text-foreground">{businessHour.name}</div>
+                    <div>Open : {businessHour.open}</div>
+                    <div>Close : {businessHour.close}</div>
                   </div>)
                 }
 

@@ -19,6 +19,6 @@ export type SocialData = z.infer<typeof socialSchema>;
  * Throws a fatal error to halt the build if the file is missing OR if the data structure is corrupt.
  */
 export function getSocials(): SocialData {
-  return loadAndValidateFile("src/content/config/social.json", socialSchema);
+  return loadAndValidateFile("src/content/core-detail/social.json", socialSchema);
 
 }

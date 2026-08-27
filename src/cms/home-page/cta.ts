@@ -1,9 +1,9 @@
 import type { CollectionFile } from "@sveltia/cms";
 
-export const testimonialsSectionConfig: CollectionFile = {
-    name: "testimonialsSection",
-    label: "Testimonials Section",
-    file: "src/content/home/testimonials-section.json",
+export const ctaSectionConfig: CollectionFile = {
+    name: "ctaSection",
+    label: "CTA (Call to Action) Section",
+    file: "src/content/home-page/cta.json",
     format: "json",
     fields: [
         { 
@@ -23,6 +23,18 @@ export const testimonialsSectionConfig: CollectionFile = {
             name: "description", 
             label: "Description Text", 
             widget: "text", 
+            required: true 
+        },
+        { 
+            name: "buttonText", 
+            label: "Button Display Label", 
+            widget: "string", 
+            required: true 
+        },
+        { 
+            name: "buttonUrl", 
+            label: "Button Redirect Destination", 
+            widget: "string", 
             required: true 
         }
     ]

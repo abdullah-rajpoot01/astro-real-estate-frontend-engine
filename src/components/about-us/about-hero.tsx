@@ -2,7 +2,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { getSiteDetails } from "@/utils/core-detail/site-detail";
 import { cn } from "@/lib/utils";
 import IconComponent from "../icons/icon";
-import { getAboutHeroSection } from "@/utils/core-detail/about-page";
+import { getAboutHeroSection } from "@/utils/about-page";
 export default function Hero() {
     const  heroSection  = getAboutHeroSection();
 

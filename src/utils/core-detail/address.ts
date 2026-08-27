@@ -23,5 +23,5 @@ export type AddressData = z.infer<typeof addressSchema>;
  * Throws a fatal error to halt the build if the file is missing OR if the data layout is invalid.
  */
 export function getAddress(): AddressData {
-    return loadAndValidateFile("src/content/config/address.json", addressSchema);
+    return loadAndValidateFile("src/content/core-detail/address.json", addressSchema);
 }

@@ -9,7 +9,7 @@ const Contact = () => {
     const { title } = getSiteDetails();
     const address = getAddress();
     const contact = getContact();
-    const businessHours = getBusinessHours();
+    const { businessHours } = getBusinessHours();
     const contactPageConfig = getContactPageConfig();
     return <div className="flex min-h-screen items-center justify-center overflow-hidden">
         <div className="w-full max-w-(--breakpoint-xl) px-2">
@@ -107,10 +107,10 @@ const Contact = () => {
                                 </div>
                                 <div className="mt-3 grid gap-3 text-sm leading-6 text-foreground/90">
                                     {
-                                        Object.keys(businessHours).map((businessHour) => <div>
-                                            <div className="font-bold text-foreground">{businessHour}</div>
-                                            <div>Open : {businessHours[businessHour].open}</div>
-                                            <div>Close : {businessHours[businessHour].close}</div>
+                                        businessHours.map((businessHour) => <div>
+                                            <div className="font-bold text-foreground capitalize">{businessHour.name}</div>
+                                            <div>Open : {businessHour.open}</div>
+                                            <div>Close : {businessHour.close}</div>
                                         </div>)
                                     }
                                 </div>
