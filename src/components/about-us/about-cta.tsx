@@ -1,9 +1,10 @@
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "../ui/button";
 import { getAboutCtaSection } from "@/utils/about-page";
+import IconComponent from "../icons/icon";
 
 const AboutCTA = () => {
-    const  ctaSection  = getAboutCtaSection();
+    const ctaSection = getAboutCtaSection();
 
     if (!ctaSection.enabled) return null;
 
@@ -16,7 +17,7 @@ const AboutCTA = () => {
                 <p className="mx-auto mt-6 max-w-xl text-center text-muted-foreground text-xl/normal">
                     {ctaSection.description}
                 </p>
-                <a href={ctaSection.buttonUrl} className={cn(buttonVariants(), "mt-8")}>{ctaSection.buttonText}</a>
+                <a href={ctaSection.buttonUrl} className={cn(buttonVariants(), "mt-8")}>{ctaSection.buttonIcon && <IconComponent name={ctaSection.buttonIcon} className="h-4! w-4!" />} {ctaSection.buttonText}</a>
             </div>
         </div>
     );

@@ -22,7 +22,7 @@ const ListingContactButtons = ({ listing }: Props) => {
     // Clean structural fallback definitions matching your schema rules
     const email = agent?.email || contact.email;
     const phone = agent?.phone || contact.phone;
-    const whatsapp = agent?.whatsapp || contact.whatsapp;
+    const whatsapp = (agent?.whatsapp || contact.whatsapp)?.replace(/^\+/, "");
     
     return (
         <div className="flex gap-2 mt-4">

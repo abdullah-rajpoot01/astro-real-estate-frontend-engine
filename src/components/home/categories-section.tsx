@@ -44,7 +44,7 @@ function CategoriesSection() {
 
         {/* Call to Action */}
         <div className='mt-12 text-center'>
-          <a href='/property-types'>
+          <a href='/categories'>
             <div className={cn(buttonVariants({ size: "lg" }), "h-10 px-4 cursor-pointer gap-2")}
             >
               <IconComponent name={categoriesSection.buttonIcon} className='size-5' />

@@ -37,18 +37,31 @@ export const agentsCollection: Collection = {
             name: "phone",
             label: "Phone Number",
             widget: "string",
-            required: true
-        },
+            required: true,
+            pattern: [
+                "^\\+?[1-9]\\d{1,14}$",
+                "Please enter a valid phone number in standard international format (e.g., +1234567890)"
+            ]
+        }
+        ,
         {
             name: "email",
             label: "Email Address",
             widget: "string",
-            required: true
+            required: true,
+            pattern: [
+                "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+                "Please enter a valid email address (e.g., name@example.com)"
+            ]
         },
         {
             name: "whatsapp",
             label: "WhatsApp Number",
             widget: "string",
+            pattern: [
+                "^\\+?[1-9]\\d{1,14}$",
+                "Please enter a valid phone number in standard international format (e.g., +1234567890)"
+            ],
             required: true
         },
         {

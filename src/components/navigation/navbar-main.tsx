@@ -36,7 +36,7 @@ const Navbar = ({children}:{children: React.ReactNode;}) => {
         <NavMenu className="hidden md:block" />
 
         <div className="flex items-center gap-3">
-          {buttons.map((button) => <div className="hidden lg:block"><a href={button.link} className={cn(buttonVariants({ variant: button.type, size: "default" }))} >
+          {buttons.map((button,index) => <div key={index} className="hidden lg:block"><a href={button.link} className={cn(buttonVariants({ variant: button.type, size: "default" }))} >
             {button.icon && <IconComponent name={button.icon} className="size-4" />}
             {button.text}
           </a>

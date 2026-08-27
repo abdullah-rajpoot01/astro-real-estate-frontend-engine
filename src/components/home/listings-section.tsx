@@ -41,7 +41,7 @@ export function ListingSection() {
             </div>
             {/* Call to Action */}
             <div className='mt-12 text-center'>
-                <a href='/properties'>
+                <a href='/properties/page/1'>
                     <div className={cn(buttonVariants({ size: "lg" }), "h-10 px-4 cursor-pointer gap-2")}>
                         <IconComponent name={listingsSection.buttonIcon} className='size-5' />
                         {listingsSection.buttonText}

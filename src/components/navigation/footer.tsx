@@ -175,7 +175,7 @@ const Footer = () => {
               <div className="grid gap-3 leading-6">
 
                 {
-                  businessHours.map((businessHour) => <div>
+                  businessHours.map((businessHour,index) => <div key={`${index}_${businessHour.name}`}>
                     <div className="font-bold text-foreground">{businessHour.name}</div>
                     <div>Open : {businessHour.open}</div>
                     <div>Close : {businessHour.close}</div>

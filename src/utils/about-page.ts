@@ -32,6 +32,7 @@ const ctaSectionSchema = z.object({
   title: z.string(),
   description: z.string(),
   buttonText: z.string(),
+  buttonIcon: z.string().optional().nullable(),
   buttonUrl: z.string(),
   enabled: z.boolean()
 });

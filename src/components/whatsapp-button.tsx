@@ -1,10 +1,7 @@
-"use client";
 import { WhatsApp } from "./social-icons";
 
-
-
 export default function WhatsAppButton({ whatsapp }: { whatsapp: string }) {
-    const number = whatsapp.replace(/[^0-9]/g, "");
+    const number = whatsapp?.replace(/^\+/, "");
     const whatsappUrl = `https://wa.me/${number}`;
 
     return (

@@ -1,3 +1,4 @@
+import { AvailableIcons } from "@/components/icons/icons-map";
 import type { CollectionFile } from "@sveltia/cms";
 
 export const aboutCtaSectionConfig: CollectionFile = {
@@ -6,36 +7,43 @@ export const aboutCtaSectionConfig: CollectionFile = {
     file: "src/content/about-page/cta.json",
     format: "json",
     fields: [
-        { 
-            name: "enabled", 
-            label: "Enable Section", 
-            widget: "boolean", 
-            default: true, 
-            required: true 
+        {
+            name: "enabled",
+            label: "Enable Section",
+            widget: "boolean",
+            default: true,
+            required: true
         },
-        { 
-            name: "title", 
-            label: "Main Title", 
-            widget: "string", 
-            required: true 
+        {
+            name: "title",
+            label: "Main Title",
+            widget: "string",
+            required: true
         },
-        { 
-            name: "description", 
-            label: "Description Text", 
-            widget: "text", 
-            required: true 
+        {
+            name: "description",
+            label: "Description Text",
+            widget: "text",
+            required: true
         },
-        { 
-            name: "buttonText", 
-            label: "Button Display Label", 
-            widget: "string", 
-            required: true 
+        {
+            name: "buttonText",
+            label: "Button Display Label",
+            widget: "string",
+            required: true
         },
-        { 
-            name: "buttonUrl", 
-            label: "Button Redirect Destination", 
-            widget: "string", 
-            required: true 
+        {
+            name: "buttonIcon",
+            label: "Button Icon Symbol",
+            widget: "select",
+            options: AvailableIcons,
+            required: false
+        },
+        {
+            name: "buttonUrl",
+            label: "Button Redirect Destination",
+            widget: "string",
+            required: true
         }
     ]
 };

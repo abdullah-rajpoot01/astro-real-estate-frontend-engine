@@ -1,9 +1,9 @@
 {
-    "title": "Know About Blue Rock Investments",
-    "description": "Discover quality products at great prices. Shop our collection, find your favorites, and enjoy a simple and convenient shopping experience.",
-    "image": "https://islamabad-images-1.pages.dev/logos/201948.jpg",
-    "buttonText": "View Properties",
-    "buttonIcon": "tags",
-    "buttonUrl": "/properties",
-    "enabled": true
+  "enabled": true,
+  "title": "Know About Blue Rock Investments",
+  "description": "Discover quality products at great prices. Shop our collection, find your favorites, and enjoy a simple and convenient shopping experience.",
+  "image": "https://islamabad-images-1.pages.dev/logos/201948.jpg",
+  "buttonText": "View Properties",
+  "buttonIcon": "shoppingBag",
+  "buttonUrl": "/properties"
 }
