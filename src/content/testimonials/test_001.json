@@ -1,6 +1,6 @@
- {
-      "id": "test-001",
-      "name": "Ahmed Khan",
-      "role": "Customer",
-      "message": "Amazing quality products and very fast delivery. Highly recommended."
-    }
+{
+    "id": "testimonial-001",
+    "name": "Ahmed Khan",
+    "role": "Home Buyer",
+    "message": "The entire process was smooth and straightforward. I found a beautiful home in the location I wanted, and the team was extremely helpful throughout the process."
+  }

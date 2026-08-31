@@ -22,7 +22,7 @@ const Testimonials = () => {
       <h2 className="text-center font-medium text-4xl tracking-[-0.04em] md:text-[2.75rem]">
         {title}
       </h2>
-      <p className="mt-3.5 text-center text-muted-foreground text-xl tracking-[-0.015em] md:text-2xl">
+      <p className="mt-3.5 max-w-3xl mx-auto text-center text-muted-foreground text-xl tracking-[-0.015em] md:text-2xl">
         {description}
       </p>
       {testimonials.length === 0 ? <EmptyTestimonialsState /> : <div className="mx-auto mt-14 max-w-(--breakpoint-xl) columns-1 gap-8 md:columns-2 lg:mt-16 lg:columns-3">

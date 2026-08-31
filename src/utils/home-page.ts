@@ -34,7 +34,7 @@ export const heroSchema = z.object({
   heading: z.string().optional().nullable(),
   subHeading1: z.string(),
   subHeading2: z.string(),
-  description: z.string(),
+  description: z.string().optional().nullable(),
   images: z.array(
     z.object({ image: z.string(), link: z.string().optional().nullable() }),
   ).max(10).min(1),

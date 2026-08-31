@@ -24,7 +24,7 @@ export const testimonialsPageConfig: CollectionFile = {
             widget: "number",
             value_type: "int", // Restricts input to integers only
             min: 1,            // Enforces minimum value constraint
-            required: true    
+            required: false    
         }
     ]
 };

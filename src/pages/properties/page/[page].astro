@@ -41,10 +41,11 @@ const paginationInfo = {
 }
 // Check total listings count for conditional visibility
 const canShowPagination =
-  listingsOnThisPage.length > 0 && paginationInfo.hasNext
+  listingsOnThisPage.length > 0 &&
+  (paginationInfo.hasNext || paginationInfo.hasPrev)
 ---
 
-<Layout title={`All Properties - Page ${page.currentPage}`}>
+<Layout pageName="properties">
   <!-- Component rendering your main real estate listings catalog grid -->
   <PropertyListingPage listings={listingsOnThisPage} />
 

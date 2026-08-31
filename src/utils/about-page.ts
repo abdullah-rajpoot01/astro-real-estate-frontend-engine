@@ -6,12 +6,14 @@ import { loadAndValidateFile } from "./load-file-folder";
 // ==========================================
 
 const heroSectionSchema = z.object({
-  title: z.string(),
-  description: z.string(),
-  image: z.string(),
-  buttonText: z.string(),
-  buttonIcon: z.string(),
-  buttonUrl: z.string(),
+  title: z.string().optional().nullable(),
+  description: z.string().optional().nullable(),
+  image: z.string().optional().nullable(),
+  button: z.object({
+    text: z.string().optional().nullable(),
+    icon: z.string().optional().nullable(),
+    url: z.string().optional().nullable(),
+  }).optional().nullable(),
   enabled: z.boolean()
 });
 

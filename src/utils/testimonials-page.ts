@@ -5,7 +5,7 @@ import { loadAndValidateFile } from "./load-file-folder";
 export const testimonialsPageSchema = z.object({
   title: z.string(),
   description: z.string(),
-  limit: z.number()
+  limit: z.number().optional().nullable()
 });
 
 // 2. Infer the TypeScript type from the schema
@@ -17,7 +17,7 @@ export type TestimonialsPageData = z.infer<typeof testimonialsPageSchema>;
  */
 export function getTestimonialsPageConfig(): TestimonialsPageData {
   return loadAndValidateFile(
-    "src/content/pages/testimonials.json", 
+    "src/content/pages/testimonials.json",
     testimonialsPageSchema
   );
 }

@@ -7,49 +7,57 @@ export const aboutHeroConfig: CollectionFile = {
     file: "src/content/about-page/hero.json",
     format: "json",
     fields: [
-        { 
-            name: "enabled", 
-            label: "Enable Section", 
-            widget: "boolean", 
-            default: true, 
-            required: true 
-        },
-        { 
-            name: "title", 
-            label: "Main Title", 
-            widget: "string", 
-            required: true 
-        },
-        { 
-            name: "description", 
-            label: "Description Text", 
-            widget: "text", 
-            required: true 
-        },
-        { 
-            name: "image", 
-            label: "Section Image Asset", 
-            widget: "image", 
-            required: true 
-        },
-        { 
-            name: "buttonText", 
-            label: "Button Display Label", 
-            widget: "string", 
-            required: true 
-        },
         {
-            name: "buttonIcon",
-            label: "Button Icon Symbol",
-            widget: "select",
-            options: AvailableIcons,
+            name: "enabled",
+            label: "Enable Section",
+            widget: "boolean",
+            default: true,
             required: true
         },
-        { 
-            name: "buttonUrl", 
-            label: "Button Redirect Destination", 
-            widget: "string", 
-            required: true 
+        {
+            name: "title",
+            label: "Main Title",
+            widget: "string",
+            required: false
+        },
+        {
+            name: "description",
+            label: "Description Text",
+            widget: "text",
+            required: false
+        },
+        {
+            name: "image",
+            label: "Section Image Asset",
+            widget: "image",
+            required: false
+        },
+        {
+            name: "button",
+            label: "Action Button",
+            widget: "object",
+            required: false, // Following our strategy to keep parent configs bulletproof
+            fields: [
+                {
+                    name: "text",
+                    label: "Button Display Label",
+                    widget: "string",
+                    required: true
+                },
+                {
+                    name: "icon",
+                    label: "Button Icon Symbol",
+                    widget: "select",
+                    options: AvailableIcons,
+                    required: true
+                },
+                {
+                    name: "url",
+                    label: "Button Redirect Destination",
+                    widget: "string",
+                    required: true
+                }
+            ]
         }
     ]
 };

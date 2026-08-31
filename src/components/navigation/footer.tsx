@@ -16,6 +16,9 @@ const Footer = () => {
   const contact = getContact();
   const { facebook, instagram, linkedin, tiktok, x, youtube } = getSocials();
   const { businessHours } = getBusinessHours();
+
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer className="border-t border-black/10 bg-background mt-10">
       <div className="site-container py-14 px-8 text-sm text-foreground md:py-18">
@@ -136,8 +139,8 @@ const Footer = () => {
               <div
                 className="flex gap-4 leading-6 transition-colors hover:text-foreground group"
               >
-                <MapPin className='size-6 group-hover:text-primary' />
-                <span className="group-hover:text-primary max-w-[80%] ">
+                <MapPin className='size-4' />
+                <span className="max-w-[80%] ">
                   {address.addressLine1} , {address.addressLine2} , {address.city} , {address.province} , {address.country}
                 </span>
               </div>
@@ -188,7 +191,7 @@ const Footer = () => {
         </div>
         <div className="mt-14 grid gap-6 border-t border-foreground/10 pt-8 md:grid-cols-[1fr_auto] md:items-end">
           <div className="grid gap-2">
-            {sections.copyRight.enabled && <div>{sections.copyRight?.title ? sections.copyRight?.title : `© ${new Date().getFullYear()} ${store.title}. All rights reserved.`}</div>}
+            {sections.copyRight.enabled && <div>{sections.copyRight?.title ? sections.copyRight?.title : `© ${currentYear} ${store.title}. All rights reserved.`}</div>}
             <div className="flex items-center gap-1">
               <span>Made with</span>
               <svg

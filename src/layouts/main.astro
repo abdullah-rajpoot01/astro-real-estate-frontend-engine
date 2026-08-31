@@ -8,8 +8,24 @@ import { MobileNavDialog } from "@/components/navigation/mobile-nav"
 import { getNavbarSection } from "@/utils/sections/navbar"
 import { getContact } from "@/utils/core-detail/contact"
 import { getSiteDetails } from "@/utils/core-detail/site-detail"
+import { SEOMETADATA } from "@/components/meta-data/default-metadata"
+import { getMetadataByName } from "@/utils/meta-data/create-meta"
+// 1. Define component props interface
+interface Props {
+  pageName?: string
+  context?: {
+    title?: string
+    description?: string
+    image?: string
+  }
+}
+
+// 2. Extract layout props
+const { pageName, context } = Astro.props
 
 const themeConfig = { name: "amber-mono-light", file: "default.css" }
+
+const canonicalURL = Astro.url.href
 
 // 3. Generate the class selector string dynamically matching your CSS block
 const themeClass = `theme-${themeConfig.name}`
@@ -19,16 +35,24 @@ const navbarData = getNavbarSection()
 const siteDetail = getSiteDetails()
 
 const contact = getContact()
+
+const meta = getMetadataByName(pageName, context)
 ---
 
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>Real Estate Frontend</title>
     <ClientRouter />
     <!-- 5. Linked stylesheet is placed AFTER globals.css to safely override variables -->
     <link rel="stylesheet" href={`/themes/${themeConfig.file}`} />
+    <SEOMETADATA
+      title={meta.title}
+      description={meta.description}
+      image={meta.image}
+      siteName={siteDetail.title}
+      url={canonicalURL}
+    />
   </head>
 
   <body class={themeClass}>

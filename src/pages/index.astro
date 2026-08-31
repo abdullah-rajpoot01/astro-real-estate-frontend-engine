@@ -10,10 +10,9 @@ import HomeCTA from "@/components/home/cta"
 import { getHeroSection } from "@/utils/home-page"
 
 const { images } = getHeroSection()
-
 ---
 
-<Layout>
+<Layout pageName="home">
   <HeroSection>
     <CarouselWithFooter images={images} client:load />
   </HeroSection>

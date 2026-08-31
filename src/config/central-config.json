@@ -1,0 +1,25 @@
+[
+    {
+        "storeName": "al_rehman_realtors",
+        "id": "usr_98431024",
+        "status": "active",
+        "domainConfig": {
+            "customDomain": "www.alrehmanrealtors.pk",
+            "cloudflareSubdomain": "al-rehman.pages.dev"
+        },
+        "repositoryConfig": {
+            "repoName": "rajpoot/data_1",
+            "repoUrl": "https://github.com",
+            "repoBranch": "main"
+        },
+        "billingInfo": {
+            "planTier": "basic",
+            "currency": "PKR",
+            "monthlyRate": 300,
+            "nextPaymentDue": "2026-09-15T00:00:00Z"
+        },
+        "metaData": {
+            "createdAt": "2026-08-31T07:15:00Z"
+        }
+    }
+]

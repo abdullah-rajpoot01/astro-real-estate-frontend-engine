@@ -6,8 +6,8 @@ export const siteMetadataConfig: CollectionFile = {
     file: "src/content/core-detail/site-metadata.json",
     format: "json",
     fields: [
-        { name: "title", label: "SEO Title Tag", widget: "string", required: true },
-        { name: "description", label: "SEO Description Text", widget: "text", required: true },
+        { name: "title", label: "SEO Title Tag", widget: "string", required: false },
+        { name: "description", label: "SEO Description Text", widget: "text", required: false },
         {
             name: "keywords",
             label: "Keywords List",
@@ -15,7 +15,7 @@ export const siteMetadataConfig: CollectionFile = {
             field: { name: "keyword", label: "Keyword Tag", widget: "string" },
             required: false
         },
-        { name: "image", label: "Default OpenGraph Banner Image", widget: "image", required: true },
-        { name: "siteUrl", label: "Website URL", widget: "string", required: true }
+        { name: "image", label: "Default OpenGraph Banner Image", widget: "image", required: false },
+        { name: "siteUrl", label: "Website URL", widget: "string", required: false }
     ]
 };
