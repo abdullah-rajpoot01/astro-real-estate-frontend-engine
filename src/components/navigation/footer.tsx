@@ -33,7 +33,7 @@ const Footer = () => {
                   {title || store.title}
                 </span>
                 <span className="block text-[10px] font-semibold uppercase tracking-[0.28em] text-primary">
-                  {subtitle || "Online Store"}
+                  {subtitle || store.subtitle}
                 </span>
               </span>
 
@@ -149,7 +149,7 @@ const Footer = () => {
                 <span className="group-hover:text-primary">{contact.phone.replace(/[^0-9]/g, "").replace(/^92/, "0")}</span>
               </a>
               <a
-                href={`https://wa.me/${contact.whatsapp}`}
+                href={`https://wa.me/${contact.whatsapp?.replace(/^\+/, "")}`}
                 target="_blank" rel="noreferrer noopener"
                 className="flex items-center gap-4 transition-colors hover:text-foreground group"
               >

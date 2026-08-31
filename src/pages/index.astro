@@ -9,12 +9,13 @@ import CategoriesSection from "@/components/home/categories-section"
 import HomeCTA from "@/components/home/cta"
 import { getHeroSection } from "@/utils/home-page"
 
-const { carouselImages } = getHeroSection()
+const { images } = getHeroSection()
+
 ---
 
 <Layout>
   <HeroSection>
-    <CarouselWithFooter images={carouselImages} client:load />
+    <CarouselWithFooter images={images} client:load />
   </HeroSection>
   <CategoriesSection />
   <ListingSection />

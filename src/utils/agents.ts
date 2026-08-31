@@ -5,13 +5,13 @@ export const agentSchema = z.object({
   id: z.string(),
   name: z.string(),
   slug: z.string(),
-  title: z.string().optional(),
-  image: z.string().optional(),
+  title: z.string().optional().nullable(),
+  image: z.string().optional().nullable(),
   phone: z.string(),
   email: z.email(),
   whatsapp: z.string(),
-  bio: z.string().optional(),
-  count: z.number().optional(),
+  bio: z.string().optional().nullable(),
+  count: z.number().optional().nullable(),
   featured: z.boolean(),
 })
 

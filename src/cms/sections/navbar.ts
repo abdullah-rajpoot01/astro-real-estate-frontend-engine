@@ -9,9 +9,9 @@ export const navigationBarConfig: CollectionFile = {
     // Enforce JSON parsing rules matching your z.object schema layout
     format: "json",
     fields: [
-        { name: "title", label: "Title", widget: "string", required: true },
-        { name: "subtitle", label: "Subtitle", widget: "string", required: true },
-        { name: "image", label: "Header Image Asset", widget: "image", required: true },
+        { name: "title", label: "Title", widget: "string", required: false },
+        { name: "subtitle", label: "Subtitle", widget: "string", required: false },
+        { name: "image", label: "Header Image Asset", widget: "image", required: false },
 
         // --- Quick Links Setup (Array of Objects) ---
         {
@@ -36,10 +36,11 @@ export const navigationBarConfig: CollectionFile = {
             name: "buttons",
             label: "Action Buttons",
             widget: "list",
+            required: false,
             fields: [
                 {
                     name: "type",
-                    label: "Shadcn UI Button Variant Type",
+                    label: "Button Variant Type",
                     widget: "select",
                     // Strict mirror of your z.enum validation rules
                     options: buttonsOptions,

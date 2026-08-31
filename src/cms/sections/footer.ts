@@ -13,10 +13,10 @@ export const footerConfig: CollectionFile = {
     file: "src/content/sections/footer.json",
     format: "json",
     fields: [
-        { name: "title", label: "Main Title", widget: "string", required: true },
-        { name: "subtitle", label: "Subtitle", widget: "string", required: true },
-        { name: "image", label: "Footer Logo/Image Asset", widget: "image", required: true },
-        { name: "description", label: "Company Description Text", widget: "text", required: true },
+        { name: "title", label: "Main Title", widget: "string", required: false },
+        { name: "subtitle", label: "Subtitle", widget: "string", required: false },
+        { name: "image", label: "Footer Logo/Image Asset", widget: "image", required: false },
+        { name: "description", label: "Company Description Text", widget: "text", required: false },
 
         // --- Quick Links Setup (Array of Objects with Optional Icons) ---
         {

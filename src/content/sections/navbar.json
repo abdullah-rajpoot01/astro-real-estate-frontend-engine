@@ -1,7 +1,4 @@
 {
-  "title": "Elite Store",
-  "subtitle": "Online Store",
-  "image": "https://islamabad-images-1.pages.dev/logos/201948.jpg",
   "quickLinks": [
     {
       "label": "Home",
@@ -27,20 +24,6 @@
       "label": "Testimonials",
       "url": "/testimonials",
       "icon": "users"
-    }
-  ],
-  "buttons": [
-    {
-      "type": "default",
-      "text": "Contact Us",
-      "link": "/contact-us",
-      "icon": "message"
-    },
-    {
-      "type": "outline",
-      "text": "Call Now",
-      "link": "tel:+92306779995",
-      "icon": "phone"
     }
   ]
 }

@@ -8,19 +8,19 @@ export const heroConfig: CollectionFile = {
     file: "src/content/home-page/hero.json",
     format: "json",
     fields: [
-        { name: "heading", label: "Main Heading", widget: "string", required: true },
+        { name: "heading", label: "Main Heading", widget: "string", required: false },
         { name: "subHeading1", label: "Sub-Heading 1", widget: "string", required: true },
         { name: "subHeading2", label: "Sub-Heading 2", widget: "string", required: true },
-        { name: "description", label: "Description Text", widget: "text", required: true },
+        { name: "description", label: "Description Text", widget: "text", required: false },
 
         // --- Carousel Images Setup (Array of Objects, min 1, max 10) ---
         {
-            name: "carouselImages",
+            name: "images",
             label: "Carousel Images Slideshow",
             widget: "list",
             summary: "{{fields.image}}",
-            min: 1,
             max: 10,
+            min: 1,
             fields: [
                 { name: "image", label: "Slide Image Asset", widget: "image", required: true },
                 {
@@ -37,6 +37,8 @@ export const heroConfig: CollectionFile = {
             name: "buttons",
             label: "Action Buttons",
             widget: "list",
+            required: false,
+            max: 2,
             fields: [
                 {
                     name: "type",

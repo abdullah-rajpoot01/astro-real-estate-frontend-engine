@@ -10,7 +10,7 @@ const AboutCTA = () => {
 
     return (
         <div className="">
-            <div className="relative flex w-full flex-col items-center justify-center bg-accent py-8 rounded-2xl">
+            <div className="relative flex w-full flex-col items-center justify-center bg-accent py-8 rounded-2xl px-4">
                 <h2 className="font-medium text-5xl tracking-tighter text-center">
                     {ctaSection.title}
                 </h2>

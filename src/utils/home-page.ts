@@ -1,5 +1,6 @@
 import { z } from "astro/zod";
 import { loadAndValidateFile } from "./load-file-folder";
+import { buttonsOptions } from "./static";
 
 // ==========================================
 // 1. Shared & Specific Schema Definitions
@@ -30,21 +31,21 @@ const simpleSectionSchema = z.object({
 
 
 export const heroSchema = z.object({
-  heading: z.string(),
+  heading: z.string().optional().nullable(),
   subHeading1: z.string(),
   subHeading2: z.string(),
   description: z.string(),
-  carouselImages: z.array(
-    z.object({ image: z.string(), link: z.string().optional() }),
+  images: z.array(
+    z.object({ image: z.string(), link: z.string().optional().nullable() }),
   ).max(10).min(1),
   buttons: z.array(
     z.object({
-      type: z.string(),
+      type: z.enum(["default", "destructive", "outline", "secondary", "ghost", "link"]),
       text: z.string(),
       link: z.string(),
       icon: z.string()
     })
-  )
+  ).min(1).max(3)
 })
 
 

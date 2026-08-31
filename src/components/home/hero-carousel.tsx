@@ -9,10 +9,12 @@ import {
 } from "@/components/ui/carousel";
 
 
-export default function CarouselWithFooter({images}:{images:{
+export default function CarouselWithFooter({ images }: {
+  images: {
     image: string;
-    link?: string | undefined;
-}[]}) {
+    link?: string | undefined | null;
+  }[]
+}) {
   const [api, setApi] = React.useState<CarouselApi>();
 
   React.useEffect(() => {

@@ -5,10 +5,10 @@ import { loadAndValidateDirectory } from "./load-file-folder";
 export const schema = z.object({
   id: z.string(),
   name: z.string(),
-  slug: z.string().optional(),
-  description: z.string(),
+  slug: z.string().optional().nullable(),
+  description: z.string().nullable(),
   image: z.string(),
-  count: z.number().optional(), // Changed to number to match your injected layout logic
+  count: z.number().optional().nullable(), // Changed to number to match your injected layout logic
   featured: z.boolean()
 })
 

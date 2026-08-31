@@ -5,9 +5,9 @@ import { loadAndValidateFile } from "../load-file-folder";
 
 // Define the schema with strict Shadcn UI variant options
 export const navbarSchema = z.object({
-  title: z.string(),
-  subtitle: z.string(),
-  image: z.string(),
+  title: z.string().optional().nullable(),
+  subtitle: z.string().optional().nullable(),
+  image: z.string().optional().nullable(),
   quickLinks: z.array(
     z.object({ 
       label: z.string(), 
@@ -22,7 +22,7 @@ export const navbarSchema = z.object({
       link: z.string(),
       icon: z.string().optional()
     })
-  )
+  ).optional().nullable()
 });
 
 // Infer the TypeScript type directly from your schema rules

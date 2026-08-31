@@ -6,13 +6,15 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
-import { Menu } from "lucide-react"
+import { Menu, MessageCircle, PhoneCall } from "lucide-react"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { useState } from "react"
 import IconComponent from "@/components/icons/icon"
 import type { NavbarData } from "@/utils/sections/navbar"
+import type { StoreDetailData } from "@/utils/core-detail/site-detail"
+import { cn } from "@/lib/utils"
 
-export function MobileNavDialog({ navbarData }: { navbarData: NavbarData }) {
+export function MobileNavDialog({ navbarData, siteDetail, phone }: { navbarData: NavbarData, siteDetail: StoreDetailData, phone: string }) {
     const { title, subtitle, image, quickLinks, buttons } = navbarData;
 
     const [open, setOpen] = useState(false);
@@ -33,17 +35,17 @@ export function MobileNavDialog({ navbarData }: { navbarData: NavbarData }) {
 
                             <div className="relative w-12 h-12 flex justify-center items-center aspect-square  shadow-lg border rounded  border-foreground/80 overflow-hidden">
 
-                                <img src={image || ""} className="w-full h-full" />
+                                <img src={image || siteDetail.logo} className="w-full h-full" />
 
                             </div>
 
 
                             <span className="min-w-0 leading-none">
                                 <span className="block text-base font-black uppercase tracking-wide text-foreground">
-                                    {title}
+                                    {title || siteDetail.title}
                                 </span>
                                 <span className="block text-[10px] font-semibold uppercase tracking-[0.28em] text-primary">
-                                    {subtitle || "Online Store"}
+                                    {subtitle || siteDetail.subtitle}
                                 </span>
                             </span>
 
@@ -65,7 +67,7 @@ export function MobileNavDialog({ navbarData }: { navbarData: NavbarData }) {
 
                         </nav>
                         {
-                            buttons.map((button) => <div className="shrink-0 p-6 pt-0">
+                            buttons && buttons.length > 0 ? buttons.map((button) => <div className="shrink-0">
                                 <div className="flex flex-col gap-3">
                                     <a href={button.link} onClick={() => {
                                         closeDialog()
@@ -75,7 +77,20 @@ export function MobileNavDialog({ navbarData }: { navbarData: NavbarData }) {
                                         {button.text}
                                     </a>
                                 </div>
-                            </div>)
+                            </div>) : (
+                                <div>
+                                    <div className="hidden lg:block"><a href={"/contact-us"} className={cn(buttonVariants())} >
+                                        <MessageCircle className="size-4" />
+                                        Contact Us
+                                    </a>
+                                    </div>
+                                    <div className="hidden lg:block"><a href={`tel:${phone}`} className={cn(buttonVariants())} >
+                                        <PhoneCall className="size-4" />
+                                        Call Now
+                                    </a>
+                                    </div>
+                                </div>
+                            )
                         }
                     </div>
                 </ScrollArea>

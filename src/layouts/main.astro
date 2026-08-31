@@ -7,18 +7,21 @@ import { ClientRouter } from "astro:transitions"
 import { MobileNavDialog } from "@/components/navigation/mobile-nav"
 import { getNavbarSection } from "@/utils/sections/navbar"
 import { getContact } from "@/utils/core-detail/contact"
+import { getSiteDetails } from "@/utils/core-detail/site-detail"
 
 const themeConfig = { name: "amber-mono-light", file: "default.css" }
- 
+
 // 3. Generate the class selector string dynamically matching your CSS block
 const themeClass = `theme-${themeConfig.name}`
 
 const navbarData = getNavbarSection()
 
+const siteDetail = getSiteDetails()
+
 const contact = getContact()
 ---
 
-<html lang="en" > 
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
@@ -30,7 +33,12 @@ const contact = getContact()
 
   <body class={themeClass}>
     <Navbar>
-      <MobileNavDialog navbarData={navbarData} client:load />
+      <MobileNavDialog
+        navbarData={navbarData}
+        siteDetail={siteDetail}
+        phone={contact.phone}
+        client:load
+      />
     </Navbar>
     <main class="min-h-screen px-4 py-20 md:px-6">
       <slot />

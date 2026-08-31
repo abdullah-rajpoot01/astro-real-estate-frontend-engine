@@ -3,12 +3,12 @@ import { loadAndValidateFile } from "../load-file-folder";
 
 // Define the social media schema with all fields marked optional
 export const socialSchema = z.object({
-  facebook: z.string().optional(),
-  instagram: z.string().optional(),
-  tiktok: z.string().optional(),
-  youtube: z.string().optional(),
-  x: z.string().optional(),
-  linkedin: z.string().optional()
+  facebook: z.string().optional().nullable(),
+  instagram: z.string().optional().nullable(),
+  tiktok: z.string().optional().nullable(),
+  youtube: z.string().optional().nullable(),
+  x: z.string().optional().nullable(),
+  linkedin: z.string().optional().nullable()
 });
 
 // Infer the TypeScript type directly from your schema rules
