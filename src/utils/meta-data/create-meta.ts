@@ -1,9 +1,9 @@
 // src/utils/metadataRegistry.ts
 
 interface RegistryContext {
-    title?: string;
-    description?: string;
-    image?: string;
+    title?: string | null
+    description?: string | null
+    image?: string | null
 }
 
 interface MetaOutput {
@@ -18,7 +18,7 @@ export function getMetadataByName(pageName?: string, context?: RegistryContext):
     switch (pageName) {
         case "home":
             return {
-                title: "Welcome to {{name}} | Find Your Dream Home",
+                title: "Welcome to {{name}} | Find Your Dream Properties",
                 description: "Browse the latest premium real estate listings, luxury homes, and commercial properties with {{name}}.",
                 image: context?.image || fallbackImage
             };
@@ -74,10 +74,10 @@ export function getMetadataByName(pageName?: string, context?: RegistryContext):
         case "category-detail":
             return {
                 title: context?.title
-                    ? `Premium ${context.title} Properties | {{name}}`
+                    ? `Explore ${context.title} Properties | {{name}}`
                     : "Browse Curated Property Types | {{name}}",
-                description: context?.description
-                    ? context.description
+                description: context?.title
+                    ? `Discover the latest ${context.title} properties and find the right property for your needs.`
                     : "Discover specialized real estate collections filtered explicitly under the {{name}} platform.",
                 image: context?.image || fallbackImage
             };

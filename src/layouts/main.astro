@@ -14,9 +14,9 @@ import { getMetadataByName } from "@/utils/meta-data/create-meta"
 interface Props {
   pageName?: string
   context?: {
-    title?: string
-    description?: string
-    image?: string
+    title?: string | null
+    description?: string | null
+    image?: string | null
   }
 }
 

@@ -5,7 +5,6 @@ import { contactConfig } from "./contact";
 import { businessHoursConfig } from "./business-hours";
 import { siteDetailConfig } from "./site-detail";
 import { brandingConfig } from "./branding";
-import { siteMetadataConfig } from "./meta-data";
 
 export const coreDetailCollection: Collection = {
     name: "core-detail",
@@ -17,7 +16,6 @@ export const coreDetailCollection: Collection = {
         addressConfig,
         businessHoursConfig,
         socialConfig,
-        brandingConfig,
-        siteMetadataConfig
+        brandingConfig
     ]
 };

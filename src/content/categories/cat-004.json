@@ -1,8 +1,8 @@
 {
-      "id": "pt_004",
-      "name": "Villa",
-      "slug": "villa",
-      "description": "Luxurious, spacious estates typically featuring premium locations and private amenities.",
-      "image": "https://islamabad-images-1.pages.dev/images/300075286-800x1200.webp",
-      "featured": true
-    }
+  "id": "pt_004",
+  "name": "Villa",
+  "description": "Luxurious, spacious estates typically featuring premium locations and private amenities.",
+  "image": "https://islamabad-images-1.pages.dev/images/300075286-800x1200.webp",
+  "featured": true,
+  "slug": "villa"
+}

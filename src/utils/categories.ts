@@ -24,7 +24,7 @@ export function getAllCategories(): Category[] {
     const categories = loadAndValidateDirectory("src/content/categories", schema);
 
     // 2. Fetch all listings to calculate active structural matches
-    const listings = getAllListings();
+    const listings = getAllListings().filter(l => l.status === "available");
 
     // 3. Populate a lookup dictionary tracking matching listings per category ID
     const countsByCategory: Record<string, number> = {};

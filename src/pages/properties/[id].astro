@@ -56,7 +56,14 @@ const recommendedListings = [
 ].slice(0, 6)
 ---
 
-<Layout pageName="property-detail">
+<Layout
+  pageName="property-detail"
+  context={{
+    title: listing.title,
+    description: listing.description,
+    image: listing.images[0],
+  }}
+>
   <!-- Pass the clean product object down into your React interface layer -->
   <ListingOverview listing={listing} />
 
