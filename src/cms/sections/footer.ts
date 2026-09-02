@@ -10,7 +10,7 @@ const footerSectionFields = [
 export const footerConfig: CollectionFile = {
     name: "footer",
     label: "Footer Layout",
-    file: "src/content/sections/footer.json",
+    file: "sections/footer.json",
     format: "json",
     fields: [
         { name: "title", label: "Main Title", widget: "string", required: false },

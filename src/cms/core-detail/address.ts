@@ -3,7 +3,7 @@ import type { CollectionFile } from "@sveltia/cms";
 export const addressConfig: CollectionFile = {
     name: "address_settings",
     label: "Address & Location Settings",
-    file: "src/content/core-detail/address.json",
+    file: "core-detail/address.json",
     format: "json",
     fields: [
         // --- Direct Root Level Fields ---

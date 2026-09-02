@@ -4,7 +4,7 @@ export const agentsCollection: Collection = {
     name: "agents",
     label: "Agents",
     label_singular: "Agent",
-    folder: "src/content/agents",
+    folder: "agents",
     format: "json",
     create: true,
     slug: "{{name}}",

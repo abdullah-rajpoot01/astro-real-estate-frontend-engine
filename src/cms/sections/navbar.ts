@@ -5,7 +5,7 @@ import { buttonsOptions } from "../static";
 export const navigationBarConfig: CollectionFile = {
     name: "navbar",
     label: "Navigation Bar ",
-    file: "src/content/sections/navbar.json",
+    file: "sections/navbar.json",
     // Enforce JSON parsing rules matching your z.object schema layout
     format: "json",
     fields: [

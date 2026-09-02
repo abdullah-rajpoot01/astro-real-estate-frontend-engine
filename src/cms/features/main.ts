@@ -5,7 +5,7 @@ export const featuresCollection: Collection = {
     name: "features",
     label: "Features",
     label_singular: "Feature",
-    folder: "src/content/features",
+    folder: "features",
     format: "json",
     create: true,
     slug: "{{id}}", // File names will be derived from a clean slug of the title (e.g., wifi-access.json)

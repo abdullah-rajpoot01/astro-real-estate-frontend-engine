@@ -3,7 +3,7 @@ import type { CollectionFile } from "@sveltia/cms";
 export const businessHoursConfig: CollectionFile = {
     name: "business_hours_settings",
     label: "Business Hours Settings",
-    file: "src/content/core-detail/business-hours.json",
+    file: "core-detail/business-hours.json",
     format: "json",
     fields: [
         {

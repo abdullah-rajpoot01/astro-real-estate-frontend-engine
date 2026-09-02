@@ -3,7 +3,7 @@ import type { CollectionFile } from "@sveltia/cms";
 export const contactConfig: CollectionFile = {
     name: "contact_settings",
     label: "Contact Information Settings",
-    file: "src/content/core-detail/contact.json",
+    file: "core-detail/contact.json",
     format: "json",
     fields: [
         {

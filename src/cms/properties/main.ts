@@ -4,7 +4,7 @@ export const listingsCollection: Collection = {
     name: "listings",
     label: "Listings",
     label_singular: "Listing",
-    folder: "src/content/listings",
+    folder: "listings",
     format: "json",
     create: true,
     limit: 200,

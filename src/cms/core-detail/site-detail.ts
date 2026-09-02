@@ -3,7 +3,7 @@ import type { CollectionFile } from "@sveltia/cms";
 export const siteDetailConfig: CollectionFile = {
     name: "store_details",
     label: "Site Details",
-    file: "src/content/core-detail/site-detail.json",
+    file: "core-detail/site-detail.json",
     format: "json",
     fields: [
         // --- Direct Root Level Fields ---

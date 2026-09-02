@@ -3,7 +3,7 @@ import type { CollectionFile } from "@sveltia/cms";
 export const ctaSectionConfig: CollectionFile = {
     name: "ctaSection",
     label: "CTA (Call to Action) Section",
-    file: "src/content/home-page/cta.json",
+    file: "home-page/cta.json",
     format: "json",
     fields: [
         { 

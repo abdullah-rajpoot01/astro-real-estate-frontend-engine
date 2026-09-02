@@ -4,7 +4,7 @@ import { AvailableIcons } from "@/components/icons/icons-map";
 export const listingsSectionConfig: CollectionFile = {
     name: "listingsSection",
     label: "Featured Listings Section",
-    file: "src/content/home-page/listings.json",
+    file: "home-page/listings.json",
     format: "json",
     fields: [
         { 

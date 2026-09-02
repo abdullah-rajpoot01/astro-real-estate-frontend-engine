@@ -4,7 +4,7 @@ import { AvailableIcons } from "@/components/icons/icons-map";
 export const categoriesSectionConfig: CollectionFile = {
     name: "categories-section",
     label: "Categories Section",
-    file: "src/content/home-page/categories.json",
+    file: "home-page/categories.json",
     format: "json",
     fields: [
         { 

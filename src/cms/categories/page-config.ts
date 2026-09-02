@@ -3,7 +3,7 @@ import type { CollectionFile } from "@sveltia/cms";
 export const categoriesPageConfig: CollectionFile = {
     name: "categoriesPageConfig",
     label: "Categories Page Settings",
-    file: "src/content/pages/categories.json",
+    file: "pages/categories.json",
     format: "json",
     fields: [
         { 

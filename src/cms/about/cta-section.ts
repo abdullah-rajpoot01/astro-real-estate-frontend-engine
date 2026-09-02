@@ -4,7 +4,7 @@ import type { CollectionFile } from "@sveltia/cms";
 export const aboutCtaSectionConfig: CollectionFile = {
     name: "ctaSection",
     label: "CTA (Call to Action) Section",
-    file: "src/content/about-page/cta.json",
+    file: "about-page/cta.json",
     format: "json",
     fields: [
         {

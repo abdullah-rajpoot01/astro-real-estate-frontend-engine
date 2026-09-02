@@ -3,7 +3,7 @@ import type { CollectionFile } from "@sveltia/cms";
 export const propertiesPageConfig: CollectionFile = {
     name: "propertiesPageConfig",
     label: "Properties Page Settings",
-    file: "src/content/pages/properties.json",
+    file: "pages/properties.json",
     format: "json",
     fields: [
         { 

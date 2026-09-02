@@ -5,7 +5,7 @@ import { buttonsOptions } from "../static";
 export const heroConfig: CollectionFile = {
     name: "hero",
     label: "Hero Section",
-    file: "src/content/home-page/hero.json",
+    file: "home-page/hero.json",
     format: "json",
     fields: [
         { name: "heading", label: "Main Heading", widget: "string", required: false },

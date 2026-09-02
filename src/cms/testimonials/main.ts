@@ -4,7 +4,7 @@ export const testimonialsCollection: Collection = {
     name: "testimonials",
     label: "Testimonials",
     label_singular: "Testimonial",
-    folder: "src/content/testimonials",
+    folder: "testimonials",
     format: "json",
     create: true,
     slug: "{{id}}", // File names will be derived from a clean slug of the author's name

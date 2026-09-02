@@ -3,7 +3,7 @@ import type { CollectionFile } from "@sveltia/cms";
 export const aboutFeaturesSectionConfig: CollectionFile = {
     name: "featuresSection",
     label: "Features Section (Why Work With Us)",
-    file: "src/content/about-page/features.json",
+    file: "about-page/features.json",
     format: "json",
     fields: [
         { 

@@ -4,7 +4,7 @@ import { AvailableIcons } from "@/components/icons/icons-map";
 export const aboutHeroConfig: CollectionFile = {
     name: "aboutHeroSection",
     label: "About / Intro Hero Section",
-    file: "src/content/about-page/hero.json",
+    file: "about-page/hero.json",
     format: "json",
     fields: [
         {

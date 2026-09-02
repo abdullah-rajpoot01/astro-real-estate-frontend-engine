@@ -3,7 +3,7 @@ import type { CollectionFile } from "@sveltia/cms";
 export const testimonialsPageConfig: CollectionFile = {
     name: "testimonialsPageConfig",
     label: "Testimonials Page Settings",
-    file: "src/content/pages/testimonials.json",
+    file: "pages/testimonials.json",
     format: "json",
     fields: [
         { 
