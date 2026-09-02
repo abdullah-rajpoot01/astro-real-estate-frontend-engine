@@ -10,7 +10,11 @@ async function syncDataRepository() {
       throw new Error('Environment variable SITE_ID must be provided to sync dynamic tenant data.');
     }
     console.log(`[SYNC-DATA] Initializing content pipeline sync for SITE_ID: ${siteId}`);
-    
+  
+    // Resolve structural path targets inside the project workspace
+    const projectRootDir = process.cwd();
+    const contentDir = path.join(projectRootDir, 'src', 'content');
+    const targetPublicMediaDir = path.join(projectRootDir, 'public', 'media');
     const configFilePath = path.join(projectRootDir, 'src', 'config', 'central-config.json');
     
    // 2. Read and parse the JSON file manually (Safest method across all Node versions)
@@ -24,11 +28,7 @@ async function syncDataRepository() {
     }
     console.log(`[SYNC-DATA] Matching configuration identified: ${siteConfig.storeName}`);
 
-    // Resolve structural path targets inside the project workspace
-    const projectRootDir = process.cwd();
-    const contentDir = path.join(projectRootDir, 'src', 'content');
-    const targetPublicMediaDir = path.join(projectRootDir, 'public', 'media');
-
+  
     // 3. Wipe out structural default schemas pre-baked into the template repo
     console.log('[SYNC-DATA] Flushing baseline template placeholder paths...');
     await fs.rm(contentDir, { recursive: true, force: true });
