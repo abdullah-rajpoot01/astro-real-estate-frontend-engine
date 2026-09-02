@@ -44,6 +44,7 @@ function ListingCard1({ maxItems, listings = [], }: ListingCardType) {
                                 alt={listing.title}
                                 className='size-full rounded-md object-cover dark:brightness-[0.95] dark:invert'
                                 loading='lazy'
+                                decoding="async"
                                 width={400}
                                 height={400}
                             />

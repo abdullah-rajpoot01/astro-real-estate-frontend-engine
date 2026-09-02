@@ -24,6 +24,8 @@ function CategoriesCard1({ categories = [], maxCategories }: CategoriesCard1Prop
                         <img
                             src={category.image}
                             alt={category.name}
+                            loading="lazy"
+                            decoding="async"
                             className='size-full object-cover transition-transform duration-500 group-hover:scale-105'
                         />
                         <div className='absolute inset-0 bg-linear-to-t from-black/60 via-black/20 to-transparent' />
