@@ -1,0 +1,12 @@
+{
+  "addressLine1": "House 24, Street 12, F-7/2",
+  "addressLine2": "Near Jinnah Super Market",
+  "city": "Islamabad",
+  "province": "Islamabad Capital Territory",
+  "postalCode": "44000",
+  "country": "Pakistan",
+  "location": {
+    "latitude": 33.7205,
+    "longitude": 73.0575
+  }
+}

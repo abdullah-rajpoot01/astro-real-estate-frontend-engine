@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { execSync } from 'node:child_process';
+import configs from './src/config/central-config.json';
 
 async function syncDataRepository() {
   try {
@@ -11,61 +12,50 @@ async function syncDataRepository() {
     }
     console.log(`[SYNC-DATA] Initializing content pipeline sync for SITE_ID: ${siteId}`);
 
-    // 2. Fetch config blocks from master mapping matrix
-    // const configUrl = 'https://mydomain.com';
-    // const response = await fetch(configUrl);
-
-    // if (!response.ok) {
-    //   throw new Error(`Failed to fetch config registry layout. Status: ${response.status}`);
-    // }
-
-    const configs = [
-    {
-        "storeName": "al_rehman_realtors",
-        "id": "usr_98431024",
-        "status": "active",
-        "domainConfig": {
-            "customDomain": "www.alrehmanrealtors.pk",
-            "cloudflareSubdomain": "al-rehman.pages.dev"
-        },
-        "repositoryConfig": {
-            "repoName": "abdullah-rajpoot01/real_estate_config_default_data",
-            "repoUrl": "https://github.com/abdullah-rajpoot01/real_estate_config_default_data",
-            "repoBranch": "main"
-        },
-        "billingInfo": {
-            "planTier": "basic",
-            "currency": "PKR",
-            "monthlyRate": 300,
-            "nextPaymentDue": "2026-09-15T00:00:00Z"
-        },
-        "metaData": {
-            "createdAt": "2026-08-31T07:15:00Z"
-        }
-    }
-];
-
-    // 3. Extract the targeted database node tracking config
+    // 2. Extract the targeted database node tracking config
     const siteConfig = configs.find(item => item.id === siteId);
     if (!siteConfig) {
       throw new Error(`Mapping verification exception: No registry entry mapped for SITE_ID: ${siteId}`);
     }
     console.log(`[SYNC-DATA] Matching configuration identified: ${siteConfig.storeName}`);
 
-    // Resolve paths target boundaries inside the frontend project
+    // Resolve structural path targets inside the project workspace
     const projectRootDir = process.cwd();
     const contentDir = path.join(projectRootDir, 'src', 'content');
+    const targetPublicMediaDir = path.join(projectRootDir, 'public', 'media');
 
-    // 4. Wipe out structural default schemas pre-baked into the template repo
+    // 3. Wipe out structural default schemas pre-baked into the template repo
     console.log('[SYNC-DATA] Flushing baseline template placeholder paths...');
     await fs.rm(contentDir, { recursive: true, force: true });
 
-    // 5. Clone targeted asset data repository shallow block right into src/content
+    // 4. Clone targeted asset data repository shallow block right into src/content
     const fullDataUrl = siteConfig.repositoryConfig.repoUrl;
     const dataBranch = siteConfig.repositoryConfig.repoBranch || 'main';
 
     console.log(`[SYNC-DATA] Shallow cloning [${dataBranch}] data assets directly into src/content...`);
     execSync(`git clone --branch ${dataBranch} --depth 1 ${fullDataUrl} "${contentDir}"`, { stdio: 'inherit' });
+
+    // ==========================================
+    // 📸 MEDIA ASSETS EXTRACTION ROUTINE
+    // ==========================================
+    const clonedDataMediaSrc = path.join(contentDir, 'public', 'media');
+
+    // Remove any previous target folder from root-level public/media if it exists
+    console.log('[SYNC-DATA] Purging existing target media allocations...');
+    await fs.rm(targetPublicMediaDir, { recursive: true, force: true });
+
+    // Verify if the newly cloned data repository contains incoming media assets
+    const hasIncomingMedia = await fs.stat(clonedDataMediaSrc).then(() => true).catch(() => false);
+    
+    if (hasIncomingMedia) {
+      console.log('[SYNC-DATA] Extracting and migrating fresh media structure to root public/media...');
+      // Ensure the parent /public directory structure exists before attempting a hard copy
+      await fs.mkdir(path.dirname(targetPublicMediaDir), { recursive: true });
+      await fs.cp(clonedDataMediaSrc, targetPublicMediaDir, { recursive: true });
+    } else {
+      console.log('[SYNC-DATA NOTICE] No active public/media directory discovered inside the incoming cloned data repo.');
+    }
+    // ==========================================
 
     console.log('[SYNC-DATA] Content repository synced successfully. Preparing Astro workspace build...');
   } catch (error) {

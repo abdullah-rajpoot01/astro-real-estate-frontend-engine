@@ -1,0 +1,58 @@
+{
+  "quickLinks": [
+    {
+      "label": "Home",
+      "url": "/",
+      "icon": "home"
+    },
+    {
+      "label": "Properties",
+      "url": "/properties/page/1",
+      "icon": "shoppingBag"
+    },
+    {
+      "label": "Categories",
+      "url": "/categories",
+      "icon": "tags"
+    },
+    {
+      "label": "Testimonials",
+      "url": "/testimonials",
+      "icon": "users"
+    },
+    {
+      "label": "About Us",
+      "url": "/about-us",
+      "icon": "user"
+    },
+    {
+      "label": "Contact Us",
+      "url": "/contact-us",
+      "icon": "user"
+    }
+  ],
+  "sections": {
+    "quickLinks": {
+      "enabled": true,
+      "title": "Quick Links"
+    },
+    "contact": {
+      "enabled": true,
+      "title": "Contact"
+    },
+    "businessHours": {
+      "enabled": true,
+      "title": "Business Hours"
+    },
+    "social": {
+      "enabled": true,
+      "title": "Social"
+    },
+    "copyRight": {
+      "enabled": true
+    },
+    "siteMap": {
+      "enabled": true
+    }
+  }
+}
