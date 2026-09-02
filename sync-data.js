@@ -1,7 +1,6 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { execSync } from 'node:child_process';
-import configs from './src/config/central-config.json';
 
 async function syncDataRepository() {
   try {
@@ -23,6 +22,11 @@ async function syncDataRepository() {
     const projectRootDir = process.cwd();
     const contentDir = path.join(projectRootDir, 'src', 'content');
     const targetPublicMediaDir = path.join(projectRootDir, 'public', 'media');
+    const configFilePath = path.join(projectRootDir, 'src', 'config', 'central-config.json');
+    
+   // 2. Read and parse the JSON file manually (Safest method across all Node versions)
+    const configRawData = await fs.readFile(configFilePath, 'utf-8');
+    const configs = JSON.parse(configRawData);
 
     // 3. Wipe out structural default schemas pre-baked into the template repo
     console.log('[SYNC-DATA] Flushing baseline template placeholder paths...');
@@ -46,7 +50,7 @@ async function syncDataRepository() {
 
     // Verify if the newly cloned data repository contains incoming media assets
     const hasIncomingMedia = await fs.stat(clonedDataMediaSrc).then(() => true).catch(() => false);
-    
+
     if (hasIncomingMedia) {
       console.log('[SYNC-DATA] Extracting and migrating fresh media structure to root public/media...');
       // Ensure the parent /public directory structure exists before attempting a hard copy
