@@ -43,7 +43,7 @@ async function syncDataRepository() {
     // ==========================================
     // 📸 MEDIA ASSETS EXTRACTION ROUTINE
     // ==========================================
-    const clonedDataMediaSrc = path.join(contentDir, 'public', 'media');
+    const clonedDataMediaSrc = path.join(contentDir, 'media');
 
     // Remove any previous target folder from root-level public/media if it exists
     console.log('[SYNC-DATA] Purging existing target media allocations...');
