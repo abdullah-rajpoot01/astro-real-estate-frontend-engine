@@ -1,4 +1,4 @@
-import { WhatsApp } from "./social-icons";
+import { WhatsApp } from "@/features/icons";
 
 export default function WhatsAppButton({ whatsapp }: { whatsapp: string }) {
     const number = whatsapp?.replace(/^\+/, "");

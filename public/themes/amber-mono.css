@@ -1,5 +1,4 @@
 
-@custom-variant dark (&:is(.theme-amber-mono-dark *));
 
 .theme-amber-mono-light {
   --background: oklch(0.9850 0 0);
@@ -162,11 +161,3 @@
   --shadow-2xl: var(--shadow-2xl);
 }
 
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}

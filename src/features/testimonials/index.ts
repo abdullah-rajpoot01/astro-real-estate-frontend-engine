@@ -1,0 +1,7 @@
+export * from "./collection.cms"
+export * from "./empty.comp"
+export * from "./testimonials-page.cms"
+export * from "./testimonials-page.comp"
+export * from "./testimonials-page.utils"
+export * from "./testimonials.cms"
+export * from "./testimonials.utils"

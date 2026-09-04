@@ -1,13 +1,13 @@
 ---
 import Layout from "@/layouts/main.astro"
-import ListingSection from "@/components/home/listings-section"
-import HeroSection from "@/components/home/hero-section"
-import CarouselWithFooter from "@/components/home/hero-carousel"
-import Testimonials from "@/components/home/testimonials"
-import Features from "@/components/home/features"
-import CategoriesSection from "@/components/home/categories-section"
-import HomeCTA from "@/components/home/cta"
-import { getHeroSection } from "@/utils/home-page"
+import ListingSection from "@/features/home/listings.comp"
+import HeroSection from "@/features/home/hero.comp"
+import CarouselWithFooter from "@/features/home/hero-carousel.comp"
+import Testimonials from "@/features/home/testimonials.comp"
+import Features from "@/features/home/features.comp"
+import CategoriesSection from "@/features/home/categories.comp"
+import HomeCTA from "@/features/home/cta.comp"
+import { getHeroSection } from "@/features/home/home.utils"
 
 const { images } = getHeroSection()
 ---

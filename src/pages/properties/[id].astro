@@ -1,12 +1,12 @@
 ---
 // 2. React UI Presenter Import
 import Layout from "@/layouts/main.astro"
-import ListingOverview from "@/components/listing-overview/shell.astro"
-import ListingCard1 from "@/components/listings/listings-card"
+import ListingOverview from "@/features/listing-page/main.comp.astro"
+import {ListingCard} from "@/features/listings"
 
 // 3. Define the path map using Astro's dynamic parameters engine
 import type { GetStaticPaths, InferGetStaticPropsType } from "astro"
-import { getAllListings } from "@/utils/listings"
+import { getAllListings } from "@/features/listings"
 
 export const getStaticPaths = (async () => {
   // 1. Fetch all listings using your function
@@ -76,6 +76,6 @@ const recommendedListings = [
     </div>
 
     <!-- Render array containing targeted matching metrics -->
-    <ListingCard1 listings={recommendedListings} maxItems={6} />
+    <ListingCard listings={recommendedListings} maxItems={6} />
   </div>
 </Layout>

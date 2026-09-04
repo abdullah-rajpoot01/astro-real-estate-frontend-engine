@@ -1,5 +1,4 @@
 
-@custom-variant dark (&:is(.theme-blue-vitron-dark *));
 
 .theme-blue-vitron-light {
   --background: oklch(0.9911 0 0);

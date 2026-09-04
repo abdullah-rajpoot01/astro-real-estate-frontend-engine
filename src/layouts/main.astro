@@ -1,15 +1,17 @@
 ---
 import "@/styles/global.css"
-import Navbar from "@/components/navigation/navbar-main"
-import Footer from "@/components/navigation/footer"
+import { Footer, Navbar } from "@/features/navigation"
 import WhatsAppButton from "@/components/whatsapp-button"
 import { ClientRouter } from "astro:transitions"
-import { MobileNavDialog } from "@/components/navigation/mobile-nav"
-import { getNavbarSection } from "@/utils/sections/navbar"
-import { getContact } from "@/utils/core-detail/contact"
-import { getSiteDetails } from "@/utils/core-detail/site-detail"
-import { SEOMETADATA } from "@/components/meta-data/default-metadata"
-import { getMetadataByName } from "@/utils/meta-data/create-meta"
+import { MobileNavDialog } from "@/features/navigation/mobile-nav.comp"
+import { getNavbarSection } from "@/features/navigation/navbar.utils"
+import { getContact } from "@/features/core-detail/contact.utils"
+import { getSiteDetails } from "@/features/core-detail/site-detail.utils"
+import { SEOMETADATA } from "@/features/metadata/create.comp"
+import { getMetadataByName } from "@/features/metadata"
+import { getStoreBranding } from "@/features/core-detail/branding.utils"
+import { themeConfig } from "@/features/reusable/static"
+
 // 1. Define component props interface
 interface Props {
   pageName?: string
@@ -23,12 +25,14 @@ interface Props {
 // 2. Extract layout props
 const { pageName, context } = Astro.props
 
-const themeConfig = { name: "amber-mono-light", file: "default.css" }
+const { theme, mode } = getStoreBranding()
+
+const activeTheme = themeConfig.find((tme) => tme.value === theme)
 
 const canonicalURL = Astro.url.href
 
 // 3. Generate the class selector string dynamically matching your CSS block
-const themeClass = `theme-${themeConfig.name}`
+const themeClass = `theme-${activeTheme?.value || "default"}-${mode}`
 
 const navbarData = getNavbarSection()
 
@@ -45,7 +49,12 @@ const meta = getMetadataByName(pageName, context)
     <meta name="viewport" content="width=device-width" />
     <ClientRouter />
     <!-- 5. Linked stylesheet is placed AFTER globals.css to safely override variables -->
-    <link rel="stylesheet" href={`/themes/${themeConfig.file}`} />
+    {
+      activeTheme && activeTheme.value !== "default" && (
+        <link rel="stylesheet" href={`/themes/${activeTheme.file}`} />
+      )
+    }
+    <link rel="sitemap" href="/sitemap-index.xml" />
     <SEOMETADATA
       title={meta.title}
       description={meta.description}
@@ -55,7 +64,7 @@ const meta = getMetadataByName(pageName, context)
     />
   </head>
 
-  <body class={themeClass}>
+  <body class={`${themeClass} ${mode}`}>
     <Navbar>
       <MobileNavDialog
         navbarData={navbarData}
