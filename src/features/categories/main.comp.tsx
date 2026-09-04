@@ -1,8 +1,8 @@
 
-import {CategoryCard} from '@/features/categories/card.comp';
-import { getAllCategories } from '@/features/categories/categories.utils';
+import {CategoryCard} from './card.comp';
+import { getAllCategories } from './categories.utils';
 import {EmptyCategoriesState} from "./empty.comp";
-import { getCategoriesPageConfig } from '@/features/categories/main.utils';
+import { getCategoriesPageConfig } from './main.utils';
 
 export function CategoriesMainPage() {
 

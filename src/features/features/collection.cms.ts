@@ -1,4 +1,4 @@
-import { AvailableIcons } from "@/features/icons";
+import { AvailableIcons } from "@/features/icons/map.static";
 import type { Collection } from "@sveltia/cms";
 
 export const featuresCollection: Collection = {

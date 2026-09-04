@@ -2,7 +2,7 @@ import {IconComponent} from "@/features/icons";
 import { getAllFeatures } from "@/features/features";
 import { getHomeFeaturesSection } from "@/features/home/home.utils";
 
-const Features = () => {
+const FeaturesSection = () => {
     const  featuresSection  = getHomeFeaturesSection();
 
     if (!featuresSection.enabled) return null;
@@ -96,4 +96,4 @@ const Features = () => {
     );
 };
 
-export default Features;
+export  {FeaturesSection};

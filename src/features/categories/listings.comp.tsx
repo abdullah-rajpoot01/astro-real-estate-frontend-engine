@@ -1,6 +1,6 @@
 import { EmptyListingsState, ListingCard } from "@/features/listings";
 import type { Listing } from "@/features/listings";
-import { getCategoriesPageConfig } from '@/features/categories/main.utils';
+import { getCategoriesPageConfig } from './main.utils';
 
 
 export function ListingPage({ listings, propertyType }: { listings: Listing[], propertyType: string }) {

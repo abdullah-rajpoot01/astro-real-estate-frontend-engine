@@ -1,5 +1,5 @@
 import { z } from "astro/zod";
-import { loadAndValidateDirectory } from "../features/reusable/load-file-folder";
+import { loadAndValidateDirectory } from "@/features/reusable";
 
 export const agentSchema = z.object({
   id: z.string(),

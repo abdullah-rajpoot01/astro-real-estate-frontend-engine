@@ -1,4 +1,4 @@
-import { getContactPageConfig } from "@/utils/contact-us-page";
+import { getContactPageConfig } from "./contact.utils";
 import { getAddress } from "@/features/core-detail/address.utils";
 import { getBusinessHours } from "@/features/core-detail/business-hours.utils";
 import { getContact } from "@/features/core-detail/contact.utils";

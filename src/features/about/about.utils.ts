@@ -1,5 +1,5 @@
 import { z } from "astro/zod";
-import { loadAndValidateFile } from "../reusable/load-file-folder";
+import { loadAndValidateFile } from "@/features/reusable";
 
 // ==========================================
 // 1. Individual Section Schema Definitions

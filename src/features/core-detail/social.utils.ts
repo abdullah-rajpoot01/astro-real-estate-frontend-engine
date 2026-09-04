@@ -1,5 +1,5 @@
 import { z } from "astro/zod";
-import { loadAndValidateFile } from "@/features/reusable/load-file-folder";
+import { loadAndValidateFile } from "@/features/reusable";
 
 // Define the social media schema with all fields marked optional
 export const socialSchema = z.object({

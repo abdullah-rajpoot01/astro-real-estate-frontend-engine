@@ -1,5 +1,5 @@
 import type { CollectionFile } from "@sveltia/cms";
-import { AvailableIcons } from "@/features/icons";
+import { AvailableIcons } from "@/features/icons/map.static";
 
 // Reusable fields schema helper for the toggleable footer sections
 const footerSectionFields = [

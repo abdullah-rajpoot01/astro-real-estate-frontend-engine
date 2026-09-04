@@ -1,5 +1,5 @@
 import { z } from "astro/zod";
-import { loadAndValidateFile } from "@/features/reusable/load-file-folder";
+import { loadAndValidateFile } from "@/features/reusable";
 
 // Define the schema exactly as you provided
 export const addressSchema = z.object({

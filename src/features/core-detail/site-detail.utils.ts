@@ -1,5 +1,5 @@
 import { z } from "astro/zod";
-import { loadAndValidateFile } from "@/features/reusable/load-file-folder";
+import { loadAndValidateFile } from "@/features/reusable";
 
 // Define the core store detail schema structure
 export const storeDetailSchema = z.object({

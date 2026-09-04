@@ -1,12 +1,14 @@
 ---
 import Layout from "@/layouts/main.astro"
 import ListingSection from "@/features/home/listings.comp"
-import HeroSection from "@/features/home/hero.comp"
+import {
+  HeroSection,
+  Testimonials,
+  CategoriesSection,
+  HomeCTA,
+  FeaturesSection,
+} from "@/features/home"
 import CarouselWithFooter from "@/features/home/hero-carousel.comp"
-import Testimonials from "@/features/home/testimonials.comp"
-import Features from "@/features/home/features.comp"
-import CategoriesSection from "@/features/home/categories.comp"
-import HomeCTA from "@/features/home/cta.comp"
 import { getHeroSection } from "@/features/home/home.utils"
 
 const { images } = getHeroSection()
@@ -18,7 +20,7 @@ const { images } = getHeroSection()
   </HeroSection>
   <CategoriesSection />
   <ListingSection />
-  <Features />
+  <FeaturesSection />
   <Testimonials />
   <HomeCTA />
 </Layout>

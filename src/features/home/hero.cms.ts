@@ -1,5 +1,5 @@
 import type { CollectionFile } from "@sveltia/cms";
-import { AvailableIcons } from "@/features/icons";
+import { AvailableIcons } from "@/features/icons/map.static";
 import { buttonsOptions } from "@/features/reusable";
 
 export const heroConfig: CollectionFile = {
