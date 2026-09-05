@@ -3,8 +3,8 @@ import { loadAndValidateFile } from "@/features/reusable";
 
 // 1. Define the schema matching your contact page JSON structure exactly
 export const contactPageSchema = z.object({
-  pageTitle: z.string(),
   title: z.string(),
+  subTitle: z.string(),
   description: z.string()
 });
 

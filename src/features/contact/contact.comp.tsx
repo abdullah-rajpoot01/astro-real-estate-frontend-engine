@@ -16,11 +16,11 @@ export const ContactMainPageComp = () => {
             <div className="text-center mx-auto max-w-3xl">
                 <b className="font-medium text-foreground text-center text-sm uppercase tracking-wide">
                     {
-                        contactPageConfig?.pageTitle ? contactPageConfig.pageTitle : <>Contact Us | <span className="text-primary">{title}</span></>
+                        contactPageConfig?.title ? contactPageConfig.title : <>Contact Us | <span className="text-primary">{title}</span></>
                     }
                 </b>
                 <h2 className="mt-3 text-center text-foreground/80 font-medium text-4xl tracking-[-0.04em]">
-                    {contactPageConfig.title}
+                    {contactPageConfig.subTitle}
                 </h2>
                 <p className="text-center mt-3 text-foreground/80 text-lg md:text-xl">
                     {contactPageConfig.description}

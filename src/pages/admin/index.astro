@@ -59,6 +59,7 @@ const targetBranch = siteConfig.repositoryConfig.repoBranch || "main"
       import { testimonialsCollection } from "@/features/testimonials/testimonials.cms"
       import { coreDetailCollection } from "@/features/core-detail/collection.cms"
       import { listingsCollection } from "@/features/listings/listings.cms"
+import { contactPageCollection } from "@/features/contact/contact.cms"
 
       // Pull the mapped environment configurations out of the script tag attributes
       const configElement = document.getElementById("cms-config")
@@ -113,6 +114,7 @@ const targetBranch = siteConfig.repositoryConfig.repoBranch || "main"
             testimonialsPageCollection,
             listingsPageCollection,
             categoriesPageCollection,
+            contactPageCollection
           ],
         },
       })
