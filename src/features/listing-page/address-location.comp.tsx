@@ -1,12 +1,12 @@
-import type { Listing } from "@/features/listings"
+import type { ListingType } from "@/features/listings"
 import { MapPin, User } from "lucide-react"
 import { getAllAgents } from "@/features/agents"
 
 interface Props { 
-    listing: Listing
+    listing: ListingType
 }
 
-const AddressAndLocation = ({ listing }: Props) => {
+export const ListingPageAddressAndLocationComp = ({ listing }: Props) => {
     const { location, agentId } = listing
 
     // Fetch agents and check if a valid assigned agent exists
@@ -113,4 +113,3 @@ const AddressAndLocation = ({ listing }: Props) => {
     )
 }
 
-export default AddressAndLocation

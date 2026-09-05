@@ -6,7 +6,7 @@ import { X } from "../icons/social.comp";
 import { getAllTestimonials } from "@/features/testimonials/testimonials.utils";
 
 
-const Testimonials = () => {
+export const HomeTestimonialsSectionComp = () => {
 
   const testimonialsSection = getHomeTestimonialsSection();
 
@@ -119,4 +119,3 @@ const TestimonialList = () => {
 
 
 
-export { Testimonials };

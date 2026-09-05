@@ -15,9 +15,9 @@ export const agentSchema = z.object({
   featured: z.boolean(),
 })
 
-export type Agent = z.infer<typeof agentSchema>
+export type AgentType = z.infer<typeof agentSchema>
 
-export function getAllAgents(): Agent[] {
+export function getAllAgents(): AgentType[] {
     return loadAndValidateDirectory("src/content/agents", agentSchema);
 
 }

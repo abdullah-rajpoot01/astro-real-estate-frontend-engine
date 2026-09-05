@@ -1,13 +1,13 @@
-import { NavMenu } from "./nav-menu.comp";
+import { NavMenuComp } from "./nav-menu.comp";
 import { Button } from "@/components/ui/button";
 import { IconComponent } from "@/features/icons";
-import { getNavbarSection } from "@/features/navigation/navbar.utils";
+import { getNavbarData } from "@/features/navigation/navbar.utils";
 import { getSiteDetails, getContact } from "@/features/core-detail";
 import { MessageCircle, PhoneCall } from "lucide-react";
 
-export const Navbar = ({ children }: { children: React.ReactNode; }) => {
+export const NavbarComp = ({ children }: { children: React.ReactNode; }) => {
 
-  const { title, subtitle, image, buttons } = getNavbarSection();
+  const { title, subtitle, image, buttons } = getNavbarData();
 
   const store = getSiteDetails();
   const contact = getContact();
@@ -32,7 +32,7 @@ export const Navbar = ({ children }: { children: React.ReactNode; }) => {
         </a>
 
         {/* Desktop Menu */}
-        <NavMenu className="hidden md:block" />
+        <NavMenuComp className="hidden md:block" />
 
         <div className="flex items-center gap-3">
           {

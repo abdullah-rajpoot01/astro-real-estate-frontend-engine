@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "sync-data": "node sync-data.js",
+    "prebuild": "node ./src/features/build/sync-data.js",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",

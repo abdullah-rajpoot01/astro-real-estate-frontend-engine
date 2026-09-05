@@ -9,13 +9,13 @@ export const contactSchema = z.object({
 });
 
 // Infer the TypeScript type directly from your schema rules
-export type ContactData = z.infer<typeof contactSchema>;
+export type ContactDataType = z.infer<typeof contactSchema>;
 
 /**
  * Fetches and parses the store contact configuration.
  * Throws a fatal error to halt the build if the file is missing OR if the data layout is invalid.
  */
-export function getContact(): ContactData {
+export function getContact(): ContactDataType {
     return loadAndValidateFile("src/content/core-detail/contact.json", contactSchema);
 
 }

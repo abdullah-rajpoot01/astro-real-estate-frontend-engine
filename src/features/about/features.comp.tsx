@@ -2,7 +2,7 @@ import {IconComponent} from "@/features/icons";
 import { getAboutFeaturesSection } from "@/features/about";
 import { getAllFeatures } from "@/features/features";
 
-const Features = () => {
+export const AboutFeaturesSectionComp = () => {
     const  featuresSection  = getAboutFeaturesSection();
 
     if (!featuresSection.enabled) return null;
@@ -95,4 +95,3 @@ const Features = () => {
     );
 };
 
-export  {Features};

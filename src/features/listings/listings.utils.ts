@@ -34,12 +34,12 @@ export const listingSchema = z.object({
   agentId: z.string().optional().nullable(),
   featured: z.boolean(),
 })
-export type Listing = z.infer<typeof listingSchema>
-export type Location = z.infer<typeof locationSchema>
-export type Specification = z.infer<typeof specificationSchema>
+export type ListingType = z.infer<typeof listingSchema>
+export type ListingLocationType = z.infer<typeof locationSchema>
+export type ListingSpecificationType = z.infer<typeof specificationSchema>
 
 
-export function getAllListings(): Listing[] {
+export function getAllListings(): ListingType[] {
   return loadAndValidateDirectory("src/content/listings", listingSchema);
 
 }

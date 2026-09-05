@@ -2,11 +2,11 @@ import type { ComponentProps } from "react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { getAllTestimonials } from "@/features/testimonials/testimonials.utils";
-import { EmptyTestimonialsState } from "./empty.comp";
+import { EmptyTestimonialsStateComp } from "./empty.comp";
 import { getTestimonialsPageConfig } from "@/features/testimonials/testimonials-page.utils";
 
 
-const TestimonialsPage = () => {
+export const TestimonialsPageMainComp = () => {
   const testimonials = getAllTestimonials
     ()
   let testimonialsWithLimitApplied = testimonials;
@@ -25,7 +25,7 @@ const TestimonialsPage = () => {
       <p className="mt-3.5 max-w-3xl mx-auto text-center text-muted-foreground text-xl tracking-[-0.015em] md:text-2xl">
         {description}
       </p>
-      {testimonials.length === 0 ? <EmptyTestimonialsState /> : <div className="mx-auto mt-14 max-w-(--breakpoint-xl) columns-1 gap-8 md:columns-2 lg:mt-16 lg:columns-3">
+      {testimonials.length === 0 ? <EmptyTestimonialsStateComp /> : <div className="mx-auto mt-14 max-w-(--breakpoint-xl) columns-1 gap-8 md:columns-2 lg:mt-16 lg:columns-3">
         {testimonialsWithLimitApplied.map((testimonial) => (
           <div
             className="mb-8 break-inside-avoid rounded-xl p-6 dark:bg-muted/60"
@@ -74,6 +74,5 @@ const TwitterLogo = (props: ComponentProps<"svg">) => (
   </svg>
 );
 
-export { TestimonialsPage };
 
 

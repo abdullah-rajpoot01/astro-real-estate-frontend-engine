@@ -2,11 +2,11 @@
 // src/pages/property-types/[propertyType]/[page].astro
 import type { GetStaticPaths, Page } from "astro"
 import Layout from "@/layouts/main.astro"
-import { getAllListings, type Listing } from "@/features/listings"
+import { getAllListings, type ListingType } from "@/features/listings"
 import PaginationWithPrimaryButton from "@/components/pagination-02"
-import { ListingPage } from "@/features/categories/listings.comp"
+import { ListingsPageComp } from "@/features/categories/listings.comp"
 import { getAllCategories } from "@/features/categories/categories.utils"
-import { getCategoriesPageConfig } from "@/features/categories/main.utils"
+import { getCategoriesPageConfig } from "@/features/categories/categories-page.utils"
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
   const allcategories = getAllCategories()
@@ -41,7 +41,7 @@ export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
 }
 
 interface Props {
-  page: Page<Listing>
+  page: Page<ListingType>
 }
 
 const { page } = Astro.props
@@ -73,7 +73,7 @@ const canShowPagination =
     image: thisCategory?.image,
   }}
 >
-  <ListingPage
+  <ListingsPageComp
     propertyType={thisCategory?.name || ""}
     listings={listingsOnThisPage}
   />

@@ -2,16 +2,16 @@ import { getContact } from "@/features/core-detail/contact.utils";
 import { Button } from "../../components/ui/button";
 import { WhatsApp } from "../icons/social.comp";
 import { Mail, PhoneCall } from "lucide-react";
-import type { Listing } from "@/features/listings";
+import type { ListingType } from "@/features/listings";
 import { getAllAgents } from "@/features/agents";
 
 interface Props {
-    listing: Listing;
+    listing: ListingType;
 }
 
 // Assumes getAllAgents() reads local static array files synchronously.
 // If it returns a Promise, pass agents down as a prop from the parent component instead!
-const ListingContactButtons = ({ listing }: Props) => {
+export const ListingPageContactButtonsSectionComp = ({ listing }: Props) => {
     const contact = getContact();
     const agents = getAllAgents();
 
@@ -53,4 +53,3 @@ const ListingContactButtons = ({ listing }: Props) => {
     );
 };
 
-export default ListingContactButtons;

@@ -10,12 +10,12 @@ export const testimonialItemSchema = z.object({
 });
 
 // Infer the TypeScript type directly from your schema requirements
-export type TestimonialItem = z.infer<typeof testimonialItemSchema>;
+export type TestimonialItemType = z.infer<typeof testimonialItemSchema>;
 
 /**
  * Fetches and parses all individual testimonial files from src/content/testimonials.
  * Throws a fatal error to halt the build if the folder is missing OR if any file is invalid.
  */
-export function getAllTestimonials(): TestimonialItem[] {
+export function getAllTestimonials(): TestimonialItemType[] {
      return loadAndValidateDirectory("src/content/testimonials", testimonialItemSchema);
 }

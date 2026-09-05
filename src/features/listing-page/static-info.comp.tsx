@@ -1,32 +1,32 @@
 // src/components/products/ProductInfoStatic.tsx
 
-import type { Listing } from "@/features/listings"
-import type { Category } from "@/features/categories/categories.utils"
+import type { ListingType } from "@/features/listings"
+import type { CategoryType } from "@/features/categories/categories.utils"
 
 interface Props {
-  listing: Listing
-  category?: Category
+  listing: ListingType
+  category?: CategoryType
 }
 
-export default function ProductInfoStatic({ listing, category }: Props) {
+export function ListingPageInfoStaticSectionComp({ listing, category }: Props) {
 
   return (
     <div className='flex flex-col gap-2 lg:gap-4'>
       <div className='flex items-center gap-2 flex-wrap'>
-        
+
         {category?.name && (
           <span className='bg-primary/10 text-primary text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-full'>
-             {category.name}
+            {category.name}
           </span>
         )}
         {listing.featured && (
           <span className='bg-primary/10 text-primary text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-full'>
-             Staff Pick
+            Staff Pick
           </span>
         )}
 
         <span className='bg-primary/10 text-primary text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-full'>
-           For {listing.type}
+          For {listing.type}
         </span>
 
 

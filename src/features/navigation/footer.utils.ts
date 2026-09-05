@@ -31,13 +31,13 @@ export const footerSchema = z.object({
 });
 
 // Infer the TypeScript type directly from your schema rules
-export type FooterData = z.infer<typeof footerSchema>;
+export type FooterDataType = z.infer<typeof footerSchema>;
 
 /**
  * Fetches and parses the footer configuration.
  * Throws a fatal error to halt the build if the file is missing OR if the data layout is invalid.
  */
-export function getFooterSection(): FooterData {
+export function getFooterData(): FooterDataType {
     return loadAndValidateFile("src/content/sections/footer.json", footerSchema);
 
 }

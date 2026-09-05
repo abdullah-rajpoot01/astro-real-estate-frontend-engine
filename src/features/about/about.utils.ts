@@ -5,7 +5,7 @@ import { loadAndValidateFile } from "@/features/reusable";
 // 1. Individual Section Schema Definitions
 // ==========================================
 
-const heroSectionSchema = z.object({
+const aboutHeroSectionSchema = z.object({
   title: z.string().optional().nullable(),
   description: z.string().optional().nullable(),
   image: z.string().optional().nullable(),
@@ -17,20 +17,20 @@ const heroSectionSchema = z.object({
   enabled: z.boolean()
 });
 
-const featuresSectionSchema = z.object({
+const aboutFeaturesSectionSchema = z.object({
   title: z.string(),
   description: z.string(),
   enabled: z.boolean()
 });
 
-const teamSectionSchema = z.object({
+const aboutTeamSectionSchema = z.object({
   badge: z.string(),
   title: z.string(),
   description: z.string(),
   enabled: z.boolean()
 });
 
-const ctaSectionSchema = z.object({
+const aboutCtaSectionSchema = z.object({
   title: z.string(),
   description: z.string(),
   buttonText: z.string(),
@@ -40,10 +40,10 @@ const ctaSectionSchema = z.object({
 });
 
 // Infer individual TypeScript types for type safety in your components
-export type AboutHeroData = z.infer<typeof heroSectionSchema>;
-export type AboutFeaturesData = z.infer<typeof featuresSectionSchema>;
-export type AboutTeamData = z.infer<typeof teamSectionSchema>;
-export type AboutCtaData = z.infer<typeof ctaSectionSchema>;
+export type AboutHeroSectionDataType = z.infer<typeof aboutHeroSectionSchema>;
+export type AboutFeaturesSectionDataType = z.infer<typeof aboutFeaturesSectionSchema>;
+export type AboutTeamSectionDataType = z.infer<typeof aboutTeamSectionSchema>;
+export type AboutCtaSectionDataType = z.infer<typeof aboutCtaSectionSchema>;
 
 // ==========================================
 // 2. Section Fetching Functions
@@ -52,27 +52,27 @@ export type AboutCtaData = z.infer<typeof ctaSectionSchema>;
 /**
  * Fetches and parses the about page hero section from hero.json
  */
-export function getAboutHeroSection(): AboutHeroData {
-  return loadAndValidateFile("src/content/about-page/hero.json", heroSectionSchema);
+export function getAboutHeroSection(): AboutHeroSectionDataType {
+  return loadAndValidateFile("src/content/about-page/hero.json", aboutHeroSectionSchema);
 }
 
 /**
  * Fetches and parses the about page features overview section from features.json
  */
-export function getAboutFeaturesSection(): AboutFeaturesData {
-  return loadAndValidateFile("src/content/about-page/features.json", featuresSectionSchema);
+export function getAboutFeaturesSection(): AboutFeaturesSectionDataType {
+  return loadAndValidateFile("src/content/about-page/features.json", aboutFeaturesSectionSchema);
 }
 
 /**
  * Fetches and parses the about page team section from team.json
  */
-export function getAboutTeamSection(): AboutTeamData {
-  return loadAndValidateFile("src/content/about-page/team.json", teamSectionSchema);
+export function getAboutTeamSection(): AboutTeamSectionDataType {
+  return loadAndValidateFile("src/content/about-page/team.json", aboutTeamSectionSchema);
 }
 
 /**
  * Fetches and parses the about page call-to-action block from cta.json
  */
-export function getAboutCtaSection(): AboutCtaData {
-  return loadAndValidateFile("src/content/about-page/cta.json", ctaSectionSchema);
+export function getAboutCtaSection(): AboutCtaSectionDataType {
+  return loadAndValidateFile("src/content/about-page/cta.json", aboutCtaSectionSchema);
 }

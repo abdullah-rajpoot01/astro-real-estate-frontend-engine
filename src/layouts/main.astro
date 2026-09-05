@@ -1,16 +1,16 @@
 ---
 import "@/styles/global.css"
-import { Footer, Navbar } from "@/features/navigation"
+import { FooterComp, NavbarComp } from "@/features/navigation"
 import WhatsAppButton from "@/components/whatsapp-button"
 import { ClientRouter } from "astro:transitions"
-import { MobileNavDialog } from "@/features/navigation/mobile-nav.comp"
-import { getNavbarSection } from "@/features/navigation/navbar.utils"
+import { MobileNavDialogComp } from "@/features/navigation/mobile-nav.comp"
+import { getNavbarData } from "@/features/navigation/navbar.utils"
 import { getContact } from "@/features/core-detail/contact.utils"
 import { getSiteDetails } from "@/features/core-detail/site-detail.utils"
-import { SEOMETADATA } from "@/features/metadata/create.comp"
-import { getMetadataByName } from "@/features/metadata"
+import { SEOMETADATAComp } from "@/features/metadata/create.comp"
+import { getMetadataByPageName } from "@/features/metadata"
 import { getStoreBranding } from "@/features/core-detail/branding.utils"
-import { themeConfig } from "@/features/reusable/static"
+import { themeConfig } from "@/features/reusable/theme-config.static"
 
 // 1. Define component props interface
 interface Props {
@@ -34,13 +34,13 @@ const canonicalURL = Astro.url.href
 // 3. Generate the class selector string dynamically matching your CSS block
 const themeClass = `theme-${activeTheme?.value || "default"}-${mode}`
 
-const navbarData = getNavbarSection()
+const navbarData = getNavbarData()
 
 const siteDetail = getSiteDetails()
 
 const contact = getContact()
 
-const meta = getMetadataByName(pageName, context)
+const meta = getMetadataByPageName(pageName, context)
 ---
 
 <html lang="en">
@@ -55,7 +55,7 @@ const meta = getMetadataByName(pageName, context)
       )
     }
     <link rel="sitemap" href="/sitemap-index.xml" />
-    <SEOMETADATA
+    <SEOMETADATAComp
       title={meta.title}
       description={meta.description}
       image={meta.image}
@@ -65,18 +65,18 @@ const meta = getMetadataByName(pageName, context)
   </head>
 
   <body class={`${themeClass} ${mode}`}>
-    <Navbar>
-      <MobileNavDialog
+    <NavbarComp>
+      <MobileNavDialogComp
         navbarData={navbarData}
         siteDetail={siteDetail}
         phone={contact.phone}
         client:load
       />
-    </Navbar>
+    </NavbarComp>
     <main class="min-h-screen px-4 py-20 md:px-6">
       <slot />
     </main>
-    <Footer />
+    <FooterComp />
     <WhatsAppButton whatsapp={contact.whatsapp} />
   </body>
 </html>

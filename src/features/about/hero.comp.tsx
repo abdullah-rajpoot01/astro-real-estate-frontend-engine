@@ -3,7 +3,7 @@ import { getSiteDetails } from "@/features/core-detail";
 import { IconComponent } from "@/features/icons";
 import { getAboutHeroSection } from "@/features/about";
 
-export  function Hero() {
+export function AboutHeroSectionComp() {
 
     const heroSection = getAboutHeroSection();
 

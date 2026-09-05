@@ -12,13 +12,13 @@ export const socialSchema = z.object({
 });
 
 // Infer the TypeScript type directly from your schema rules
-export type SocialData = z.infer<typeof socialSchema>;
+export type SocialDataType = z.infer<typeof socialSchema>;
 
 /**
  * Fetches and parses the social media links JSON configuration.
  * Throws a fatal error to halt the build if the file is missing OR if the data structure is corrupt.
  */
-export function getSocials(): SocialData {
+export function getSocials(): SocialDataType {
   return loadAndValidateFile("src/content/core-detail/social.json", socialSchema);
 
 }

@@ -1,7 +1,7 @@
 import type { CollectionFile } from "@sveltia/cms";
 import { AvailableIcons } from "@/features/icons/map.static";
 
-export const listingsSectionConfig: CollectionFile = {
+export const homeListingsSectionConfig: CollectionFile = {
     name: "listingsSection",
     label: "Featured Listings Section",
     file: "home-page/listings.json",

@@ -8,7 +8,7 @@ interface HeroSectionProps {
     children: React.ReactNode; // This holds our interactive carousel island
 }
 
-export function HeroSection({ children }: HeroSectionProps) {
+export function HomeHeroSectionComp({ children }: HeroSectionProps) {
     const heroData = getHeroSection();
 
     const { heading, subHeading1, subHeading2, description, buttons } = heroData;

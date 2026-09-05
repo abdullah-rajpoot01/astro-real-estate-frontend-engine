@@ -8,7 +8,7 @@ interface SEOProps {
     url?: string;
 }
 
-export const SEOMETADATA: React.FC<SEOProps> = ({
+export const SEOMETADATAComp: React.FC<SEOProps> = ({
     title,
     description,
     image,

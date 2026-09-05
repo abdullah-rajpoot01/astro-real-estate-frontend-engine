@@ -1,10 +1,10 @@
 
 import { Button } from '@/components/ui/button'
-import { getAllCategories ,CategoryCard} from '@/features/categories';
+import { getAllCategories ,CategoriesCardComp} from '@/features/categories';
 import { getHomeCategoriesSection } from '@/features/home';
 import { IconComponent } from '@/features/icons';
 
-export function CategoriesSection() {
+export function HomeCategoriesSectionComp() {
   const categoriesSection = getHomeCategoriesSection();
 
   if (!categoriesSection || !categoriesSection.enabled) return null;
@@ -38,7 +38,7 @@ export function CategoriesSection() {
         </div>
 
         {/* Categories Grid */}
-        <CategoryCard categories={recommendedCategories} maxCategories={categoriesSection.maxItems} />
+        <CategoriesCardComp categories={recommendedCategories} maxCategories={categoriesSection.maxItems} />
 
         {/* Call to Action */}
         <div className='mt-12 text-center'>

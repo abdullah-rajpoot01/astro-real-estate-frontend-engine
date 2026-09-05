@@ -5,7 +5,7 @@ import { getContact } from "@/features/core-detail/contact.utils";
 import { getSiteDetails } from "@/features/core-detail/site-detail.utils";
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
 
-const Contact = () => {
+export const ContactMainPageComp = () => {
     const { title } = getSiteDetails();
     const address = getAddress();
     const contact = getContact();
@@ -140,4 +140,3 @@ const Contact = () => {
     </div>
 };
 
-export default Contact;

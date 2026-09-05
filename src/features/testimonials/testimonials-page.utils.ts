@@ -9,13 +9,13 @@ export const testimonialsPageSchema = z.object({
 });
 
 // 2. Infer the TypeScript type from the schema
-export type TestimonialsPageData = z.infer<typeof testimonialsPageSchema>;
+export type TestimonialsPageDataType = z.infer<typeof testimonialsPageSchema>;
 
 /**
  * Fetches and parses the testimonials page configuration metadata.
  * Throws an error to halt the build if the file is missing or invalid.
  */
-export function getTestimonialsPageConfig(): TestimonialsPageData {
+export function getTestimonialsPageConfig(): TestimonialsPageDataType {
   return loadAndValidateFile(
     "src/content/pages/testimonials.json",
     testimonialsPageSchema

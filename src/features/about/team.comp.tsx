@@ -5,7 +5,7 @@ import { Mail, Phone } from "lucide-react";
 import { getAboutTeamSection } from "@/features/about";
 
 
-const Team = () => {
+export const AboutTeamSectionComp = () => {
   const teamSection = getAboutTeamSection();
 
   if (!teamSection.enabled) return null;
@@ -62,5 +62,3 @@ const Team = () => {
     </div>
   );
 };
-
-export default Team;

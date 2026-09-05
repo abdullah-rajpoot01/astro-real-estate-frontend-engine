@@ -1,8 +1,8 @@
-import { Button  } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { getAboutCtaSection } from "@/features/about";
-import {IconComponent} from "@/features/icons";
+import { IconComponent } from "@/features/icons";
 
-const CTA = () => {
+export const AboutCTASectionComp = () => {
     const ctaSection = getAboutCtaSection();
 
     if (!ctaSection.enabled) return null;
@@ -24,4 +24,3 @@ const CTA = () => {
     );
 };
 
-export  {CTA};

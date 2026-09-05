@@ -2,29 +2,29 @@
 import { useState, useEffect } from 'react'
 import { cn } from '@/lib/utils'
 import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '@/components/ui/carousel'
-import type { Listing } from '@/features/listings'
+import type { ListingType } from '@/features/listings'
 
-export default function ProductCarouselIsland({ listing }: { listing: Listing }) {
+export function ListingPageCarouselSectionComp({ listing }: { listing: ListingType }) {
   const [selectedImage, setSelectedImage] = useState(0)
   const [carouselApi, setCarouselApi] = useState<CarouselApi>()
 
-// src/components/products/ProductCarouselIsland.tsx
+  // src/components/products/ProductCarouselIsland.tsx
 
-// Change this:
-useEffect(() => {
-  if (!carouselApi) return
-  carouselApi.scrollTo(selectedImage)
+  // Change this:
+  useEffect(() => {
+    if (!carouselApi) return
+    carouselApi.scrollTo(selectedImage)
 
-  const handleSelect = () => {
-    setSelectedImage(carouselApi.selectedScrollSnap())
-  }
+    const handleSelect = () => {
+      setSelectedImage(carouselApi.selectedScrollSnap())
+    }
 
-  // FIX: Wrap these in curly braces so they don't implicitly return a value
-  carouselApi.on('select', handleSelect)
-  return () => {
-    carouselApi.off('select', handleSelect)
-  }
-}, [carouselApi, selectedImage])
+    // FIX: Wrap these in curly braces so they don't implicitly return a value
+    carouselApi.on('select', handleSelect)
+    return () => {
+      carouselApi.off('select', handleSelect)
+    }
+  }, [carouselApi, selectedImage])
 
   return (
     <div className='flex flex-col gap-4 w-full'>
@@ -37,7 +37,7 @@ useEffect(() => {
           ))}
         </CarouselContent>
       </Carousel>
-      
+
       <div className='flex flex-wrap gap-3'>
         {listing.images?.map((image, index) => (
           <button

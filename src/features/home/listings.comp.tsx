@@ -1,10 +1,10 @@
 import { Button } from '@/components/ui/button'
-import { getAllListings, ListingCard } from '@/features/listings';
+import { getAllListings, ListingsCardComp } from '@/features/listings';
 import { getHomeListingsSection } from '@/features/home';
 import { IconComponent } from '@/features/icons';
 
 
-export function ListingSection() {
+export function HomeListingSectionComp() {
     const listingsSection = getHomeListingsSection();
     if (!listingsSection.enabled) return null;
 
@@ -35,7 +35,7 @@ export function ListingSection() {
                     <h2 className='text-3xl font-bold tracking-tight text-balance'>{listingsSection.title}</h2>
                     <p className='text-muted-foreground mt-4 text-lg'>{listingsSection.description}</p>
                 </div>
-                <ListingCard listings={recommendedListings} maxItems={listingsSection.maxItems} />
+                <ListingsCardComp listings={recommendedListings} maxItems={listingsSection.maxItems} />
             </div>
             {/* Call to Action */}
             <div className='mt-12 text-center'>
@@ -50,4 +50,3 @@ export function ListingSection() {
     )
 }
 
-export default ListingSection

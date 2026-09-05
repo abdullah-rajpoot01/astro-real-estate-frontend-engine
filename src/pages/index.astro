@@ -1,26 +1,5 @@
 ---
-import Layout from "@/layouts/main.astro"
-import ListingSection from "@/features/home/listings.comp"
-import {
-  HeroSection,
-  Testimonials,
-  CategoriesSection,
-  HomeCTA,
-  FeaturesSection,
-} from "@/features/home"
-import CarouselWithFooter from "@/features/home/hero-carousel.comp"
-import { getHeroSection } from "@/features/home/home.utils"
-
-const { images } = getHeroSection()
+import HomeMainPageComp from "@/features/home/main-page.comp.astro"
 ---
 
-<Layout pageName="home">
-  <HeroSection>
-    <CarouselWithFooter images={images} client:load />
-  </HeroSection>
-  <CategoriesSection />
-  <ListingSection />
-  <FeaturesSection />
-  <Testimonials />
-  <HomeCTA />
-</Layout>
+<HomeMainPageComp />

@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/carousel";
 
 
-export default function CarouselWithFooter({ images }: {
+export function HomeHeroSectionCarouselComp({ images }: {
   images: {
     image: string;
     link?: string | undefined | null;

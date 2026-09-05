@@ -1,6 +1,6 @@
 import type { CollectionFile } from "@sveltia/cms";
 
-export const featuresSectionConfig: CollectionFile = {
+export const HomeFeaturesSectionConfig: CollectionFile = {
     name: "featuresSection",
     label: "Features Section (Why Work With Us)",
     file: "home-page/features.json",

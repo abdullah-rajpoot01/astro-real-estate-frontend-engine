@@ -8,13 +8,13 @@ interface RegistryContext {
     image?: string | null;
 }
 
-interface MetaOutput {
+interface MetadataOutputType {
     title: string;
     description: string;
     image: string;
 }
 
-export function getMetadataByName(pageName?: string, context?: RegistryContext): MetaOutput {
+export function getMetadataByPageName(pageName?: string, context?: RegistryContext): MetadataOutputType {
     const fallbackImage = "/default-og.png";
 
     // 1. Direct call without try/catch so any schema validation error stops the build

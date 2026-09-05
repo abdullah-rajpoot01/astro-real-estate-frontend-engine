@@ -9,13 +9,13 @@ export const contactPageSchema = z.object({
 });
 
 // 2. Infer the TypeScript type from the schema
-export type ContactPageData = z.infer<typeof contactPageSchema>;
+export type ContactPageDataType = z.infer<typeof contactPageSchema>;
 
 /**
  * Fetches and parses the contact page configuration.
  * Throws an error to halt the build if the file is missing or invalid.
  */
-export function getContactPageConfig(): ContactPageData {
+export function getContactPageConfig(): ContactPageDataType {
   return loadAndValidateFile(
     "src/content/pages/contact.json", 
     contactPageSchema

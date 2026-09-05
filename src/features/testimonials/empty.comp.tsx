@@ -9,7 +9,7 @@ import {
   EmptyTitle,
 } from "@/components/ui/empty";
 
-export function EmptyTestimonialsState() {
+export function EmptyTestimonialsStateComp() {
   return (
     // Clean, fluid flex container that respects parent layout bounds
     <div className="flex w-full items-center justify-center py-6">

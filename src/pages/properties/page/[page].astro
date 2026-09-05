@@ -2,14 +2,17 @@
 // src/pages/properties/[...page].astro
 import type { GetStaticPaths, Page } from "astro"
 import Layout from "@/layouts/main.astro"
-import { getAllListings, type Listing } from "@/features/listings"
+import {
+  getAllListings,
+  getListingsPageConfig,
+  type ListingType,
+  ListingsPageMainComp,
+} from "@/features/listings"
 import PaginationWithPrimaryButton from "@/components/pagination-02"
-import PropertyListingPage from "@/features/listings/listings-page.comp"
-import { getPropertiesPageConfig } from "@/features/listings"
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
   const allListings = getAllListings()
-  const propertiesPageConfig = getPropertiesPageConfig()
+  const propertiesPageConfig = getListingsPageConfig()
   // Filter for available listings (or 'pending' if you still want to show them)
   const activeListings = allListings.filter(
     (item) => item.status === "available" || item.status === "pending"
@@ -22,7 +25,7 @@ export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
 }
 
 interface Props {
-  page: Page<Listing>
+  page: Page<ListingType>
 }
 
 const { page } = Astro.props
@@ -47,7 +50,7 @@ const canShowPagination =
 
 <Layout pageName="properties">
   <!-- Component rendering your main real estate listings catalog grid -->
-  <PropertyListingPage listings={listingsOnThisPage} />
+  <ListingsPageMainComp listings={listingsOnThisPage} />
 
   <!-- Reusable pagination engine -->
   {

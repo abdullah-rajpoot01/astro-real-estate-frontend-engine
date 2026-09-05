@@ -24,13 +24,13 @@ export const navbarSchema = z.object({
 });
 
 // Infer the TypeScript type directly from your schema rules
-export type NavbarData = z.infer<typeof navbarSchema>;
+export type NavbarDataType = z.infer<typeof navbarSchema>;
 
 /**
  * Fetches and parses the navbar section JSON configuration.
  * Throws a fatal error to halt the build if the file is missing OR if the data layout is invalid.
  */
-export function getNavbarSection(): NavbarData {
+export function getNavbarData(): NavbarDataType {
     return loadAndValidateFile("src/content/sections/navbar.json", navbarSchema);
 
 }

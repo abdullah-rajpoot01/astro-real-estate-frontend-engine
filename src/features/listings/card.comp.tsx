@@ -1,13 +1,13 @@
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import type { Listing } from './listings.utils'
+import type { ListingType } from './listings.utils'
 
 interface ListingCardType {
     maxItems?: number,
-    listings: Listing[]
+    listings: ListingType[]
 }
-export function ListingCard({ maxItems, listings = [], }: ListingCardType) {
+export function ListingsCardComp({ maxItems, listings = [], }: ListingCardType) {
 
     if (maxItems === 0) {
         return null;

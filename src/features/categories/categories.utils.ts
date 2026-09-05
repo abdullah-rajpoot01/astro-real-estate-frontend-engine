@@ -2,7 +2,7 @@ import { getAllListings } from "@/features/listings";
 import { z } from "astro/zod";
 import { loadAndValidateDirectory } from "@/features/reusable";
 
-export const schema = z.object({
+export const categorySchema = z.object({
   id: z.string(),
   name: z.string(),
   slug: z.string().optional().nullable(),
@@ -12,16 +12,16 @@ export const schema = z.object({
   featured: z.boolean()
 })
 
-export type Category = z.infer<typeof schema>;
+export type CategoryType = z.infer<typeof categorySchema>;
 
 /**
  * Fetches categories using the unified directory validation utility,
  * then maps and dynamically injects active listing occurrence counts.
  */
-export function getAllCategories(): Category[] {
+export function getAllCategories(): CategoryType[] {
   try {
     // 1. Fetch and structurally validate all raw category items via our global utility
-    const categories = loadAndValidateDirectory("src/content/categories", schema);
+    const categories = loadAndValidateDirectory("src/content/categories", categorySchema);
 
     // 2. Fetch all listings to calculate active structural matches
     const listings = getAllListings().filter(l => l.status === "available");

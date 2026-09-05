@@ -26,13 +26,13 @@ const siteMetadataSchema = z.object({
 });
 
 // Infer individual TypeScript types for type safety in your components
-export type SiteMetadataData = z.infer<typeof siteMetadataSchema>;
-export type SinglePageMetadata = z.infer<typeof metadataItemSchema>;
+export type SiteMetadataDataType = z.infer<typeof siteMetadataSchema>;
+export type SinglePageMetadataType = z.infer<typeof metadataItemSchema>;
 
 
 /**
  * Fetches, parses, and validates the global page SEO settings from core-detail/meta-data.json
  */
-export function getSiteMetadata(): SiteMetadataData {
+export function getSiteMetadata(): SiteMetadataDataType {
   return loadAndValidateFile("src/content/core-detail/metadata.json", siteMetadataSchema);
 }

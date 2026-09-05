@@ -1,7 +1,7 @@
 ---
 // src/pages/admin.astro
 // 1. Import the central config file inside the Astro server context
-import configs from "@/config/central-config.json"
+import configs from "@/features/config/central-config.json"
 
 // 2. Fetch the SITE_ID environment variable at build-time on the server
 const siteId = process.env.SITE_ID
@@ -47,12 +47,12 @@ const targetBranch = siteConfig.repositoryConfig.repoBranch || "main"
     <script>
       // Import the CMS object directly from the npm package
       import CMS from "@sveltia/cms"
-      import { sectionsCollection } from "@/features/navigation/collection.cms"
+      import { navigationCollection } from "@/features/navigation/collection.cms"
       import { homePageCollection } from "@/features/home/collection.cms"
       import { aboutPageCollection } from "@/features/about/collection.cms"
       import { testimonialsPageCollection } from "@/features/testimonials/collection.cms"
-      import { propertiesPageCollection } from "@/features/listings/collection.cms"
-      import { categoriesPageCollection } from "@/features/categories/collection.cms"
+      import { listingsPageCollection } from "@/features/listings/collection.cms"
+      import { categoriesPageCollection } from "@/features/categories/categories-page.cms"
       import { categoriesCollection } from "@/features/categories/categories.cms"
       import { agentsCollection } from "@/features/agents/collection.cms"
       import { featuresCollection } from "@/features/features/collection.cms"
@@ -107,11 +107,11 @@ const targetBranch = siteConfig.repositoryConfig.repoBranch || "main"
             featuresCollection,
             testimonialsCollection,
             coreDetailCollection,
-            sectionsCollection,
+            navigationCollection,
             homePageCollection,
             aboutPageCollection,
             testimonialsPageCollection,
-            propertiesPageCollection,
+            listingsPageCollection,
             categoriesPageCollection,
           ],
         },

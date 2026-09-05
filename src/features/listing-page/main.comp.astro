@@ -1,47 +1,43 @@
 ---
 // src/components/products/ProductOverviewShell.astro
-import ProductInfoStatic from "./static-info.comp"
-import ProductCarouselIsland from "./images.comp"
-import ProductSpecsStatic from "./features-specification.comp"
-import type { Listing } from "@/features/listings"
-import ListingContactButtons from "./contact-buttons.comp"
+import { ListingPageInfoStaticSectionComp } from "./static-info.comp"
+import { ListingPageCarouselSectionComp } from "./images.comp"
+import { ListingPageSpecsStaticSectionComp } from "./features-specification.comp"
+import type { ListingType } from "@/features/listings"
+import { ListingPageContactButtonsSectionComp } from "./contact-buttons.comp"
 import { getAllCategories } from "@/features/categories/categories.utils"
-import AddressAndLocation from "./address-location.comp"
+import { ListingPageAddressAndLocationComp } from "./address-location.comp"
 
 interface Props {
-  listing: Listing
+  listing: ListingType
 }
 
-const { listing   } = Astro.props
+const { listing } = Astro.props
 
 // 3. Fetch all property types using your consolidated function
-const categories = getAllCategories();
+const categories = getAllCategories()
 
 // 4. Find the specific property type that matches the current listing
-const category = categories.find(
-  (type) => type.id === listing.category
-);
+const category = categories.find((type) => type.id === listing.category)
 ---
 
-<section class="mx-auto w-full ">
+<section class="mx-auto w-full">
   <div
     class="grid grid-cols-1 gap-6 py-4 lg:grid-cols-2 lg:gap-8 lg:py-6 xl:grid-cols-3 xl:gap-12 xl:py-12"
   >
     <!-- Column 1: Static Info Text -->
     <div>
-      <ProductInfoStatic listing={listing} category={category} />
-      <ListingContactButtons
-        listing={listing}
-      />
+      <ListingPageInfoStaticSectionComp listing={listing} category={category} />
+      <ListingPageContactButtonsSectionComp listing={listing} />
     </div>
 
     <!-- Column 2: Client Image Slider -->
     <div class="row-span-2 row-start-1 lg:col-start-2">
-      <ProductCarouselIsland client:load listing={listing} />
+      <ListingPageCarouselSectionComp client:load listing={listing} />
     </div>
   </div>
 
   <!-- Row 2: Full-Width Static Tech Details Panel -->
-  <ProductSpecsStatic listing={listing} />
-  <AddressAndLocation listing={listing}/>
+  <ListingPageSpecsStaticSectionComp listing={listing} />
+  <ListingPageAddressAndLocationComp listing={listing} />
 </section>

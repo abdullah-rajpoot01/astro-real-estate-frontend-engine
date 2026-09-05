@@ -1,9 +1,9 @@
 import type { CollectionFile } from "@sveltia/cms";
 
-export const testimonialsPageConfig: CollectionFile = {
-    name: "testimonialsPageConfig",
-    label: "Testimonials Page Settings",
-    file: "pages/testimonials.json",
+export const listingsPageConfig: CollectionFile = {
+    name: "listings-page-config",
+    label: "Properties Page Settings",
+    file: "pages/listings.json",
     format: "json",
     fields: [
         { 
@@ -19,12 +19,12 @@ export const testimonialsPageConfig: CollectionFile = {
             required: true 
         },
         {
-            name: "limit",
-            label: "Display Limit",
+            name: "listingPerPage",
+            label: "Listings Per Page",
             widget: "number",
             value_type: "int", // Restricts input to integers only
             min: 1,            // Enforces minimum value constraint
-            required: false    
+            required: true    
         }
     ]
 };

@@ -10,8 +10,8 @@ export const brandingSchema = z.object({
 });
 
 // Infer the TypeScript type directly from your schema rules
-export type BrandingData = z.infer<typeof brandingSchema>;
+export type BrandingDataType = z.infer<typeof brandingSchema>;
 
-export function getStoreBranding(): BrandingData {
+export function getStoreBranding(): BrandingDataType {
     return loadAndValidateFile("src/content/core-detail/branding.json", brandingSchema);
 } 

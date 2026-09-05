@@ -3,14 +3,14 @@ import { Badge } from '@/components/ui/badge'
 import { buttonVariants } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import type { Category } from '@/features/categories/categories.utils'
+import type { CategoryType } from '@/features/categories/categories.utils'
 
-interface CategoriesCard1Prop {
-    categories: Category[],
+interface CategoriesCardProp {
+    categories: CategoryType[],
     maxCategories?: number,
 }
 
-export function CategoryCard({ categories = [], maxCategories }: CategoriesCard1Prop) {
+export function CategoriesCardComp({ categories = [], maxCategories }: CategoriesCardProp) {
     if (maxCategories === 0) return null;
     let displayedCategories = maxCategories ? categories.slice(0, maxCategories) : categories;
     return (

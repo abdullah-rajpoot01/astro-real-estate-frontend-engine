@@ -1,10 +1,10 @@
 
-import {CategoryCard} from './card.comp';
+import { CategoriesCardComp } from './card.comp';
 import { getAllCategories } from './categories.utils';
-import {EmptyCategoriesState} from "./empty.comp";
-import { getCategoriesPageConfig } from './main.utils';
+import { EmptyCategoriesStateComp } from "./empty.comp";
+import { getCategoriesPageConfig } from './categories-page.utils';
 
-export function CategoriesMainPage() {
+export function CategoriesMainPageComp() {
 
   const categoriesPageConfig = getCategoriesPageConfig();
   // Fetch all property types with their dynamic listing counts pre-calculated
@@ -21,7 +21,7 @@ export function CategoriesMainPage() {
         </div>
 
         {/* Categories Grid */}
-        {allCategories.length === 0 ? <EmptyCategoriesState /> : <CategoryCard categories={allCategories} />}
+        {allCategories.length === 0 ? <EmptyCategoriesStateComp /> : <CategoriesCardComp categories={allCategories} />}
 
       </div>
     </section>

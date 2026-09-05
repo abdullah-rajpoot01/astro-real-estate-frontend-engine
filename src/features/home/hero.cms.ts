@@ -2,7 +2,7 @@ import type { CollectionFile } from "@sveltia/cms";
 import { AvailableIcons } from "@/features/icons/map.static";
 import { buttonsOptions } from "@/features/reusable";
 
-export const heroConfig: CollectionFile = {
+export const homeHeroSectionConfig: CollectionFile = {
     name: "hero",
     label: "Hero Section",
     file: "home-page/hero.json",

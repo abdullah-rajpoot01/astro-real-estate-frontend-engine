@@ -10,10 +10,10 @@ import { Menu, MessageCircle, PhoneCall } from "lucide-react"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { useState } from "react"
 import {IconComponent} from "@/features/icons/icon.comp"
-import type { NavbarData } from "@/features/navigation/navbar.utils"
-import type { StoreDetailData } from "@/features/core-detail/site-detail.utils"
+import type { NavbarDataType } from "@/features/navigation/navbar.utils"
+import type { StoreDetailDataType } from "@/features/core-detail/site-detail.utils"
 
-export function MobileNavDialog({ navbarData, siteDetail, phone }: { navbarData: NavbarData, siteDetail: StoreDetailData, phone: string }) {
+export function MobileNavDialogComp({ navbarData, siteDetail, phone }: { navbarData: NavbarDataType, siteDetail: StoreDetailDataType, phone: string }) {
     const { title, subtitle, image, quickLinks, buttons } = navbarData;
 
     const [open, setOpen] = useState(false);

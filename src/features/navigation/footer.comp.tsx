@@ -1,11 +1,11 @@
 import { ArrowRight, Clock, Mail, MapPin, Phone } from "lucide-react";
 import { IconComponent, Facebook, Instagram, LinkedIn, TikTok, WhatsApp, X, YouTube } from "@/features/icons";
-import { getFooterSection } from "@/features/navigation/footer.utils";
+import { getFooterData } from "@/features/navigation/footer.utils";
 import { getAddress, getSiteDetails, getBusinessHours, getSocials, getContact } from "@/features/core-detail";
 
 
-const Footer = () => {
-  const { title, subtitle, description, image, sections, quickLinks } = getFooterSection();
+export const FooterComp = () => {
+  const { title, subtitle, description, image, sections, quickLinks } = getFooterData();
 
   const store = getSiteDetails();
   const address = getAddress();
@@ -229,4 +229,3 @@ const Footer = () => {
   );
 };
 
-export { Footer };

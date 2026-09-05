@@ -1,17 +1,16 @@
-import { Features } from './features.comp'
-import { CTA } from './cta.comp'
-import { Hero } from './hero.comp'
-import Team from './team.comp'
+import { AboutHeroSectionComp } from './hero.comp'
+import { AboutFeaturesSectionComp } from './features.comp'
+import { AboutTeamSectionComp } from './team.comp'
+import { AboutCTASectionComp } from './cta.comp'
 
-const AboutPage = () => {
+export const AboutPageMainComp = () => {
     return (
         <div>
-            <Hero />
-            <Features />
-            <Team />
-            <CTA />
+            <AboutHeroSectionComp />
+            <AboutFeaturesSectionComp />
+            <AboutTeamSectionComp />
+            <AboutCTASectionComp />
         </div>
     )
 }
 
-export { AboutPage }

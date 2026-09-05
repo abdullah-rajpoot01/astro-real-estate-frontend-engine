@@ -10,13 +10,13 @@ export const featureItemSchema = z.object({
 });
 
 // Infer the TypeScript type directly from your schema requirements
-export type FeatureItem = z.infer<typeof featureItemSchema>;
+export type FeatureItemType = z.infer<typeof featureItemSchema>;
 
 /**
  * Fetches and parses all individual feature files from src/content/features.
  * Throws a fatal error to halt the build if the folder is missing OR if any file is invalid.
  */
-export function getAllFeatures(): FeatureItem[] {
+export function getAllFeatures(): FeatureItemType[] {
   return loadAndValidateDirectory("src/content/features", featureItemSchema);
 
 }

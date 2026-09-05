@@ -1,6 +1,6 @@
 import { AvailableIcons } from "@/features/icons/map.static";
 import type { CollectionFile } from '@sveltia/cms'
-import { buttonsOptions } from "@/features/reusable";
+import { buttonsOptions } from "@/features/reusable/static";
 
 export const navigationBarConfig: CollectionFile = {
     name: "navbar",

@@ -1,8 +1,8 @@
 // src/components/products/ProductSpecsStatic.tsx
 import { cn } from '@/lib/utils'
-import type { Listing } from '@/features/listings'
+import type { ListingType } from '@/features/listings'
 
-export default function ProductSpecsStatic({ listing }: { listing: Listing }) {
+export  function ListingPageSpecsStaticSectionComp({ listing }: { listing: ListingType }) {
   return (
     <div className='mt-12 border-t pt-12 grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16'>
       {/* Key Features */}

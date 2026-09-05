@@ -50,10 +50,10 @@ export const heroSchema = z.object({
 
 
 // Infer individual TypeScript types for explicit typing where needed
-export type HeroData = z.infer<typeof heroSchema>;
-export type GridSectionData = z.infer<typeof gridSectionSchema>;
-export type CtaSectionData = z.infer<typeof ctaSectionSchema>;
-export type SimpleSectionData = z.infer<typeof simpleSectionSchema>;
+export type HomeHeroSectionDataType = z.infer<typeof heroSchema>;
+export type HomeGridSectionDataType = z.infer<typeof gridSectionSchema>;
+export type HomeCtaSectionDataType = z.infer<typeof ctaSectionSchema>;
+export type HomeSimpleSectionDataType = z.infer<typeof simpleSectionSchema>;
 
 // ==========================================
 // 2. Individual Section Fetching Functions
@@ -63,7 +63,7 @@ export type SimpleSectionData = z.infer<typeof simpleSectionSchema>;
  * Fetches and parses the hero section JSON configuration.
  * Throws a fatal error to halt the build if the file is missing OR if the data is invalid.
  */
-export function getHeroSection(): HeroData {
+export function getHeroSection(): HomeHeroSectionDataType {
   return loadAndValidateFile("src/content/home-page/hero.json", heroSchema);
 
 }
@@ -71,34 +71,34 @@ export function getHeroSection(): HeroData {
 /**
  * Fetches and parses the home page categories section layout from categories.json
  */
-export function getHomeCategoriesSection(): GridSectionData {
+export function getHomeCategoriesSection(): HomeGridSectionDataType {
   return loadAndValidateFile("src/content/home-page/categories.json", gridSectionSchema);
 }
 
 /**
  * Fetches and parses the home page listings section layout from listings.json
  */
-export function getHomeListingsSection(): GridSectionData {
+export function getHomeListingsSection(): HomeGridSectionDataType {
   return loadAndValidateFile("src/content/home-page/listings.json", gridSectionSchema);
 }
 
 /**
  * Fetches and parses the home page features section visibility from features.json
  */
-export function getHomeFeaturesSection(): SimpleSectionData {
+export function getHomeFeaturesSection(): HomeSimpleSectionDataType {
   return loadAndValidateFile("src/content/home-page/features.json", simpleSectionSchema);
 }
 
 /**
  * Fetches and parses the home page testimonials section visibility from testimonials.json
  */
-export function getHomeTestimonialsSection(): SimpleSectionData {
+export function getHomeTestimonialsSection(): HomeSimpleSectionDataType {
   return loadAndValidateFile("src/content/home-page/testimonials.json", simpleSectionSchema);
 }
 
 /**
  * Fetches and parses the home page Call-To-Action section layout from cta.json
  */
-export function getHomeCtaSection(): CtaSectionData {
+export function getHomeCtaSection(): HomeCtaSectionDataType {
   return loadAndValidateFile("src/content/home-page/cta.json", ctaSectionSchema);
 }

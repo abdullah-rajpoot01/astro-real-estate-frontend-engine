@@ -1,6 +1,6 @@
 import type { CollectionFile } from "@sveltia/cms";
 
-export const ctaSectionConfig: CollectionFile = {
+export const homeCtaSectionConfig: CollectionFile = {
     name: "ctaSection",
     label: "CTA (Call to Action) Section",
     file: "home-page/cta.json",

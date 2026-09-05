@@ -16,12 +16,12 @@ export const addressSchema = z.object({
 });
 
 // Infer the TypeScript type directly from your schema rules
-export type AddressData = z.infer<typeof addressSchema>;
+export type AddressDataType = z.infer<typeof addressSchema>;
 
 /**
  * Fetches and parses the store address JSON configuration.
  * Throws a fatal error to halt the build if the file is missing OR if the data layout is invalid.
  */
-export function getAddress(): AddressData {
+export function getAddress(): AddressDataType {
     return loadAndValidateFile("src/content/core-detail/address.json", addressSchema);
 }

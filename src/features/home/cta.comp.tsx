@@ -1,8 +1,7 @@
-import { cn } from "@/lib/utils";
 import { getHomeCtaSection } from "@/features/home/home.utils";
-import { Button, buttonVariants } from "../../components/ui/button";
+import { Button } from "../../components/ui/button";
 
-const HomeCTA = () => {
+export const HomeCTASectionComp = () => {
     const ctaSection = getHomeCtaSection();
 
     if (!ctaSection.enabled) return null;
@@ -24,4 +23,3 @@ const HomeCTA = () => {
     );
 };
 
-export { HomeCTA };

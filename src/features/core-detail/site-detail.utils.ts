@@ -16,13 +16,13 @@ export const storeDetailSchema = z.object({
 });
 
 // Infer the TypeScript type directly from your schema rules
-export type StoreDetailData = z.infer<typeof storeDetailSchema>;
+export type StoreDetailDataType = z.infer<typeof storeDetailSchema>;
 
 /**
  * Fetches and parses the store details configuration.
  * Throws a fatal error to halt the build if the file is missing OR if the data layout is invalid.
  */
-export function getSiteDetails(): StoreDetailData {
+export function getSiteDetails(): StoreDetailDataType {
     return loadAndValidateFile("src/content/core-detail/site-detail.json", storeDetailSchema);
 
 }

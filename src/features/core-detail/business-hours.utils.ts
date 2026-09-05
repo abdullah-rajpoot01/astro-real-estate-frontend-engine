@@ -13,13 +13,13 @@ const dayScheduleSchema = z.array(z.object({
 export const businessHoursSchema = z.record(z.string(), dayScheduleSchema);
 
 // Infer the TypeScript type directly from your schema rules
-export type BusinessHoursData = z.infer<typeof businessHoursSchema>;
+export type BusinessHoursDataType = z.infer<typeof businessHoursSchema>;
 
 /**
  * Fetches and parses the business hours configuration.
  * Throws a fatal error to halt the build if the file is missing OR if the data layout is invalid.
  */
-export function getBusinessHours(): BusinessHoursData {
+export function getBusinessHours(): BusinessHoursDataType {
   return loadAndValidateFile("src/content/core-detail/business-hours.json", businessHoursSchema);
 
 }
