@@ -1,0 +1,26 @@
+name: On-Demand Static Cloud Build
+
+on:
+  repository_dispatch:
+    types: [on_demand_build] # Triggered via Sveltia CMS button or your Central API webhook
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Client Data Repo
+        uses: actions/checkout@v4
+
+      - name: Setup Runtime Environments
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Fetch and Run Remote Orchestrator
+        env:
+          SITE_ID: "test" # Placed one-time per client setup
+          PASSWORD: "1234" # Placed one-time per client setup
+        run: |
+          # Pulls your script completely live from your remote URL server link
+          curl -s https://yourdomain.com -o build.js
+          node build.js

@@ -1,4 +1,5 @@
 import type { CollectionFile } from "@sveltia/cms";
+import { currencyCodes} from "@/features/reusable/currency";
 
 export const siteDetailConfig: CollectionFile = {
     name: "store_details",
@@ -7,11 +8,31 @@ export const siteDetailConfig: CollectionFile = {
     format: "json",
     fields: [
         // --- Direct Root Level Fields ---
-        { name: "title", label: "Store Title", widget: "string", required: true },
-        { name: "subtitle", label: "Store Subtitle", widget: "string", required: true },
-        { name: "tagline", label: "Store Tagline", widget: "string", required: true },
-        { name: "description", label: "Store Description", widget: "text", required: true },
-        
+        {
+            name: "title",
+            label: "Store Title",
+            widget: "string",
+            required: true
+        },
+        {
+            name: "subtitle",
+            label: "Store Subtitle",
+            widget: "string",
+            required: true
+        },
+        {
+            name: "tagline",
+            label: "Store Tagline",
+            widget: "string",
+            required: true
+        },
+        {
+            name: "description",
+            label: "Store Description",
+            widget: "text",
+            required: true
+        },
+
         // Maps to your z.url() rule by providing asset path options or raw inputs
         { name: "logo", label: "Logo URL / Image Asset", widget: "image", required: true },
 
@@ -21,8 +42,15 @@ export const siteDetailConfig: CollectionFile = {
             label: "Currency Configurations",
             widget: "object",
             fields: [
-                { name: "code", label: "Currency Code (e.g., USD, PKR)", widget: "string", required: true },
-                { name: "symbol", label: "Currency Symbol (e.g., $, ₨)", widget: "string", required: true },
+                {
+                    name: "code",
+                    label: "Currency Code (e.g., USD, PKR)",
+                    widget: "select",
+                    options: currencyCodes,
+                    default: "PKR",
+                    required: true
+                },
+
                 {
                     name: "position",
                     label: "Symbol Display Position",

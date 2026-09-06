@@ -1,5 +1,4 @@
 export * from "./card.comp"
-export * from "./collection.cms"
 export * from "./empty.comp"
 export * from "./listings-page.cms"
 export * from "./listings-page.comp"

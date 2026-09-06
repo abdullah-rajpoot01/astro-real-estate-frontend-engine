@@ -2,6 +2,7 @@
 
 import type { ListingType } from "@/features/listings"
 import type { CategoryType } from "@/features/categories/categories.utils"
+import { formatPriceShort } from "../core-detail/currency.utils"
 
 interface Props {
   listing: ListingType
@@ -37,9 +38,9 @@ export function ListingPageInfoStaticSectionComp({ listing, category }: Props) {
         <p className='text-muted-foreground text-sm leading-relaxed text-balance'>{listing.description}</p>
       )}
       <div className='flex items-baseline gap-3 pb-4'>
-        <p className='text-2xl font-bold tracking-tight'>${listing.price}</p>
+        <p className='text-2xl font-bold tracking-tight'>{formatPriceShort(listing.price)}</p>
         {listing.comparePrice && listing.comparePrice > listing.price && (
-          <p className='text-lg text-muted-foreground line-through'>${listing.comparePrice}</p>
+          <p className='text-lg text-muted-foreground line-through'>{formatPriceShort(listing.comparePrice)}</p>
         )}
         {listing.saleLable ? (
           <span className='bg-red-500 text-white text-xs font-semibold px-2 py-0.5 rounded'>
@@ -47,7 +48,7 @@ export function ListingPageInfoStaticSectionComp({ listing, category }: Props) {
           </span>
         ) : listing.comparePrice && listing.comparePrice > listing.price ? (
           <span className='bg-red-500 text-white text-xs font-semibold px-2 py-0.5 rounded'>
-            Save ${listing.comparePrice - listing.price}
+            Save {formatPriceShort(listing.comparePrice - listing.price)}
           </span>
         ) : null}
       </div>

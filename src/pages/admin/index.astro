@@ -50,16 +50,13 @@ const targetBranch = siteConfig.repositoryConfig.repoBranch || "main"
       import { navigationCollection } from "@/features/navigation/collection.cms"
       import { homePageCollection } from "@/features/home/collection.cms"
       import { aboutPageCollection } from "@/features/about/collection.cms"
-      import { testimonialsPageCollection } from "@/features/testimonials/collection.cms"
-      import { listingsPageCollection } from "@/features/listings/collection.cms"
-      import { categoriesPageCollection } from "@/features/categories/categories-page.cms"
       import { categoriesCollection } from "@/features/categories/categories.cms"
       import { agentsCollection } from "@/features/agents/collection.cms"
       import { featuresCollection } from "@/features/features/collection.cms"
       import { testimonialsCollection } from "@/features/testimonials/testimonials.cms"
       import { coreDetailCollection } from "@/features/core-detail/collection.cms"
       import { listingsCollection } from "@/features/listings/listings.cms"
-import { contactPageCollection } from "@/features/contact/contact.cms"
+      import { pagesCollection } from "@/features/pages/collection"
 
       // Pull the mapped environment configurations out of the script tag attributes
       const configElement = document.getElementById("cms-config")
@@ -111,10 +108,7 @@ import { contactPageCollection } from "@/features/contact/contact.cms"
             navigationCollection,
             homePageCollection,
             aboutPageCollection,
-            testimonialsPageCollection,
-            listingsPageCollection,
-            categoriesPageCollection,
-            contactPageCollection
+            pagesCollection,
           ],
         },
       })

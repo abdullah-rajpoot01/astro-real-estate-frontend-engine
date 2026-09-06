@@ -1,9 +1,9 @@
 
-import type { Collection, CollectionFile } from "@sveltia/cms";
+import type {  CollectionFile } from "@sveltia/cms";
 
-const testimonialsPageConfig: CollectionFile = {
+export const testimonialsPageConfig: CollectionFile = {
     name: "testimonialsPageConfig",
-    label: "Testimonials Page Settings",
+    label: "Testimonials",
     file: "pages/testimonials.json",
     format: "json",
     fields: [
@@ -31,11 +31,4 @@ const testimonialsPageConfig: CollectionFile = {
 };
 
 
-export const testimonialsPageCollection: Collection = {
-    name: "testimonialsPage",
-    label: "Testimonials Page",
-    // A file collection manages specific configuration files rather than a folder layout
-    files: [
-        testimonialsPageConfig
-    ]
-};
+

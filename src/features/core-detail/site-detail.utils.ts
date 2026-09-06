@@ -10,7 +10,6 @@ export const storeDetailSchema = z.object({
   logo: z.url(), // Ensures the logo path is a fully qualified URL link
   currency: z.object({
     code: z.string(),
-    symbol: z.string(),
     position: z.enum(["before", "after"]) // Limits placement choices to before or after values
   })
 });

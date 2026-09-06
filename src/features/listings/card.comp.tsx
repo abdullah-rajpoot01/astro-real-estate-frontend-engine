@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import type { ListingType } from './listings.utils'
+import { formatPriceShort } from '../core-detail/currency.utils'
 
 interface ListingCardType {
     maxItems?: number,
@@ -52,10 +53,10 @@ export function ListingsCardComp({ maxItems, listings = [], }: ListingCardType) 
                         <div className='flex flex-1 flex-col'>
                             <h2 className='mb-1 font-medium text-balance line-clamp-1'>{listing.title}</h2>
                             <div className='mt-auto flex items-baseline gap-2'>
-                                <p className='font-semibold'>${listing.price.toFixed(2)}</p>
+                                <p className='font-semibold'>{formatPriceShort(listing.price)}</p>
                                 {listing.comparePrice && (
                                     <p className='text-muted-foreground text-sm line-through md:text-base xl:text-sm 2xl:text-base'>
-                                        ${listing.comparePrice.toFixed(2)}
+                                        {formatPriceShort(listing.comparePrice)}
                                     </p>
                                 )}
                             </div>

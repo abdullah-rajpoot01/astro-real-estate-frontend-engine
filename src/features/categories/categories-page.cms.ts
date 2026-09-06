@@ -1,9 +1,9 @@
 import type { Collection } from "@sveltia/cms";
 import type { CollectionFile } from "@sveltia/cms";
 
-const categoriesPageConfig: CollectionFile = {
+export const categoriesPageConfig: CollectionFile = {
     name: "categoriesPageConfig",
-    label: "Categories Page Settings",
+    label: "Categories",
     file: "pages/categories.json",
     format: "json",
     fields: [
@@ -31,11 +31,3 @@ const categoriesPageConfig: CollectionFile = {
 };
 
 
-export const categoriesPageCollection: Collection = {
-    name: "categories-page",
-    label: "Categories Page",
-    // A file collection manages specific configuration files rather than a folder layout
-    files: [
-        categoriesPageConfig
-    ]
-};

@@ -2,7 +2,7 @@ import type { CollectionFile } from "@sveltia/cms";
 
 export const listingsPageConfig: CollectionFile = {
     name: "listings-page-config",
-    label: "Properties Page Settings",
+    label: "Properties",
     file: "pages/listings.json",
     format: "json",
     fields: [

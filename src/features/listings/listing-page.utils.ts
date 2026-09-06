@@ -17,7 +17,7 @@ export type ListingsPageDataType = z.infer<typeof listingsPageSchema>;
  */
 export function getListingsPageConfig(): ListingsPageDataType {
   return loadAndValidateFile(
-    "src/content/pages/properties.json",
+    "src/content/pages/listings.json",
     listingsPageSchema
   );
 }
