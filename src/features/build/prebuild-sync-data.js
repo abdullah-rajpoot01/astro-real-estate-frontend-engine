@@ -15,7 +15,7 @@ async function syncDataRepository() {
     const projectRootDir = process.cwd();
     const contentDir = path.join(projectRootDir, 'src', 'content');
     const targetPublicMediaDir = path.join(projectRootDir, 'public', 'media');
-    const configFilePath = path.join(projectRootDir, 'src', 'config', 'central-config.json');
+    const configFilePath = path.join(projectRootDir, 'src',"features", 'config', 'central-config.json');
     
    // 2. Read and parse the JSON file manually (Safest method across all Node versions)
     const configRawData = await fs.readFile(configFilePath, 'utf-8');
