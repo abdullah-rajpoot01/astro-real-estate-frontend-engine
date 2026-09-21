@@ -184,7 +184,8 @@ async function prepareBuildEnvironment() {
 
   process.env.GITHUB_USERNAME =
     githubAccount.username;
-
+    
+  process.env.API_SITE_URL = "https://primebuilders.pages.dev";
   console.log("Build environment prepared.");
 }
 
@@ -231,18 +232,18 @@ async function runBuildPipeline() {
   );
 
 
-// Construct authenticated URL: https://<token>@github.com/...
-const authenticatedRepoUrl = frontendRepoUrl.replace(
-  "https://",
-  `https://${frontendRepoToken}@`
-);
+  // Construct authenticated URL: https://<token>@github.com/...
+  const authenticatedRepoUrl = frontendRepoUrl.replace(
+    "https://",
+    `https://${frontendRepoToken}@`
+  );
 
-execSync(
-  `git clone --depth 1 "${authenticatedRepoUrl}" "${frontendDir}"`,
-  {
-    stdio: "inherit",
-  }
-);
+  execSync(
+    `git clone --depth 1 "${authenticatedRepoUrl}" "${frontendDir}"`,
+    {
+      stdio: "inherit",
+    }
+  );
 
 
   // Install dependencies
@@ -280,7 +281,7 @@ async function main() {
     await prepareBuildEnvironment();
 
     await runBuildPipeline();
- 
+
 
   } catch (error) {
     console.error(

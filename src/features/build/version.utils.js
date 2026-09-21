@@ -5,7 +5,7 @@ const rootDir = process.cwd()
 const publicDir = path.join(rootDir, 'public')
 const targetFile = path.join(publicDir, 'version.json')
 
-const siteUrl = process.env.SITE_URL || "https://primebuilders.pages.dev"
+const siteUrl = process.env.API_SITE_URL ;
 
 async function generateDynamicVersionFile() {
     let buildCount = 1
