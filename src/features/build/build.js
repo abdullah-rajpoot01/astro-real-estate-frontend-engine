@@ -59,6 +59,54 @@ async function getCloudflareAccount(cloudflareToken) {
   return account;
 }
 
+async function getCloudflarePagesSubdomain(accountId, projectName,apiToken) {
+  if (!accountId) {
+    throw new Error("Cloudflare account ID is required.");
+  }
+
+  if (!projectName) {
+    throw new Error("Cloudflare project name is required.");
+  }
+
+
+  if (!apiToken) {
+    throw new Error(
+      "CLOUDFLARE_API_TOKEN is required."
+    );
+  }
+
+  const response = await fetch(
+    `https://api.cloudflare.com/client/v4/accounts/${accountId}/pages/projects/${encodeURIComponent(projectName)}`,
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${apiToken}`,
+        "Content-Type": "application/json",
+      },
+    }
+  );
+
+  const data = await response.json();
+
+  if (!response.ok || !data.success) {
+    throw new Error(
+      data.errors
+        ?.map((error) => error.message)
+        .join(", ") ||
+        `Failed to get Cloudflare Pages project "${projectName}".`
+    );
+  }
+
+  const subdomain = data.result?.subdomain;
+
+  if (!subdomain) {
+    throw new Error(
+      `No subdomain found for Cloudflare project "${projectName}".`
+    );
+  }
+
+  return subdomain;
+}
 
 async function getGitHubUsername(token) {
   const response = await fetch(
@@ -156,7 +204,7 @@ async function prepareBuildEnvironment() {
   const cloudflareAccount =
     await getCloudflareAccount(cloudflare_token);
 
-  // Get frontend repository token
+    // Get frontend repository token
   // const frontendRepoToken =
   //   await getFrontendToken(authToken);
 
@@ -184,8 +232,10 @@ async function prepareBuildEnvironment() {
 
   process.env.GITHUB_USERNAME =
     githubAccount.username;
-    
-  process.env.API_SITE_URL = "https://primebuilders.pages.dev";
+
+  process.env.SITE_URL =
+
+  process.env.API_SITE_URL = "https://webmanager-seven.vercel.app";
   console.log("Build environment prepared.");
 }
 
