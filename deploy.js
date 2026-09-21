@@ -26,7 +26,8 @@ async function deployToCloudflare() {
 
     console.log("Deploying ./dist to Cloudflare Pages...");
 
-    execSync(
+    // Capture the standard output instead of inheriting stdio so we can use it as a robust extraction fallback
+    const deployOutput = execSync(
       `npx wrangler pages deploy "./dist" --project-name="${projectName}"`,
       {
         cwd: process.cwd(),
@@ -35,44 +36,66 @@ async function deployToCloudflare() {
           CLOUDFLARE_ACCOUNT_ID: accountId,
           CLOUDFLARE_API_TOKEN: apiToken,
         },
-        stdio: "inherit",
       }
     );
 
+    // Print output to console logs so you don't lose pipeline visibility
+    console.log(deployOutput.toString());
     console.log("🚀 Cloudflare Pages deployment completed successfully!");
 
     // ==========================================
     // EXTRACT SUBDOMAIN & UPDATE REMOTE API
     // ==========================================
+    let subdomain = null;
+
     console.log("🔍 Fetching project data from Cloudflare to extract subdomain...");
 
-    // Execute wrangler project query returning JSON layout structure
-    const projectListRaw = execSync(
-      `npx wrangler pages project list --json`,
-      {
-        cwd: process.cwd(),
-        env: {
-          ...process.env,
-          CLOUDFLARE_ACCOUNT_ID: accountId,
-          CLOUDFLARE_API_TOKEN: apiToken,
-        },
+    try {
+      // Execute wrangler project query returning JSON layout structure
+      const projectListRaw = execSync(
+        `npx wrangler pages project list --json`,
+        {
+          cwd: process.cwd(),
+          env: {
+            ...process.env,
+            CLOUDFLARE_ACCOUNT_ID: accountId,
+            CLOUDFLARE_API_TOKEN: apiToken,
+          },
+        }
+      );
+
+      const parsedData = JSON.parse(projectListRaw.toString());
+      // Support cases where wrangler wraps array elements under a result field
+      const projects = Array.isArray(parsedData) ? parsedData : (parsedData.result || []);
+      
+      // Fixed line: Defensively use optional chaining to safely traverse missing or null names
+      const activeProject = projects.find(
+        (p) => p?.name?.toLowerCase() === projectName.toLowerCase()
+      );
+
+      if (activeProject && activeProject.subdomain) {
+        subdomain = activeProject.subdomain;
       }
-    );
+    } catch (apiErr) {
+      console.warn("⚠️ Cloudflare List API matching failed, attempting fallback terminal string parsing...", apiErr.message);
+    }
 
-    const projects = JSON.parse(projectListRaw.toString());
-    
-    // Locate the matching project structure by name string
-    const activeProject = projects.find(
-      (p) => p.name.toLowerCase() === projectName.toLowerCase()
-    );
+    // FALLBACK STRATEGY: Parse from stdout if API payload failed or went missing
+    if (!subdomain) {
+      const outputStr = deployOutput.toString();
+      // Matches strings like "Take a peek over at https://xxxxxx.pages.dev"
+      const urlMatch = outputStr.match(/https:\/\/([a-zA-Z0-9-]+\.pages\.dev)/);
+      if (urlMatch && urlMatch[1]) {
+        subdomain = urlMatch[1];
+      }
+    }
 
-    if (!activeProject || !activeProject.subdomain) {
-      console.warn(
-        `Failed to locate Cloudflare project metadata or subdomain assignment for "${projectName}".`
+    if (!subdomain) {
+      throw new Error(
+        `Failed to locate Cloudflare project metadata, subdomain assignment, or console fallback URL pattern for "${projectName}".`
       );
     }
 
-    const subdomain = activeProject.subdomain;
     console.log(`✅ Extracted Subdomain: ${subdomain}`);
 
     // Clean base API endpoint strings to avoid slash collision mismatches
@@ -95,7 +118,7 @@ async function deployToCloudflare() {
     const responseData = await response.json();
 
     if (!response.ok) {
-      console.warn(
+      throw new Error(
         responseData.error || `Server responded with an unexpected status code: ${response.status}`
       );
     }
