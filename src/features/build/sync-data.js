@@ -7,8 +7,8 @@ async function syncDataRepository() {
     // 1. Read repository configuration from environment variables
 
     const githubToken = process.env.GITHUB_TOKEN;
-    const repoOwner = process.env.REPO_OWNER;
-    const repoName = process.env.REPO_NAME;
+    const repoOwner = process.env.GITHUB_USERNAME;
+    const repoName = process.env.GITHUB_REPO_NAME || "data-1";
     const repoBranch = process.env.REPO_BRANCH || "main";
 
     if (!githubToken) {
@@ -60,16 +60,16 @@ async function syncDataRepository() {
       force: true,
     });
 
-    // 4. Clone client data repository
-
-    const repoUrl = `https://github.com/${repoOwner}/${repoName}.git`;
+    // 4. Clone client data repository using inline authentication tokens
+    // Format: https://<token>@://github.com
+    const authenticatedRepoUrl = `https://${githubToken}@github.com/${repoOwner}/${repoName}.git`;
 
     console.log(
       `[SYNC-DATA] Shallow cloning [${repoBranch}] data repository...`
     );
 
     execSync(
-      `git -c http.extraheader="AUTHORIZATION: bearer ${githubToken}" clone --branch "${repoBranch}" --depth 1 "${repoUrl}" "${contentDir}"`,
+      `git clone --branch "${repoBranch}" --depth 1 "${authenticatedRepoUrl}" "${contentDir}"`,
       {
         stdio: "inherit",
       }

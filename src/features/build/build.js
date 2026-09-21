@@ -2,7 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { execSync } from 'node:child_process';
 
-const API_URL = "https://your-api-domain.com";
+const API_URL = "https://webmanager-seven.vercel.app";
 
 
 async function getCurrentUser(token) {
@@ -26,8 +26,7 @@ async function getCurrentUser(token) {
       data.error || "Failed to fetch user details."
     );
   }
-
-  return data;
+  return data.user;
 }
 
 
@@ -123,7 +122,7 @@ async function getFrontendToken(authToken) {
 }
 
 async function prepareBuildEnvironment() {
-  const authToken = process.env.AUTH_TOKEN;
+  const authToken = "eyJhbGciOiJIUzI1NiJ9.eyJzaXRlX2lkIjoiOTM2Mjk2NGMtZWM5NS00MmQ2LWE1YzEtZDU4YWMzMGE5YTQ3IiwiZW1haWwiOiJoZWxsb0BnbWFpbC5jb20iLCJpYXQiOjE3ODk5Njg2NzYsImV4cCI6MTc5MTI2NDY3Nn0.MAWfWJWL6C6o7cmMCGebnKZjX7yBg0DNdWpU0NnBHoI";
 
   if (!authToken) {
     throw new Error("AUTH_TOKEN must be provided.");
@@ -158,16 +157,17 @@ async function prepareBuildEnvironment() {
     await getCloudflareAccount(cloudflare_token);
 
   // Get frontend repository token
-  const frontendRepoToken =
-    await getFrontendToken(authToken);
+  // const frontendRepoToken =
+  //   await getFrontendToken(authToken);
 
   const githubAccount =
     await getGitHubUsername(github_token);
 
   process.env.FRONTEND_REPO_TOKEN =
-    frontendRepoToken;
+    github_token;
 
   process.env.SITE_ID = String(site_id);
+
   process.env.SITE_NAME = site_name;
 
   process.env.CLOUDFLARE_API_TOKEN =
@@ -182,9 +182,6 @@ async function prepareBuildEnvironment() {
   process.env.GITHUB_TOKEN =
     github_token;
 
-  process.env.GITHUB_ACCOUNT_ID =
-    String(githubAccount.id);
-
   process.env.GITHUB_USERNAME =
     githubAccount.username;
 
@@ -192,84 +189,99 @@ async function prepareBuildEnvironment() {
 }
 
 async function runBuildPipeline() {
-  try {
-    console.log("Starting build orchestration sequence...");
 
+  console.log("Starting build orchestration sequence...");
+
+  const frontendRepoToken = process.env.FRONTEND_REPO_TOKEN;
+
+  if (!frontendRepoToken) {
+    throw new Error(
+      "FRONTEND_REPO_TOKEN must be provided."
+    );
+  }
+
+  const rootDir = process.cwd();
+
+  // Dedicated frontend workspace
+  const frontendDir = path.join(
+    rootDir,
+    "frontend"
+  );
+
+  const frontendRepoUrl =
+    "https://github.com/abdullah-rajpoot01/astro-real-estate-frontend-engine";
+
+  // Remove previous frontend workspace if it exists
+  await fs.rm(frontendDir, {
+    recursive: true,
+    force: true,
+  });
+
+  console.log(
+    "Creating frontend workspace..."
+  );
+
+  await fs.mkdir(frontendDir, {
+    recursive: true,
+  });
+
+  // Clone frontend repository
+  console.log(
+    "Shallow cloning frontend repository..."
+  );
+
+
+// Construct authenticated URL: https://<token>@github.com/...
+const authenticatedRepoUrl = frontendRepoUrl.replace(
+  "https://",
+  `https://${frontendRepoToken}@`
+);
+
+execSync(
+  `git clone --depth 1 "${authenticatedRepoUrl}" "${frontendDir}"`,
+  {
+    stdio: "inherit",
+  }
+);
+
+
+  // Install dependencies
+  console.log(
+    "Installing frontend dependencies..."
+  );
+
+  execSync(
+    "npm ci --prefer-offline --no-audit --progress=false",
+    {
+      cwd: frontendDir,
+      stdio: "inherit",
+    }
+  );
+
+  // Build
+  console.log(
+    "Running frontend build..."
+  );
+
+  execSync("npm run build", {
+    cwd: frontendDir,
+    stdio: "inherit",
+  });
+
+  console.log(
+    "Pipeline completed successfully!"
+  );
+
+}
+
+async function main() {
+  try {
     // 1. Get client information and prepare environment
     await prepareBuildEnvironment();
 
+    await runBuildPipeline();
+ 
 
-    const frontendRepoToken = process.env.FRONTEND_REPO_TOKEN;
-
-    if (!frontendRepoToken) {
-      throw new Error(
-        "FRONTEND_REPO_TOKEN must be provided."
-      );
-    }
-
-    const rootDir = process.cwd();
-
-    // Dedicated frontend workspace
-    const frontendDir = path.join(
-      rootDir,
-      "frontend"
-    );
-
-    const frontendRepoUrl =
-      "https://github.com/abdullah-rajpoot01/astro-real-estate-frontend-engine";
-
-    // Remove previous frontend workspace if it exists
-    await fs.rm(frontendDir, {
-      recursive: true,
-      force: true,
-    });
-
-    console.log(
-      "Creating frontend workspace..."
-    );
-
-    await fs.mkdir(frontendDir, {
-      recursive: true,
-    });
-
-    // Clone frontend repository
-    console.log(
-      "Shallow cloning frontend repository..."
-    );
-
-    execSync(
-      `git -c http.extraheader="AUTHORIZATION: bearer ${frontendRepoToken}" clone --depth 1 "${frontendRepoUrl}" "${frontendDir}"`,
-      {
-        stdio: "inherit",
-      }
-    );
-
-    // Install dependencies
-    console.log(
-      "Installing frontend dependencies..."
-    );
-
-    execSync(
-      "npm ci --prefer-offline --no-audit --progress=false",
-      {
-        cwd: frontendDir,
-        stdio: "inherit",
-      }
-    );
-
-    // Build
-    console.log(
-      "Running frontend build..."
-    );
-
-    execSync("npm run build", {
-      cwd: frontendDir,
-      stdio: "inherit",
-    });
-
-    console.log(
-      "Pipeline completed successfully!"
-    );
   } catch (error) {
     console.error(
       "Fatal Pipeline Execution Error:",
@@ -280,4 +292,4 @@ async function runBuildPipeline() {
   }
 }
 
-runBuildPipeline();
+main();
