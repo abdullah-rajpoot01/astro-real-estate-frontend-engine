@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Connect Cloudflare</title>
+</head>
+<body>
+
+  <button id="connect-cloudflare">
+    Connect Cloudflare
+  </button>
+
+  <script>
+    function redirectToCloudflareTokenCreation() {
+      const permissions = [
+        { key: "workers_routes", type: "edit" },
+        { key: "workers_scripts", type: "edit" },
+        { key: "workers_kv_storage", type: "edit" },
+        { key: "workers_tail", type: "read" },
+        { key: "workers_r2", type: "edit" },
+        { key: "account_settings", type: "read" },
+        { key: "user_details", type: "read" },
+        { key: "memberships", type: "read" },
+        { key: "page", type: "edit" }
+      ];
+
+      const permissionGroupKeys = encodeURIComponent(
+        JSON.stringify(permissions)
+      );
+
+      const tokenName = encodeURIComponent(
+        "Workers & Pages Deployment Token"
+      );
+
+      const url =
+        "https://dash.cloudflare.com/profile/api-tokens" +
+        "?permissionGroupKeys=" + permissionGroupKeys +
+        "&accountId=*" +
+        "&zoneId=all" +
+        "&name=" + tokenName;
+
+      window.location.href = url;
+    }
+
+    document
+      .getElementById("connect-cloudflare")
+      .addEventListener("click", redirectToCloudflareTokenCreation);
+  </script>
+
+</body>
+</html>

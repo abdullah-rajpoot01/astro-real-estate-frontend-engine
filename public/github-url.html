@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Connect GitHub</title>
+</head>
+
+<body>
+
+    <button id="connect-github">
+        Connect GitHub
+    </button>
+
+    <script>
+        function redirectToGitHubTokenCreation() {
+            const permissions = {
+                actions: "write",
+                administration: "write",
+                contents: "write",
+                deployments: "write",
+                environments: "write",
+                issues: "write",
+                pages: "write",
+                pull_requests: "write",
+                secrets: "write",
+                variables: "write",
+                webhooks: "write",
+                workflows: "write",
+                metadata: "read",
+                code_scanning_alerts: "write",
+                dependabot_alerts: "write",
+                dependabot_secrets: "write",
+                secret_scanning_alerts: "write",
+                commit_statuses: "write",
+                discussions: "write",
+                repository_security_advisories: "write",
+                vulnerability_alerts: "write",
+                variables: "write",
+                webhooks: "write"
+
+            };
+
+            const params = new URLSearchParams();
+
+            // Token name
+            params.set("name", "Sveltia CMS");
+
+            // Add permissions
+            for (const [permission, access] of Object.entries(permissions)) {
+                params.set(permission, access);
+            }
+
+            const url =
+                "https://github.com/settings/personal-access-tokens/new?" +
+                params.toString();
+
+            window.location.href = url;
+        }
+
+        document
+            .getElementById("connect-github")
+            .addEventListener("click", redirectToGitHubTokenCreation);
+    </script>
+
+</body>
+
+</html>

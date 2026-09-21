@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fork GitHub Repository</title>
+</head>
+
+<body>
+
+  <input
+    id="token"
+    type="password"
+    placeholder="GitHub token"
+  />
+
+  <input
+    id="repo"
+    type="text"
+    value="octocat/Hello-World"
+    placeholder="owner/repository"
+  />
+
+  <button id="fork-repo">
+    Fork Repository
+  </button>
+
+  <pre id="result"></pre>
+
+  <script>
+
+    async function forkPublicRepository(token, repository) {
+
+      const [owner, repo] = repository.split("/");
+
+      if (!owner || !repo) {
+        throw new Error(
+          "Repository must be in the format: owner/repository"
+        );
+      }
+
+      const response = await fetch(
+        `https://api.github.com/repos/${owner}/${repo}/forks`,
+        {
+          method: "POST",
+
+          headers: {
+            "Accept": "application/vnd.github+json",
+            "Authorization": `Bearer ${token}`,
+            "X-GitHub-Api-Version": "2026-03-10",
+            "Content-Type": "application/json"
+          },
+
+          body: JSON.stringify({
+            name: "forked-repo"
+          })
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          `${response.status}: ${data.message || "GitHub API error"}`
+        );
+      }
+
+      return data;
+    }
+
+
+    async function waitForFork(token, fullName) {
+
+      const maxAttempts = 30;
+
+      for (let i = 0; i < maxAttempts; i++) {
+
+        const response = await fetch(
+          `https://api.github.com/repos/${fullName}`,
+          {
+            headers: {
+              "Accept": "application/vnd.github+json",
+              "Authorization": `Bearer ${token}`,
+              "X-GitHub-Api-Version": "2026-03-10"
+            }
+          }
+        );
+
+        if (response.ok) {
+          return await response.json();
+        }
+
+        // Wait 2 seconds before checking again
+        await new Promise(resolve =>
+          setTimeout(resolve, 2000)
+        );
+      }
+
+      throw new Error(
+        "Fork was accepted but did not become available within 60 seconds."
+      );
+    }
+
+
+    document
+      .getElementById("fork-repo")
+      .addEventListener("click", async () => {
+
+        const token =
+          document.getElementById("token").value.trim();
+
+        const repository =
+          document.getElementById("repo").value.trim();
+
+        const result =
+          document.getElementById("result");
+
+
+        if (!token) {
+          result.textContent =
+            "Please enter your GitHub token.";
+          return;
+        }
+
+
+        if (!repository) {
+          result.textContent =
+            "Please enter a repository.";
+          return;
+        }
+
+
+        result.textContent =
+          "Creating fork...";
+
+
+        try {
+
+          // Create fork
+          const fork = await forkPublicRepository(
+            token,
+            repository
+          );
+
+
+          result.textContent =
+            `Fork request accepted.\n\n` +
+            `Waiting for GitHub to finish creating it...`;
+
+
+          // Wait until fork actually exists
+          const createdFork = await waitForFork(
+            token,
+            fork.full_name
+          );
+
+
+          result.textContent =
+            `Fork created successfully!\n\n` +
+            `Repository: ${createdFork.full_name}\n` +
+            `URL: ${createdFork.html_url}`;
+
+
+        } catch (error) {
+
+          result.textContent =
+            `Failed to fork repository:\n\n` +
+            error.message;
+
+          console.error(error);
+        }
+
+      });
+
+  </script>
+
+</body>
+</html>

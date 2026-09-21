@@ -1,0 +1,117 @@
+---
+// src/pages/admin.astro
+// 1. Import the central config file inside the Astro server context
+import configs from "@/features/config/central-config.json"
+
+// 2. Fetch the SITE_ID environment variable at build-time on the server
+const siteId = process.env.SITE_ID
+
+if (!siteId) {
+  console.warn(
+    "[CMS BUILD] Warning: Environment variable SITE_ID is not defined."
+  )
+}
+
+// 3. Find the matching store tracking metadata block
+const siteConfig = configs.find((item) => item.id === siteId) || {
+  repositoryConfig: {
+    repoName: "rajpoot/data_1", // Local fallback template target
+    repoBranch: "main",
+  },
+}
+
+const targetRepo = siteConfig.repositoryConfig.repoName
+const targetBranch = siteConfig.repositoryConfig.repoBranch || "main"
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Content Manager</title>
+  </head>
+  <body>
+    <!-- Sveltia CMS requires this empty div to mount its user interface -->
+    <div id="nc-root"></div>
+
+    <script
+      id="cms-config"
+      is:inline
+      data-repo={targetRepo}
+      data-branch={targetBranch}
+    >
+      // This structural injection hook makes properties accessible to client execution tags
+    </script>
+
+    <script>
+      // Import the CMS object directly from the npm package
+      import CMS from "@sveltia/cms"
+      import { navigationCollection } from "@/features/navigation/collection.cms"
+      import { homePageCollection } from "@/features/home/collection.cms"
+      import { aboutPageCollection } from "@/features/about/collection.cms"
+      import { categoriesCollection } from "@/features/categories/categories.cms"
+      import { agentsCollection } from "@/features/agents/collection.cms"
+      import { featuresCollection } from "@/features/features/collection.cms"
+      import { testimonialsCollection } from "@/features/testimonials/testimonials.cms"
+      import { coreDetailCollection } from "@/features/core-detail/collection.cms"
+      import { listingsCollection } from "@/features/listings/listings.cms"
+      import { pagesCollection } from "@/features/pages/collection"
+
+      // Pull the mapped environment configurations out of the script tag attributes
+      const configElement = document.getElementById("cms-config")
+      const gitHubRepo = configElement?.getAttribute("data-repo")
+      const gitHubBranch = configElement?.getAttribute("data-branch")
+
+      // Initialize with your JavaScript configuration object
+      CMS.init({
+        config: {
+          load_config_file: false,
+          // Backend provider (e.g., GitHub, GitLab, or Bitbucket)
+          backend: {
+            name: "github",
+            repo: gitHubRepo || "rajpoot/data_1",
+            branch: gitHubBranch || "main",
+          },
+          output: {
+            omit_empty_optional_fields: true,
+          },
+          media_libraries: {
+            default: {
+              config: {
+                max_file_size: 254800,
+                transformations: {
+                  raster_image: {
+                    format: "webp",
+                    quality: 80,
+                  },
+                },
+              },
+            },
+          },
+          // Where uploaded media assets will be saved
+          media_folder: "media",
+          public_folder: "/media",
+          app_title: "Real Estate CMS",
+          logo: {
+            src: "https://islamabad-images-1.pages.dev/logos/201948.jpg",
+            show_in_header: false,
+          },
+          // Define your Astro Content Collections here
+          collections: [
+            categoriesCollection,
+            listingsCollection,
+            agentsCollection,
+            featuresCollection,
+            testimonialsCollection,
+            coreDetailCollection,
+            navigationCollection,
+            homePageCollection,
+            aboutPageCollection,
+            pagesCollection,
+          ],
+        },
+      })
+    </script>
+  </body>
+</html>

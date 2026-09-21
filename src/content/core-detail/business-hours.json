@@ -1,0 +1,16 @@
+{
+  "businessHours": [
+    {
+      "name": "Monday-Friday",
+      "closed": false,
+      "open": "09:00",
+      "close": "18:00"
+    },
+    {
+      "name": "Saturday-Sunday",
+      "closed": false,
+      "open": "09:00",
+      "close": "18:00"
+    }
+  ]
+}

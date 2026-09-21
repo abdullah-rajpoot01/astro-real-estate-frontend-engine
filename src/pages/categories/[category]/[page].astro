@@ -1,0 +1,89 @@
+---
+// src/pages/property-types/[propertyType]/[page].astro
+import type { GetStaticPaths, Page } from "astro"
+import Layout from "@/layouts/main.astro"
+import { getAllListings, type ListingType } from "@/features/listings"
+import PaginationWithPrimaryButton from "@/components/pagination-02"
+import { ListingsPageComp } from "@/features/categories/listings.comp"
+import { getAllCategories } from "@/features/categories/categories.utils"
+import { getCategoriesPageConfig } from "@/features/categories/categories-page.utils"
+
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+  const allcategories = getAllCategories()
+  const allListings = getAllListings()
+  const categoriesPageConfig = getCategoriesPageConfig()
+
+  const activeListings = allListings.filter(
+    (item) => item.status === "available" || item.status === "pending"
+  )
+
+  // Use flatMap to generate routes for both IDs and Slugs
+  return allcategories.flatMap((type) => {
+    // Still matching listings securely by ID internally
+    const typedListings = activeListings.filter(
+      (listing) => listing.category === type.id
+    )
+
+    // Generate path A: Using the slug (e.g., /property-types/apartment)
+    const slugRoute = paginate(typedListings, {
+      params: { category: String(type.slug) },
+      pageSize: categoriesPageConfig.listingPerPage || 12,
+    })
+
+    // Generate path B: Using the raw ID (e.g., /property-types/pt_001)
+    const idRoute = paginate(typedListings, {
+      params: { category: String(type.id) },
+      pageSize: categoriesPageConfig.listingPerPage || 12,
+    })
+
+    return [...slugRoute, ...idRoute]
+  })
+}
+
+interface Props {
+  page: Page<ListingType>
+}
+
+const { page } = Astro.props
+const { category } = Astro.params
+
+const listingsOnThisPage = page.data
+const categories = getAllCategories()
+const thisCategory = categories.find((pro) => pro.id === category)
+// Keeps your navigation consistent with your folder naming configuration
+const baseUrl = `/categories/${category}`
+
+const paginationInfo = {
+  currentPage: page.currentPage,
+  lastPage: page.lastPage,
+  hasNext: typeof page.url.next === "string",
+  hasPrev: typeof page.url.prev === "string",
+  nextUrl: page.url.next,
+  prevUrl: page.url.prev,
+}
+const canShowPagination =
+  listingsOnThisPage.length > 0 &&
+  (paginationInfo.hasNext || paginationInfo.hasPrev)
+---
+
+<Layout
+  pageName="category-detail"
+  context={{
+    title: thisCategory?.name,
+    image: thisCategory?.image,
+  }}
+>
+  <ListingsPageComp
+    propertyType={thisCategory?.name || ""}
+    listings={listingsOnThisPage}
+  />
+
+  {
+    canShowPagination && (
+      <PaginationWithPrimaryButton
+        baseUrl={baseUrl}
+        pagination={paginationInfo}
+      />
+    )
+  }
+</Layout>

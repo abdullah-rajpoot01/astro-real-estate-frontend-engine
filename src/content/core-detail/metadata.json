@@ -1,0 +1,38 @@
+{
+  "home": {
+    "title": "Welcome to {{name}} | Find Your Dream Properties",
+    "description": "Browse the latest premium real estate listings, luxury homes, and commercial properties with {{name}}."
+  },
+  "properties": {
+    "title": "Available Properties for Sale & Rent | {{name}}",
+    "description": "Explore our comprehensive directory of houses, apartments, and land spaces managed by {{name}}."
+  },
+  "categories": {
+    "title": "Property Categories & Collections | {{name}}",
+    "description": "Filter real estate spaces by type, lifestyle, or location criteria to match your requirements with {{name}}."
+  },
+  "about": {
+    "title": "About Our Agency & Expert Agents | {{name}}",
+    "description": "Meet the professional real estate brokers, consultants, and dedicated team behind {{name}}."
+  },
+  "contact": {
+    "title": "Get in Touch With Our Team | {{name}}",
+    "description": "Have questions about a listing or market valuations? Contact the real estate advisors at {{name}} today."
+  },
+  "testimonials": {
+    "title": "Client Testimonials & Success Stories | {{name}}",
+    "description": "Read verified reviews from homeowners, investors, and renters who achieved their goals using {{name}}."
+  },
+  "propertyDetail": {
+    "title": "View Property Listing Details | {{name}}",
+    "description": "Get explicit price sheets, structural floor plans, neighborhood metrics, and viewing schedules on {{name}}."
+  },
+  "categoryDetail": {
+    "title": "Browse Curated Property Types | {{name}}",
+    "description": "Discover specialized real estate collections filtered explicitly under the {{name}} platform."
+  },
+  "default": {
+    "title": "Premium Real Estate Agency | {{name}}",
+    "description": "Discover luxury residential listings and commercial opportunities with {{name}}."
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "id": "agt_103",
+  "name": "Elena Rostova",
+  "title": "Leads Manager",
+  "image": "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=600",
+  "phone": "+15550177",
+  "email": "elena.r@example.com",
+  "whatsapp": "+15550177",
+  "bio": "Elite luxury agent matching high-net-worth individuals with waterfront estates and villas.",
+  "featured": true,
+  "slug": "elena-rostova"
+}

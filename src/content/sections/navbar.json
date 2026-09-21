@@ -1,0 +1,29 @@
+{
+  "quickLinks": [
+    {
+      "label": "Home",
+      "url": "/",
+      "icon": "home"
+    },
+    {
+      "label": "Properties",
+      "url": "/properties/page/1",
+      "icon": "shoppingBag"
+    },
+    {
+      "label": "Categories",
+      "url": "/categories",
+      "icon": "tags"
+    },
+    {
+      "label": "About Us",
+      "url": "/about-us",
+      "icon": "user"
+    },
+    {
+      "label": "Testimonials",
+      "url": "/testimonials",
+      "icon": "users"
+    }
+  ]
+}

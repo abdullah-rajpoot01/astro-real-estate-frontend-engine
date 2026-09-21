@@ -1,0 +1,81 @@
+---
+// 2. React UI Presenter Import
+import Layout from "@/layouts/main.astro"
+import ListingOverview from "@/features/listing-page/main.comp.astro"
+import {ListingsCardComp} from "@/features/listings"
+
+// 3. Define the path map using Astro's dynamic parameters engine
+import type { GetStaticPaths, InferGetStaticPropsType } from "astro"
+import { getAllListings } from "@/features/listings"
+
+export const getStaticPaths = (async () => {
+  // 1. Fetch all listings using your function
+  const listings = getAllListings()
+
+  // 2. Map them into the format Astro expects
+  return listings.map((listing) => ({
+    params: {
+      id: String(listing.id),
+    },
+    props: {
+      listing,
+    },
+  }))
+}) satisfies GetStaticPaths
+
+// 3. Type the props using Astro's built-in type inference helper
+type Props = InferGetStaticPropsType<typeof getStaticPaths>
+
+// 4. Access the fully-typed listing directly from Astro.props
+const { listing } = Astro.props
+
+// 1. Fetch all listings from the local inventory
+const allListings = getAllListings()
+
+/* 
+  ⚡ ALGORITHM: Find related listings (Same Category Priority, max 6 slots)
+*/
+
+// A. Exclude the current listing so it doesn't recommend itself
+const availableListings = allListings.filter((l) => l.id !== listing.id)
+
+// B. Extract listings matching the current property type
+const sameCategoryListings = availableListings.filter(
+  (l) => l.category === listing.category
+)
+
+// C. Gather listings from different categories to use as fallbacks
+const otherCategoryListings = availableListings.filter(
+  (l) => l.category !== listing.category
+)
+
+// D. Merge lists ensuring same category takes absolute priority, limited safely to 6 slots
+const recommendedListings = [
+  ...sameCategoryListings,
+  ...otherCategoryListings,
+].slice(0, 6)
+---
+
+<Layout
+  pageName="property-detail"
+  context={{
+    title: listing.title,
+    description: listing.description,
+    image: listing.images[0],
+  }}
+>
+  <!-- Pass the clean product object down into your React interface layer -->
+  <ListingOverview listing={listing} />
+
+  <div class="w-full">
+    <div class="py-12 text-center">
+      <!-- Added oswald styling here if you want it applied to headings -->
+      <h2 class="font-oswald text-3xl font-bold tracking-tight text-balance">
+        Properties you might also want
+      </h2>
+    </div>
+
+    <!-- Render array containing targeted matching metrics -->
+    <ListingsCardComp listings={recommendedListings} maxItems={6} />
+  </div>
+</Layout>

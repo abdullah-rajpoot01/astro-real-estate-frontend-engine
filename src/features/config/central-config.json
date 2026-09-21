@@ -1,0 +1,40 @@
+[
+    {
+        "siteName": "al_rehman_realtors",
+        "id": "usr_98431024",
+        "password": "secure_password_1234",
+        "status": "active",
+        "domainConfig": {
+            "customDomain": "https://alrehmanrealtors.pk",
+            "cloudflareSubdomain": "https://al-rehman.pages.dev"
+        },
+        "repositoryConfig": {
+            "ownerName": "abdullah-rajpoot01",
+            "repoName": "real_estate_config_default_data",
+            "repoUrl": "https://github.com/abdullah-rajpoot01/real_estate_config_default_data",
+            "repoBranch": "main"
+        },
+        "billingInfo": {
+            "planTier": "basic",
+            "currency": "PKR",
+            "monthlyRate": 500,
+            "lastPaymentDate": "2026-09-15T00:00:00Z",
+            "durationMonths": 4,
+            "gracePeriod": 7
+        },
+        "envVariables": {
+            "cloudflare_account_id": "cf_acc_id_alrehman_9988",
+            "cloudflare_api_token": "cf_tok_alrehman_secret_abc123",
+            "cloudflare_project_name": "al-rehman-realtors",
+            "github_pat": "github_pat_kdfhsfoiewsddfhssfhowfksdfwrfwefsfhoifwsfwjfspofj"
+        },
+        "limits": {
+            "maxListings": 70,
+            "maxCategories": 10,
+            "maxAgents": 10
+        },
+        "metaData": {
+            "createdAt": "2026-08-31T07:15:00Z"
+        }
+    }
+]

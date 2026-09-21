@@ -1,0 +1,26 @@
+---
+import Layout from "@/layouts/main.astro"
+import {
+  HomeHeroSectionComp,
+  HomeTestimonialsSectionComp,
+  HomeCategoriesSectionComp,
+  HomeCTASectionComp,
+  HomeListingSectionComp,
+  HomeHeroSectionCarouselComp,
+  HomeFeaturesSectionComp,
+} from "@/features/home"
+import { getHeroSection } from "@/features/home/home.utils"
+
+const { images } = getHeroSection()
+---
+
+<Layout pageName="home">
+  <HomeHeroSectionComp>
+    <HomeHeroSectionCarouselComp images={images} client:load />
+  </HomeHeroSectionComp>
+  <HomeCategoriesSectionComp />
+  <HomeListingSectionComp />
+  <HomeFeaturesSectionComp />
+  <HomeTestimonialsSectionComp />
+  <HomeCTASectionComp />
+</Layout>
