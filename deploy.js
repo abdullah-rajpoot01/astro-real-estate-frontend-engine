@@ -1,5 +1,66 @@
 import { execSync } from "node:child_process";
 
+async function deleteOldDeployments(accountId, cloudflareToken) {
+  let projectName = "gym-leads";
+  try {
+    console.log("🧹 Checking for deployments to clean up...");
+
+    const response = await fetch(
+      `https://api.cloudflare.com/client/v4/accounts/${accountId}/pages/projects/${encodeURIComponent(projectName)}/deployments`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${cloudflareToken}`,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok || !data.success) {
+      console.warn("⚠️ Could not fetch deployments for cleanup.");
+      return;
+    }
+
+    const deployments = data.result || [];
+    if (deployments.length === 0) {
+      console.log("ℹ️ No deployments found to delete.");
+      return;
+    }
+
+    console.log(`🗑️ Found ${deployments.length} deployments. Cleaning up...`);
+
+    for (const deployment of deployments) {
+      // NOTE: Cloudflare will naturally reject deleting the active "production" 
+      // deployment if you are trying to delete a project, but it will clear out all previews.
+      try {
+        const deleteResponse = await fetch(
+          `https://api.cloudflare.com/client/v4/accounts/${accountId}/pages/projects/${encodeURIComponent(projectName)}/deployments/${deployment.id}`,
+          {
+            method: 'DELETE',
+            headers: {
+              Authorization: `Bearer ${cloudflareToken}`,
+              'Content-Type': 'application/json',
+            },
+          }
+        );
+
+        const deleteData = await deleteResponse.json();
+        if (deleteResponse.ok && deleteData.success) {
+          console.log(`✅ Deleted deployment: ${deployment.id}`);
+        } else {
+          console.warn(`⚠️ Skipped/Failed deployment ${deployment.id}: ${deleteData.errors?.[0]?.message || 'Unknown error'}`);
+        }
+      } catch (err) {
+        console.error(`❌ Network error deleting deployment ${deployment.id}:`, err.message);
+      }
+    }
+    console.log("✨ Deployment cleanup finished.");
+  } catch (error) {
+    console.error("❌ Failed during deployment cleanup loop:", error.message);
+  }
+}
 
 async function getCloudflarePagesSubdomain(
   accountId,
@@ -143,6 +204,7 @@ async function deployToCloudflare() {
     console.log(
       "🚀 Cloudflare Pages deployment completed successfully!"
     );
+    await deleteOldDeployments(accountId, apiToken);
 
   } catch (error) {
     console.error(
