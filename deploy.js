@@ -1,5 +1,48 @@
 import { execSync } from "node:child_process";
 
+
+async function getCloudflarePagesSubdomain(
+  accountId,
+  projectName,
+  cloudflareToken
+) {
+  try {
+    const response = await fetch(
+      `https://api.cloudflare.com/client/v4/accounts/${accountId}/pages/projects/${encodeURIComponent(projectName)}`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${cloudflareToken}`,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    const data = await response.json();
+
+    // If project is not found, Cloudflare API usually returns 404 or success: false with specific error code
+    if (!response.ok || !data.success) {
+      const isNotFound = data.errors?.some(err => err.code === 8000007 || err.message.includes("not found"));
+      if (isNotFound || response.status === 404) {
+        return null; // Return null so the deploy script knows to create it
+      }
+
+      throw new Error(
+        data.errors?.map((error) => error.message).join(', ') ||
+        `Failed to check Cloudflare project "${projectName}".`
+      );
+    }
+
+    return data.result?.subdomain || null;
+  } catch (error) {
+    // If it's a known "not found" scenario handled above, rethrow other unexpected network errors
+    if (error.message.includes("Failed to check Cloudflare project")) {
+      throw error;
+    }
+    return null;
+  }
+}
+
 async function deployToCloudflare() {
   try {
     console.log("🚀 Starting Cloudflare Pages deployment...");
@@ -39,6 +82,17 @@ async function deployToCloudflare() {
       );
     }
 
+    // -----------------------------------------
+    // Get Pages project subdomain
+    // -----------------------------------------
+
+    const subdomain =
+      await getCloudflarePagesSubdomain(
+        accountId,
+        user.site_name,
+        cloudflareToken
+      )
+
     // ------------------------------------------
     // Deploy
     // ------------------------------------------
@@ -46,22 +100,44 @@ async function deployToCloudflare() {
     console.log(
       "📦 Deploying ./dist to Cloudflare Pages..."
     );
+    if (subdomain !== null) {
+      execSync(
+        `npx wrangler pages deploy "./dist" --project-name="${projectName}"`,
+        {
+          cwd: process.cwd(),
 
-    execSync(
-      `npx wrangler pages deploy "./dist" --project-name="${projectName}"`,
-      {
-        cwd: process.cwd(),
+          env: {
+            ...process.env,
+            CLOUDFLARE_ACCOUNT_ID: accountId,
+            CLOUDFLARE_API_TOKEN: apiToken,
+          },
 
-        env: {
-          ...process.env,
-          CLOUDFLARE_ACCOUNT_ID: accountId,
-          CLOUDFLARE_API_TOKEN: apiToken,
-        },
+          encoding: "utf8",
+        }
+      );
+    } else {
+      console.log(`ℹ️ Project does not exist. Creating new Pages project: "${projectName}"...`);
+      // Step 1: Create the empty project framework
+      execSync(
+        `npx wrangler pages project create "${projectName}" --production-branch="main"`,
+        {
+          cwd: process.cwd(),
+          env: { ...process.env, CLOUDFLARE_ACCOUNT_ID: accountId, CLOUDFLARE_API_TOKEN: apiToken },
+          encoding: "utf8",
+        }
+      );
 
-        encoding: "utf8",
-      }
-    );
-
+      // Step 2: Deploy the compiled contents to the freshly created project
+      console.log(`📦 Running initial production deployment for "${projectName}"...`);
+      execSync(
+        `npx wrangler pages deploy "./dist" --project-name="${projectName}"`,
+        {
+          cwd: process.cwd(),
+          env: { ...process.env, CLOUDFLARE_ACCOUNT_ID: accountId, CLOUDFLARE_API_TOKEN: apiToken },
+          encoding: "utf8",
+        }
+      );
+    }
     console.log(
       "🚀 Cloudflare Pages deployment completed successfully!"
     );
@@ -77,3 +153,4 @@ async function deployToCloudflare() {
 }
 
 deployToCloudflare();
+
