@@ -62,6 +62,8 @@ async function deployToCloudflare() {
     const siteUrl =
       process.env.API_SITE_URL;
 
+    const siteName = process.env.SITE_NAME;
+
     // ------------------------------------------
     // Validate Cloudflare configuration
     // ------------------------------------------
@@ -89,8 +91,8 @@ async function deployToCloudflare() {
     const subdomain =
       await getCloudflarePagesSubdomain(
         accountId,
-        user.site_name,
-        cloudflareToken
+        siteName,
+        apiToken
       )
 
     // ------------------------------------------
