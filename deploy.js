@@ -129,81 +129,81 @@ async function deployToCloudflare() {
     // Validate Cloudflare configuration
     // ------------------------------------------
 
-    if (!accountId || !apiToken || !projectName) {
-      throw new Error(
-        "CLOUDFLARE_ACCOUNT_ID, CLOUDFLARE_API_TOKEN and CLOUDFLARE_PROJECT_NAME are required"
-      );
-    }
+    // if (!accountId || !apiToken || !projectName) {
+    //   throw new Error(
+    //     "CLOUDFLARE_ACCOUNT_ID, CLOUDFLARE_API_TOKEN and CLOUDFLARE_PROJECT_NAME are required"
+    //   );
+    // }
 
-    // ------------------------------------------
-    // Validate API configuration
-    // ------------------------------------------
+    // // ------------------------------------------
+    // // Validate API configuration
+    // // ------------------------------------------
 
-    if (!token || !siteUrl) {
-      throw new Error(
-        "AUTH_TOKEN and API_SITE_URL environment variables are required"
-      );
-    }
+    // if (!token || !siteUrl) {
+    //   throw new Error(
+    //     "AUTH_TOKEN and API_SITE_URL environment variables are required"
+    //   );
+    // }
 
-    // -----------------------------------------
-    // Get Pages project subdomain
-    // -----------------------------------------
+    // // -----------------------------------------
+    // // Get Pages project subdomain
+    // // -----------------------------------------
 
-    const subdomain =
-      await getCloudflarePagesSubdomain(
-        accountId,
-        siteName,
-        apiToken
-      )
+    // const subdomain =
+    //   await getCloudflarePagesSubdomain(
+    //     accountId,
+    //     siteName,
+    //     apiToken
+    //   )
 
-    // ------------------------------------------
-    // Deploy
-    // ------------------------------------------
+    // // ------------------------------------------
+    // // Deploy
+    // // ------------------------------------------
 
-    console.log(
-      "📦 Deploying ./dist to Cloudflare Pages..."
-    );
-    if (subdomain !== null) {
-      execSync(
-        `npx wrangler pages deploy "./dist" --project-name="${projectName}"`,
-        {
-          cwd: process.cwd(),
+    // console.log(
+    //   "📦 Deploying ./dist to Cloudflare Pages..."
+    // );
+    // if (subdomain !== null) {
+    //   execSync(
+    //     `npx wrangler pages deploy "./dist" --project-name="${projectName}"`,
+    //     {
+    //       cwd: process.cwd(),
 
-          env: {
-            ...process.env,
-            CLOUDFLARE_ACCOUNT_ID: accountId,
-            CLOUDFLARE_API_TOKEN: apiToken,
-          },
+    //       env: {
+    //         ...process.env,
+    //         CLOUDFLARE_ACCOUNT_ID: accountId,
+    //         CLOUDFLARE_API_TOKEN: apiToken,
+    //       },
 
-          encoding: "utf8",
-        }
-      );
-    } else {
-      console.log(`ℹ️ Project does not exist. Creating new Pages project: "${projectName}"...`);
-      // Step 1: Create the empty project framework
-      execSync(
-        `npx wrangler pages project create "${projectName}" --production-branch="main"`,
-        {
-          cwd: process.cwd(),
-          env: { ...process.env, CLOUDFLARE_ACCOUNT_ID: accountId, CLOUDFLARE_API_TOKEN: apiToken },
-          encoding: "utf8",
-        }
-      );
+    //       encoding: "utf8",
+    //     }
+    //   );
+    // } else {
+    //   console.log(`ℹ️ Project does not exist. Creating new Pages project: "${projectName}"...`);
+    //   // Step 1: Create the empty project framework
+    //   execSync(
+    //     `npx wrangler pages project create "${projectName}" --production-branch="main"`,
+    //     {
+    //       cwd: process.cwd(),
+    //       env: { ...process.env, CLOUDFLARE_ACCOUNT_ID: accountId, CLOUDFLARE_API_TOKEN: apiToken },
+    //       encoding: "utf8",
+    //     }
+    //   );
 
-      // Step 2: Deploy the compiled contents to the freshly created project
-      console.log(`📦 Running initial production deployment for "${projectName}"...`);
-      execSync(
-        `npx wrangler pages deploy "./dist" --project-name="${projectName}"`,
-        {
-          cwd: process.cwd(),
-          env: { ...process.env, CLOUDFLARE_ACCOUNT_ID: accountId, CLOUDFLARE_API_TOKEN: apiToken },
-          encoding: "utf8",
-        }
-      );
-    }
-    console.log(
-      "🚀 Cloudflare Pages deployment completed successfully!"
-    );
+    //   // Step 2: Deploy the compiled contents to the freshly created project
+    //   console.log(`📦 Running initial production deployment for "${projectName}"...`);
+    //   execSync(
+    //     `npx wrangler pages deploy "./dist" --project-name="${projectName}"`,
+    //     {
+    //       cwd: process.cwd(),
+    //       env: { ...process.env, CLOUDFLARE_ACCOUNT_ID: accountId, CLOUDFLARE_API_TOKEN: apiToken },
+    //       encoding: "utf8",
+    //     }
+    //   );
+    // }
+    // console.log(
+    //   "🚀 Cloudflare Pages deployment completed successfully!"
+    // );
     await deleteOldDeployments(accountId, apiToken);
 
   } catch (error) {
