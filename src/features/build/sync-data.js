@@ -21,6 +21,10 @@ async function generateContentMetadata(
     });
 
     for (const entry of entries) {
+      if (entry.name === ".git") {
+        continue;
+      }
+
       const fullPath = path.join(
         directory,
         entry.name
@@ -250,7 +254,7 @@ async function syncDataRepository() {
       "[SYNC-DATA] Content repository synced successfully."
     );
 
-     // ==========================================
+    // ==========================================
     // GENERATE CONTENT METADATA
     // ==========================================
 
