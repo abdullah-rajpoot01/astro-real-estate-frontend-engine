@@ -12,7 +12,7 @@ async function generateDynamicVersionFile() {
 
     try {
         if (siteUrl) {
-            const response = await fetch(`${siteUrl}/version.json`, {
+            const response = await fetch(`https://${siteUrl}/version.json`, {
                 cache: 'no-store',
             })
 
