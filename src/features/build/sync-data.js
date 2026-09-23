@@ -21,7 +21,7 @@ async function generateContentMetadata(
     });
 
     for (const entry of entries) {
-      if (entry.name === ".git") {
+      if (entry.name === ".git" || entry.name ===".github") {
         continue;
       }
 
