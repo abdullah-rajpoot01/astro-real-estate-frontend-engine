@@ -1,13 +1,51 @@
-import fs from 'node:fs/promises';
-import path from 'node:path';
-import { execSync } from 'node:child_process';
+import fs from "node:fs/promises";
+import path from "node:path";
+import { execSync } from "node:child_process";
 
 const API_URL = "https://webmanager-seven.vercel.app";
 
 
+// ======================================================
+// Get current user
+// ======================================================
+
 async function getCurrentUser(token) {
+  const response = await fetch(`${API_URL}/api/users/me`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      token,
+    }),
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(
+      data.error || "Failed to fetch user details."
+    );
+  }
+
+  if (!data.user) {
+    throw new Error("User data was not returned by API.");
+  }
+
+  return data.user;
+}
+
+
+// ======================================================
+// Create website / prepare Cloudflare Pages
+// ======================================================
+
+async function createWebsite(token) {
+  console.log("Website information is incomplete.");
+  console.log("Calling create-website API...");
+
   const response = await fetch(
-    `${API_URL}/api/users/me`,
+    `${API_URL}/api/users/create-website`,
     {
       method: "POST",
       headers: {
@@ -23,120 +61,75 @@ async function getCurrentUser(token) {
 
   if (!response.ok) {
     throw new Error(
-      data.error || "Failed to fetch user details."
+      data.error || "Failed to create website."
     );
   }
+
+  if (!data.user) {
+    throw new Error(
+      "Website API succeeded but user data was not returned."
+    );
+  }
+
+  console.log(
+    "Website information successfully prepared."
+  );
+
   return data.user;
 }
 
 
-async function getCloudflareAccount(cloudflareToken) {
-  const response = await fetch(
-    "https://api.cloudflare.com/client/v4/accounts",
-    {
-      headers: {
-        Authorization: `Bearer ${cloudflareToken}`,
-        "Content-Type": "application/json",
-      },
-    }
-  );
-
-  const data = await response.json();
-
-  if (!response.ok || !data.success) {
-    throw new Error(
-      data.errors?.map(error => error.message).join(", ") ||
-      "Failed to get Cloudflare account"
-    );
-  }
-
-  const account = data.result?.[0];
-
-  if (!account) {
-    throw new Error("No Cloudflare account found");
-  }
-
-  return account;
-}
-
-async function getGitHubUsername(token) {
-  const response = await fetch(
-    "https://api.github.com/user",
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: "application/vnd.github+json",
-        "X-GitHub-Api-Version": "2022-11-28",
-      },
-    }
-  );
-
-  if (!response.ok) {
-    throw new Error(
-      `Failed to get GitHub account: ${await response.text()}`
-    );
-  }
-
-  const user = await response.json();
-
-  return {
-    id: user.id,
-    username: user.login,
-  };
-}
-
-async function getFrontendToken(authToken) {
-  if (!authToken) {
-    throw new Error("AUTH_TOKEN is required.");
-  }
-
-  const response = await fetch(
-    `${API_URL}/api/frontend/token`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        token: authToken,
-      }),
-    }
-  );
-
-  const data = await response.json();
-
-  if (!response.ok) {
-    throw new Error(
-      data.error || "Failed to get frontend repository token."
-    );
-  }
-
-  if (!data.token) {
-    throw new Error(
-      "Frontend repository token was not returned by API."
-    );
-  }
-
-  return data.token;
-}
+// ======================================================
+// Prepare build environment
+// ======================================================
 
 async function prepareBuildEnvironment() {
-  const authToken = process.env.AUTH_TOKEN;
+  const authToken = process.env.AUTH_TOKEN
+    ? process.env.AUTH_TOKEN.trim()
+    : null;
 
   if (!authToken) {
     throw new Error("AUTH_TOKEN must be provided.");
   }
 
-  const user = await getCurrentUser(authToken);
+  // --------------------------------------------------
+  // Get current user
+  // --------------------------------------------------
+
+  let user = await getCurrentUser(authToken);
+
+  // --------------------------------------------------
+  // Check whether website information exists
+  //
+  // If either cf_account_id OR subdomain_url is missing,
+  // let the backend create/check everything.
+  // --------------------------------------------------
+
+  if (!user.cf_account_id || !user.subdomain_url) {
+    console.log(
+      "Cloudflare account ID or subdomain URL is missing."
+    );
+
+    user = await createWebsite(authToken);
+  }
+
+  // --------------------------------------------------
+  // Extract user information
+  // --------------------------------------------------
 
   const {
     site_id,
     site_name,
     cloudflare_token,
     github_token,
+    github_username,
+    cf_account_id,
     subdomain_url,
-    website_created
   } = user;
+
+  // --------------------------------------------------
+  // Validate required values
+  // --------------------------------------------------
 
   if (!site_id) {
     throw new Error("site_id is required.");
@@ -154,18 +147,23 @@ async function prepareBuildEnvironment() {
     throw new Error("github_token is required.");
   }
 
-  const cloudflareAccount =
-    await getCloudflareAccount(cloudflare_token);
+  if (!github_username) {
+    throw new Error("github_username is required.");
+  }
 
-  // Get frontend repository token
-  // const frontendRepoToken =
-  //   await getFrontendToken(authToken);
+  if (!cf_account_id) {
+    throw new Error("cf_account_id is required.");
+  }
 
-  const githubAccount =
-    await getGitHubUsername(github_token);
+  if (!subdomain_url) {
+    throw new Error("subdomain_url is required.");
+  }
 
-  process.env.FRONTEND_REPO_TOKEN =
-    github_token;
+  // --------------------------------------------------
+  // Set build environment
+  // --------------------------------------------------
+
+  process.env.FRONTEND_REPO_TOKEN = github_token;
 
   process.env.SITE_ID = String(site_id);
 
@@ -175,7 +173,7 @@ async function prepareBuildEnvironment() {
     cloudflare_token;
 
   process.env.CLOUDFLARE_ACCOUNT_ID =
-    cloudflareAccount.id;
+    cf_account_id;
 
   process.env.CLOUDFLARE_PROJECT_NAME =
     site_name;
@@ -184,23 +182,43 @@ async function prepareBuildEnvironment() {
     github_token;
 
   process.env.GITHUB_USERNAME =
-    githubAccount.username;
+    github_username;
 
-  if (subdomain_url) {
-    process.env.SITE_URL = subdomain_url;
-  }
+  process.env.SITE_URL =
+    subdomain_url;
 
-  process.env.WEBSITE_CREATED = website_created;
+  process.env.API_SITE_URL =
+    API_URL;
 
-  process.env.API_SITE_URL = "https://webmanager-seven.vercel.app";
   console.log("Build environment prepared.");
+
+  console.log({
+    SITE_ID: "exists",
+    SITE_NAME: "exists",
+    CLOUDFLARE_API_TOKEN: "exists",
+    CLOUDFLARE_ACCOUNT_ID: "exists",
+    CLOUDFLARE_PROJECT_NAME: "exists",
+    GITHUB_TOKEN: "exists",
+    GITHUB_USERNAME: "exists",
+    SITE_URL: "exists",
+    API_SITE_URL: "exists",
+  });
+
+  return user;
 }
 
+
+// ======================================================
+// Run build pipeline
+// ======================================================
+
 async function runBuildPipeline() {
+  console.log(
+    "Starting build orchestration sequence..."
+  );
 
-  console.log("Starting build orchestration sequence...");
-
-  const frontendRepoToken = process.env.FRONTEND_REPO_TOKEN;
+  const frontendRepoToken =
+    process.env.FRONTEND_REPO_TOKEN;
 
   if (!frontendRepoToken) {
     throw new Error(
@@ -210,7 +228,10 @@ async function runBuildPipeline() {
 
   const rootDir = process.cwd();
 
-  // Dedicated frontend workspace
+  // --------------------------------------------------
+  // Frontend workspace
+  // --------------------------------------------------
+
   const frontendDir = path.join(
     rootDir,
     "frontend"
@@ -219,7 +240,10 @@ async function runBuildPipeline() {
   const frontendRepoUrl =
     "https://github.com/abdullah-rajpoot01/astro-real-estate-frontend-engine";
 
-  // Remove previous frontend workspace if it exists
+  // --------------------------------------------------
+  // Remove previous frontend workspace
+  // --------------------------------------------------
+
   await fs.rm(frontendDir, {
     recursive: true,
     force: true,
@@ -233,17 +257,19 @@ async function runBuildPipeline() {
     recursive: true,
   });
 
+  // --------------------------------------------------
   // Clone frontend repository
+  // --------------------------------------------------
+
   console.log(
     "Shallow cloning frontend repository..."
   );
 
-
-  // Construct authenticated URL: https://<token>@github.com/...
-  const authenticatedRepoUrl = frontendRepoUrl.replace(
-    "https://",
-    `https://${frontendRepoToken}@`
-  );
+  const authenticatedRepoUrl =
+    frontendRepoUrl.replace(
+      "https://",
+      `https://${frontendRepoToken}@`
+    );
 
   execSync(
     `git clone --depth 1 "${authenticatedRepoUrl}" "${frontendDir}"`,
@@ -252,8 +278,10 @@ async function runBuildPipeline() {
     }
   );
 
-
+  // --------------------------------------------------
   // Install dependencies
+  // --------------------------------------------------
+
   console.log(
     "Installing frontend dependencies..."
   );
@@ -266,7 +294,10 @@ async function runBuildPipeline() {
     }
   );
 
+  // --------------------------------------------------
   // Build
+  // --------------------------------------------------
+
   console.log(
     "Running frontend build..."
   );
@@ -279,21 +310,27 @@ async function runBuildPipeline() {
   console.log(
     "Pipeline completed successfully!"
   );
-
 }
+
+
+// ======================================================
+// Main
+// ======================================================
 
 async function main() {
   try {
-    // 1. Get client information and prepare environment
+    // 1. Get user and prepare environment
     await prepareBuildEnvironment();
 
+    // 2. Build frontend
     await runBuildPipeline();
-
 
   } catch (error) {
     console.error(
       "Fatal Pipeline Execution Error:",
-      error.message
+      error instanceof Error
+        ? error.message
+        : error
     );
 
     process.exit(1);
