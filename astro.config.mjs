@@ -13,7 +13,7 @@ export default defineConfig({
     plugins: [tailwindcss()],
     esbuild: {
       // Strips out console.log, console.debug, and debugger statements automatically
-      drop: ['console', 'debugger'],
+      // drop: ['console', 'debugger'],
     },
   },
   integrations: [react(), sitemap({
