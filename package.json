@@ -8,9 +8,9 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "prebuild": "node ./src/features/prebuild/sync-data.js && node ./src/features/prebuild/version.utils",
+    "prebuild": "node ./build/sync.js",
     "build": "astro build",
-    "postbuild": "node ./deploy.js",
+    "postbuild": "node ./build/deploy.js",
     "preview": "astro preview",
     "astro": "astro",
     "lint": "eslint .",
